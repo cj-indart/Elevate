@@ -1,14 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 
 import { useRouter } from "expo-router";
 
 import Theme from "@/assets/theme";
-import Feed from "@/components/Feed";
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 export default function Personal() {
   return (
-    <View stlye={styles.container}>
-      <Text style={styles.textBox}>Implement this personal page!</Text>
+    <View style={styles.container}>
+      <Image style={styles.logo} source={require("@/assets/images/logo.png")} />
+      <Text style={styles.text}>Implement this personal page!</Text>
     </View>
   );
 }
@@ -16,11 +19,16 @@ export default function Personal() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
-  textBox: {
-    padding: 40,
-    backgroundColor: "white",
+  text: {
+    fontSize: 20,
+    color: "black",
+  },
+  logo: {
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.2,
   },
 });
