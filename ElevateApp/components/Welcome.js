@@ -15,6 +15,7 @@ const windowHeight = Dimensions.get("window").height;
 
 export default function Welcome() {
   return (
+    // TODO, make Sign In and Create Account Centered... confusing with Link
     <View style={styles.container}>
       <Image
         style={styles.logo}
@@ -22,24 +23,14 @@ export default function Welcome() {
         resizeMode="contain"
       />
       <View style={styles.topButtonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          // onPress={() => alert("Button not ready yet!")}
-        >
-          <Link href="/Login">
-            <Text style={styles.buttonText}>Sign In</Text>
-          </Link>
-        </TouchableOpacity>
+        <Link href="/Login" style={styles.button}>
+          <Text style={styles.buttonText}>Sign In</Text>
+        </Link>
       </View>
       <View style={styles.buttomButtonContainer}>
-        <TouchableOpacity 
-          style={styles.button} 
-          // onPress={() => alert("")}
-        >
-          <Link href="/createAccount">
-            <Text style={styles.buttonText}>Create Account</Text>
-          </Link>
-        </TouchableOpacity>
+        <Link href="/createAccount" style={styles.button}>
+          <Text style={styles.buttonText}>Create Account</Text>
+        </Link>
       </View>
     </View>
   );
