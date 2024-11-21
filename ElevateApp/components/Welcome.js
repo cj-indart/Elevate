@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "expo-router";
 import {
   StyleSheet,
   View,
@@ -8,12 +9,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { Link } from "expo-router";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function Welcome() {
+  const router = useRouter();
+
   return (
     // TODO, make Sign In and Create Account Centered... confusing with Link
     <View style={styles.container}>
@@ -22,16 +24,18 @@ export default function Welcome() {
         source={require("@/assets/images/logo.png")}
         resizeMode="contain"
       />
-      <View style={styles.topButtonContainer}>
-        <Link href="/Login" style={styles.button}>
-          <Text style={styles.buttonText}>Sign In</Text>
-        </Link>
-      </View>
-      <View style={styles.buttomButtonContainer}>
-        <Link href="/createAccount" style={styles.button}>
-          <Text style={styles.buttonText}>Create Account</Text>
-        </Link>
-      </View>
+      <TouchableOpacity
+        style={styles.topButtonContainer}
+        onPress={() => router.push("/Login")} // Navigate on press
+      >
+        <Text style={styles.buttonText}>Sign In</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.bottomButtonContainer}
+        onPress={() => router.push("/createAccount")} // Navigate on press
+      >
+        <Text style={styles.buttonText}>Create Account</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -65,14 +69,14 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 8,
     width: windowWidth * 0.8,
-    alignSelf: "center",
+    alignItems: "center",
     marginVertical: 20,
   },
-  buttomButtonContainer: {
+  bottomButtonContainer: {
     backgroundColor: "#C0DFF0",
     padding: 15,
     borderRadius: 8,
     width: windowWidth * 0.8,
-    alignSelf: "center",
+    alignItems: "center",
   },
 });

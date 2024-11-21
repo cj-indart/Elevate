@@ -16,10 +16,10 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function CreateAccount() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [pronouns, setPronouns] = useState("");
+  const [gender, setGender] = useState("");
+  const [ethnicity, setEthnicity] = useState("");
+  const [nationality, setNationality] = useState("");
 
   const router = useRouter();
 
@@ -29,36 +29,30 @@ export default function CreateAccount() {
 
       <TextInput
         style={styles.inputBox}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
+        placeholder="Pronouns"
+        value={pronouns}
+        onChangeText={setPronouns}
       />
 
       <TextInput
         style={styles.inputBox}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
+        placeholder="Gender"
+        value={gender}
+        onChangeText={setGender}
       />
 
       <TextInput
         style={styles.inputBox}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={true}
-        autoCapitalize="none"
+        placeholder="Ethnicity"
+        value={ethnicity}
+        onChangeText={setEthnicity}
       />
 
       <TextInput
         style={styles.inputBox}
-        placeholder="Confirm Password"
-        value={confirmPassword}
-        onChangeText={setConfirmPassword}
-        secureTextEntry={true}
-        autoCapitalize="none"
+        placeholder="Nationality"
+        value={nationality}
+        onChangeText={setNationality}
       />
 
       <View style={styles.buttonContainer}>
@@ -70,7 +64,7 @@ export default function CreateAccount() {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push("/onboarding")} // Navigate on press
+          onPress={() => router.push("/tabs/groupHome")} // Navigate on press
         >
           <FontAwesomeIcon icon={faArrowRight} size={24} color="black" />
         </TouchableOpacity>
@@ -105,9 +99,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     paddingRight: windowWidth * 0.05,
     width: "100%",
-    justifyContent: 'space-around',
     flexDirection: 'row',
-
+    justifyContent: 'space-around',
   },
   button: {
     marginTop: windowHeight * 0.1,

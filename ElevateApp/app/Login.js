@@ -10,6 +10,10 @@ import {
 import { StatusBar } from "expo-status-bar";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import db from "@/database/db";
+import { useRouter } from "expo-router";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 
 import Theme from "@/assets/theme";
 
@@ -17,6 +21,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const signInWithEmail = async () => {
     setLoading(true);
@@ -84,6 +90,12 @@ export default function Login() {
           </Text>
         </TouchableOpacity>
       </View>
+      <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.back()} // Navigate on press
+        >
+          <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
+        </TouchableOpacity>
     </View>
   );
 }
