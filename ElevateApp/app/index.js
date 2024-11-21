@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
 import { Redirect } from "expo-router";
-import Login from "@/components/Login";
+import Login from "@/app/Login";
 import Welcome from "@/components/Welcome";
 import db from "@/database/db";
-import CreateAccount from "@/components/createAccount";
+import CreateAccount from "@/components/Welcome";
 // import Loading from "@/components/Loading";
 
 // we'll put all the commented code in when we have the backend setup

@@ -10,6 +10,7 @@ import {
 import theme from "@/assets/theme";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "expo-router";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -60,7 +61,9 @@ export default function CreateAccount() {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button}>
-          <FontAwesomeIcon icon={faArrowRight} size={24} color="black" />
+          <Link href="/tabs/groupHome" >
+            <FontAwesomeIcon icon={faArrowRight} size={24} color="black" />
+          </Link>
         </TouchableOpacity>
       </View>
     </View>
@@ -96,8 +99,9 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   button: {
-    marginTop: windowHeight * 0.1,
+    // marginTop: windowHeight * 0.1,
     width: windowWidth * 0.2,
+
     backgroundColor: theme.colors.buttonBlue,
     borderRadius: 5,
     padding: 10,

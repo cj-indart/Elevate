@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import { Link } from "expo-router";
+
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
@@ -22,14 +24,21 @@ export default function Welcome() {
       <View style={styles.topButtonContainer}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => alert("Button not ready yet!")}
+          // onPress={() => alert("Button not ready yet!")}
         >
-          <Text style={styles.buttonText}>Sign In</Text>
+          <Link href="/Login">
+            <Text style={styles.buttonText}>Sign In</Text>
+          </Link>
         </TouchableOpacity>
       </View>
       <View style={styles.buttomButtonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => alert("")}>
-          <Text style={styles.buttonText}>Create Account</Text>
+        <TouchableOpacity 
+          style={styles.button} 
+          // onPress={() => alert("")}
+        >
+          <Link href="/createAccount">
+            <Text style={styles.buttonText}>Create Account</Text>
+          </Link>
         </TouchableOpacity>
       </View>
     </View>
