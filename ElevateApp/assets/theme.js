@@ -4,6 +4,8 @@ export default {
     backgroundPrimary: "white",
     backgroundSecondary: "grey",
 
+    buttonBlue: "#C0DFF0",
+
     textPrimary: "#FFFFFF",
     textSecondary: "#B4B4B4",
     textTertiary: "#6C6C6C",
