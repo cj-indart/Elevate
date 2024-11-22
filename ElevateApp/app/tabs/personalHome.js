@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 
 import { useRouter } from "expo-router";
 
@@ -18,7 +25,9 @@ export default function Personal() {
           style={styles.logo}
           source={require("@/assets/images/logo.png")}
         />
-        <Entypo style={styles.chat} name="chat" size={30} color="black" />
+        <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+          <Entypo style={styles.chat} name="chat" size={30} color="black" />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -33,12 +42,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  chat: {
-    marginHorizontal: 10,
-  },
   logo: {
-    marginHorizontal: 10,
+    marginHorizontal: 15,
     width: windowWidth * 0.3,
     height: windowHeight * 0.07,
+  },
+  chat: {
+    marginHorizontal: 15,
   },
 });
