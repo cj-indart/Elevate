@@ -39,7 +39,14 @@ export default function Group() {
         </TouchableOpacity>
       </View>
       <Text style={styles.header}>Group Check-ins</Text>
-      <View style={styles.checkIn}></View>
+      <View style={styles.tempText}>
+        <Text>No group members yet!</Text>
+      </View>
+
+      <Text style={styles.groupGoals}>Group Goals</Text>
+      <View style={styles.tempText}>
+        <Text>No group members yet!</Text>
+      </View>
     </SafeAreaView>
   );
 }
@@ -70,19 +77,20 @@ const styles = StyleSheet.create({
     // flex: 1,
     flexDirection: "row",
     justifyContent: "space-around",
+    alignItems: "center",
     paddingVertical: 25,
   },
   topButtonContainer: {
     backgroundColor: Theme.colors.buttonBlue,
     borderRadius: 8,
-    width: windowWidth * 0.3,
+    width: windowWidth * 0.25,
     height: windowWidth * 0.08,
     alignItems: "center",
     justifyContent: "center",
   },
   buttonText: {
     fontSize: Theme.sizes.bodyText,
-    fontWeight: "500",
+    fontWeight: "600",
   },
   header: {
     fontSize: Theme.sizes.headerText,
@@ -91,5 +99,15 @@ const styles = StyleSheet.create({
   },
   checkIn: {
     flexDirection: "row",
+  },
+  tempText: {
+    marginTop: windowHeight * 0.1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  groupGoals: {
+    fontSize: Theme.sizes.headerText,
+    paddingHorizontal: 35,
+    marginTop: windowHeight * 0.15,
   },
 });

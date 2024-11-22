@@ -27,13 +27,14 @@ export default function Welcome() {
       />
       <TouchableOpacity
         style={styles.topButtonContainer}
-        onPress={() => router.push("/setup/login")} // Navigate on press
+        // onPress={() => router.push("/setup/login")}
+        onPress={() => alert("not implemented yet!")}
       >
         <Text style={styles.buttonText}>Sign In</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.bottomButtonContainer}
-        onPress={() => router.push("/onboarding/createAccount")} // Navigate on press
+        onPress={() => router.push("/onboarding/createAccount")}
       >
         <Text style={styles.buttonText}>Create Account</Text>
       </TouchableOpacity>
@@ -58,8 +59,8 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: Theme.sizes.headerText,
     fontWeight: "500",
-    justifyContent: 'center',
-    textAlign: 'center'
+    justifyContent: "center",
+    textAlign: "center",
   },
   topButtonContainer: {
     marginTop: windowHeight * 0.1,
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.8,
     alignItems: "center",
     marginVertical: 20,
-    alignSelf: 'center'
+    alignSelf: "center",
   },
   bottomButtonContainer: {
     backgroundColor: Theme.colors.buttonBlue,
@@ -77,6 +78,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: windowWidth * 0.8,
     alignItems: "center",
-    alignSelf: 'center'
+    alignSelf: "center",
   },
 });
