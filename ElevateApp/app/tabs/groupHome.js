@@ -40,12 +40,12 @@ export default function Group() {
       </View>
       <Text style={styles.header}>Group Check-ins</Text>
       <View style={styles.tempText}>
-        <Text>No group members yet!</Text>
+        <Text>No group check-ins yet!</Text>
       </View>
 
       <Text style={styles.groupGoals}>Group Goals</Text>
       <View style={styles.tempText}>
-        <Text>No group members yet!</Text>
+        <Text>No group goals yet!</Text>
       </View>
     </SafeAreaView>
   );
