@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import ProgressBar from "react-native-progress/Bar";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
@@ -20,7 +21,7 @@ export default function Plane() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push("/tabs/groupHome"); 
+      router.push("/tabs/groupHome");
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -34,17 +35,25 @@ export default function Plane() {
         source={require("@/assets/images/dottedPlane.png")}
         resizeMode="contain"
       />
-      <TouchableOpacity style={styles.button} onPress={() => router.back()}>
+
+      <ProgressBar
+        progress={1}
+        width={windowWidth * 0.6}
+        style={styles.bar}
+        color="#A9A9A9"
+      />
+
+      {/* <TouchableOpacity style={styles.button} onPress={() => router.back()}>
         <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    justifyContent: 'space-around',
+    flexDirection: "column",
+    justifyContent: "space-around",
     alignItems: "center",
     flex: 1,
     padding: 20,
@@ -58,6 +67,10 @@ const styles = StyleSheet.create({
   image: {
     height: windowHeight * 0.4,
     aspectRatio: 1,
-
+    marginBottom: windowHeight * 0.3,
+  },
+  bar: {
+    position: "absolute",
+    bottom: windowHeight * 0.3,
   },
 });

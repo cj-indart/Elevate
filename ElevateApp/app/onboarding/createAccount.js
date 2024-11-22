@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
+import ProgressBar from "react-native-progress/Bar";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -60,6 +61,13 @@ export default function CreateAccount() {
         onChangeText={setConfirmPassword}
         secureTextEntry={true}
         autoCapitalize="none"
+      />
+      <ProgressBar
+        progress={0.333}
+        width={windowWidth * 0.6}
+        style={styles.bar}
+        // color={Theme.colors.backgroundSecodary}
+        color="#A9A9A9"
       />
 
       <View style={styles.buttonContainer}>
@@ -123,5 +131,9 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
     justifyContent: "center",
+  },
+  bar: {
+    position: "absolute",
+    bottom: windowHeight * 0.3,
   },
 });

@@ -12,6 +12,7 @@ import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "expo-router";
 import { SelectList } from "react-native-dropdown-select-list";
 import Theme from "@/assets/theme";
+import ProgressBar from "react-native-progress/Bar";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -170,6 +171,13 @@ export default function Background() {
         }}
       />
 
+      <ProgressBar
+        progress={0.666}
+        width={windowWidth * 0.6}
+        style={styles.bar}
+        color="#A9A9A9"
+      />
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={() => router.back()}>
           <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
@@ -205,8 +213,8 @@ const styles = StyleSheet.create({
   },
   body: {
     fontSize: Theme.sizes.bodyText,
-    textAlign: "center", 
-    margin: windowHeight * 0.02, 
+    textAlign: "center",
+    margin: windowHeight * 0.02,
     paddingBottom: 15,
   },
   inputBox: {
@@ -236,5 +244,9 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
     justifyContent: "center",
+  },
+  bar: {
+    position: "absolute",
+    bottom: windowHeight * 0.3,
   },
 });
