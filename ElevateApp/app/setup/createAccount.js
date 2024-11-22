@@ -16,55 +16,59 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function CreateAccount() {
-  const [pronouns, setPronouns] = useState("");
-  const [gender, setGender] = useState("");
-  const [ethnicity, setEthnicity] = useState("");
-  const [nationality, setNationality] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const router = useRouter();
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create Account</Text>
+      <Text style={styles.header}>Personal</Text>
 
       <TextInput
         style={styles.inputBox}
-        placeholder="Pronouns"
-        value={pronouns}
-        onChangeText={setPronouns}
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
       />
 
       <TextInput
         style={styles.inputBox}
-        placeholder="Gender"
-        value={gender}
-        onChangeText={setGender}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
       />
 
       <TextInput
         style={styles.inputBox}
-        placeholder="Ethnicity"
-        value={ethnicity}
-        onChangeText={setEthnicity}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry={true}
+        autoCapitalize="none"
       />
 
       <TextInput
         style={styles.inputBox}
-        placeholder="Nationality"
-        value={nationality}
-        onChangeText={setNationality}
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
+        secureTextEntry={true}
+        autoCapitalize="none"
       />
 
       <View style={styles.buttonContainer}>
-      <TouchableOpacity
-          style={styles.button}
-          onPress={() => router.back()} // Navigate on press
-        >
+        <TouchableOpacity style={styles.button} onPress={() => router.back()}>
           <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push("/tabs/groupHome")} // Navigate on press
+          onPress={() => router.push("/onboarding/background")}
         >
           <FontAwesomeIcon icon={faArrowRight} size={24} color="black" />
         </TouchableOpacity>
@@ -84,6 +88,11 @@ const styles = StyleSheet.create({
     marginTop: windowHeight * 0.1,
     fontSize: 30,
     fontWeight: "bold",
+  },
+  header: {
+    marginTop: windowHeight * 0.05,
+    fontSize: 20,
+    fontWeight: "bold",
     marginBottom: windowHeight * 0.1,
   },
   inputBox: {
@@ -99,8 +108,10 @@ const styles = StyleSheet.create({
   buttonContainer: {
     paddingRight: windowWidth * 0.05,
     width: "100%",
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: "space-around",
+    flexDirection: "row",
+    position: "absolute",
+    bottom: windowHeight * 0.2,
   },
   button: {
     marginTop: windowHeight * 0.1,

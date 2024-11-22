@@ -26,13 +26,13 @@ export default function Welcome() {
       />
       <TouchableOpacity
         style={styles.topButtonContainer}
-        onPress={() => router.push("/Login")} // Navigate on press
+        onPress={() => router.push("/setup/login")} // Navigate on press
       >
         <Text style={styles.buttonText}>Sign In</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.bottomButtonContainer}
-        onPress={() => router.push("/createAccount")} // Navigate on press
+        onPress={() => router.push("/setup/createAccount")} // Navigate on press
       >
         <Text style={styles.buttonText}>Create Account</Text>
       </TouchableOpacity>
