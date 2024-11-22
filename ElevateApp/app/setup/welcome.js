@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import Theme from "@/assets/theme";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -32,7 +33,7 @@ export default function Welcome() {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.bottomButtonContainer}
-        onPress={() => router.push("/setup/createAccount")} // Navigate on press
+        onPress={() => router.push("/onboarding/createAccount")} // Navigate on press
       >
         <Text style={styles.buttonText}>Create Account</Text>
       </TouchableOpacity>
@@ -44,39 +45,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: Theme.colors.backgroundPrimary,
   },
   logo: {
     marginTop: windowHeight * 0.2,
     width: windowWidth * 0.9,
     height: windowHeight * 0.2,
   },
-  welcomeText: {
-    marginTop: windowHeight * 0.05,
-    fontSize: 30,
-    fontWeight: "500",
-  },
   button: {
     alignItems: "center",
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: Theme.sizes.headerText,
     fontWeight: "500",
+    justifyContent: 'center',
+    textAlign: 'center'
   },
   topButtonContainer: {
     marginTop: windowHeight * 0.1,
-    backgroundColor: "#C0DFF0",
+    backgroundColor: Theme.colors.buttonBlue,
     padding: 15,
     borderRadius: 8,
     width: windowWidth * 0.8,
     alignItems: "center",
     marginVertical: 20,
+    alignSelf: 'center'
   },
   bottomButtonContainer: {
-    backgroundColor: "#C0DFF0",
+    backgroundColor: Theme.colors.buttonBlue,
     padding: 15,
     borderRadius: 8,
     width: windowWidth * 0.8,
     alignItems: "center",
+    alignSelf: 'center'
   },
 });

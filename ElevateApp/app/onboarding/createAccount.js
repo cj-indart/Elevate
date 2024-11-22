@@ -7,10 +7,10 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
-import theme from "@/assets/theme";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "expo-router";
+import Theme from "@/assets/theme";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -26,7 +26,7 @@ export default function CreateAccount() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create Account</Text>
-      <Text style={styles.header}>Personal</Text>
+      <Text style={styles.header}>Account Information</Text>
 
       <TextInput
         style={styles.inputBox}
@@ -82,44 +82,46 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     padding: 20,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: Theme.colors.backgroundPrimary,
   },
   title: {
     marginTop: windowHeight * 0.1,
-    fontSize: 30,
+    fontSize: Theme.sizes.titleText,
     fontWeight: "bold",
   },
   header: {
-    marginTop: windowHeight * 0.05,
-    fontSize: 20,
+    marginTop: windowHeight * 0.02,
+    fontSize: Theme.sizes.headerText,
     fontWeight: "bold",
     marginBottom: windowHeight * 0.1,
   },
   inputBox: {
+    fontSize: Theme.sizes.bodyText,
     height: windowHeight * 0.06,
     width: windowWidth * 0.8,
-    borderColor: "#a9a9a9",
+    borderColor: Theme.colors.border,
     borderWidth: 0.5,
     borderRadius: 5,
     paddingHorizontal: 10,
-    marginBottom: 15,
-    backgroundColor: "#e0e0e0",
+    margin: 10,
+    backgroundColor: Theme.colors.backgroundSecodary,
   },
   buttonContainer: {
-    paddingRight: windowWidth * 0.05,
     width: "100%",
-    justifyContent: "space-around",
     flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     position: "absolute",
-    bottom: windowHeight * 0.2,
+    bottom: windowHeight * 0.09,
+    paddingHorizontal: windowWidth * 0.1,
   },
   button: {
-    marginTop: windowHeight * 0.1,
-    width: windowWidth * 0.2,
-
-    backgroundColor: theme.colors.buttonBlue,
+    width: windowWidth * 0.18,
+    height: windowHeight * 0.06,
+    backgroundColor: Theme.colors.buttonBlue,
     borderRadius: 5,
     padding: 10,
     alignItems: "center",
+    justifyContent: "center",
   },
 });

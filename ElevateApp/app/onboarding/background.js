@@ -7,17 +7,16 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
-import theme from "@/assets/theme";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "expo-router";
-
 import { SelectList } from "react-native-dropdown-select-list";
+import Theme from "@/assets/theme";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-export default function background() {
+export default function Background() {
   const [major, setMajor] = useState("");
   const [selectedCareer, setSelectedCareer] = useState("");
   const [selectedGrad, setSelectedGrad] = useState("");
@@ -104,7 +103,11 @@ export default function background() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create Account</Text>
-      <Text style={styles.header}>Education</Text>
+      <Text style={styles.header}>Background</Text>
+      <Text style={styles.body}>
+        This information will help connect you with like-minded students and
+        graduates!
+      </Text>
 
       <TextInput
         style={styles.inputBox}
@@ -121,25 +124,22 @@ export default function background() {
         boxStyles={{
           height: windowHeight * 0.06,
           width: windowWidth * 0.8,
-          borderColor: "#a9a9a9",
+          borderColor: Theme.colors.border,
           borderWidth: 0.5,
           borderRadius: 5,
           paddingHorizontal: 10,
-          marginBottom: 15,
-          backgroundColor: "#e0e0e0",
+          margin: 10,
+          backgroundColor: Theme.colors.backgroundSecodary,
           alignItems: "center",
         }}
         dropdownStyles={{
           width: windowWidth * 0.8,
-          borderColor: "#a9a9a9",
+          borderColor: Theme.colors.border,
           borderWidth: 0.5,
           borderRadius: 5,
-          backgroundColor: "#f0f0f0",
-        }}
-        textStyles={{
-          textAlign: "left",
-          color: "#000",
-          fontSize: 16,
+          backgroundColor: Theme.colors.backgroundPrimary,
+          marginBottom: 10,
+          alignSelf: "center",
         }}
       />
 
@@ -151,25 +151,22 @@ export default function background() {
         boxStyles={{
           height: windowHeight * 0.06,
           width: windowWidth * 0.8,
-          borderColor: "#a9a9a9",
+          borderColor: Theme.colors.border,
           borderWidth: 0.5,
           borderRadius: 5,
           paddingHorizontal: 10,
-          marginBottom: 15,
-          backgroundColor: "#e0e0e0",
+          margin: 10,
+          backgroundColor: Theme.colors.backgroundSecodary,
           alignItems: "center",
         }}
         dropdownStyles={{
           width: windowWidth * 0.8,
-          borderColor: "#a9a9a9",
+          borderColor: Theme.colors.border,
           borderWidth: 0.5,
           borderRadius: 5,
-          backgroundColor: "#f0f0f0",
-        }}
-        textStyles={{
-          textAlign: "left",
-          color: "#000",
-          fontSize: 16,
+          backgroundColor: Theme.colors.backgroundPrimary,
+          marginBottom: 10,
+          alignSelf: "center",
         }}
       />
 
@@ -179,7 +176,7 @@ export default function background() {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push("/tabs/groupHome")}
+          onPress={() => router.push("./plane")}
         >
           <FontAwesomeIcon icon={faArrowRight} size={24} color="black" />
         </TouchableOpacity>
@@ -193,44 +190,51 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     padding: 20,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: Theme.colors.backgroundPrimary,
   },
   title: {
     marginTop: windowHeight * 0.1,
     fontSize: 30,
     fontWeight: "bold",
-    // marginBottom: windowHeight * 0.05,
   },
   header: {
-    marginTop: windowHeight * 0.05,
+    marginTop: windowHeight * 0.02,
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: windowHeight * 0.1,
+    // marginBottom: windowHeight * 0.1,
+  },
+  body: {
+    fontSize: Theme.sizes.bodyText,
+    textAlign: "center", 
+    margin: windowHeight * 0.02, 
+    paddingBottom: 15,
   },
   inputBox: {
     height: windowHeight * 0.06,
     width: windowWidth * 0.8,
-    borderColor: "#a9a9a9",
+    borderColor: Theme.colors.border,
     borderWidth: 0.5,
     borderRadius: 5,
     paddingHorizontal: 10,
-    marginBottom: 15,
-    backgroundColor: "#e0e0e0",
+    margin: 10,
+    backgroundColor: Theme.colors.backgroundSecodary,
   },
   buttonContainer: {
-    paddingRight: windowWidth * 0.05,
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
+    alignItems: "center",
     position: "absolute",
-    bottom: windowHeight * 0.2,
+    bottom: windowHeight * 0.09,
+    paddingHorizontal: windowWidth * 0.1,
   },
   button: {
-    marginTop: windowHeight * 0.1,
-    width: windowWidth * 0.2,
-    backgroundColor: theme.colors.buttonBlue,
+    width: windowWidth * 0.18,
+    height: windowHeight * 0.06,
+    backgroundColor: Theme.colors.buttonBlue,
     borderRadius: 5,
     padding: 10,
     alignItems: "center",
+    justifyContent: "center",
   },
 });

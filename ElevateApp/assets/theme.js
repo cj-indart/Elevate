@@ -1,8 +1,10 @@
 export default {
   // Feel free to customize these colors!
   colors: {
-    backgroundPrimary: "white",
-    backgroundSecondary: "grey",
+    backgroundPrimary: "#f0f0f0",
+    backgroundSecodary: "#e5e5e5",
+
+    border: "#a9a9a9",
 
     buttonBlue: "#C0DFF0",
 
@@ -19,6 +21,9 @@ export default {
     tabBarBorder: "#747474",
   },
   sizes: {
+    titleText: 30,
+    headerText: 20,
+    bodyText: 15,
     iconSmall: 16,
 
     textMedium: 16,
