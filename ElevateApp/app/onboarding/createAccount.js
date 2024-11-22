@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.backgroundPrimary,
   },
   title: {
-    marginTop: windowHeight * 0.1,
+    marginTop: windowHeight * 0.15,
     fontSize: Theme.sizes.titleText,
     fontWeight: "bold",
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     position: "absolute",
-    bottom: windowHeight * 0.09,
+    bottom: windowHeight * 0.065,
     paddingHorizontal: windowWidth * 0.1,
   },
   button: {
@@ -134,6 +134,6 @@ const styles = StyleSheet.create({
   },
   bar: {
     position: "absolute",
-    bottom: windowHeight * 0.3,
+    bottom: windowHeight * 0.87,
   },
 });

@@ -60,17 +60,17 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.backgroundPrimary,
   },
   title: {
-    marginTop: windowHeight * 0.1,
+    marginTop: windowHeight * 0.15,
     fontSize: 30,
     fontWeight: "bold",
   },
   image: {
     height: windowHeight * 0.4,
     aspectRatio: 1,
-    marginBottom: windowHeight * 0.3,
+    marginBottom: windowHeight * 0.15,
   },
   bar: {
     position: "absolute",
-    bottom: windowHeight * 0.3,
+    bottom: windowHeight * 0.87,
   },
 });
