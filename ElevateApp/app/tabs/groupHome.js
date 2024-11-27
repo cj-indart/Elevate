@@ -21,15 +21,6 @@ export default function Group() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topNav}>
-        <Image
-          style={styles.logo}
-          source={require("@/assets/images/logo.png")}
-        />
-        <TouchableOpacity onPress={() => alert("not implemented yet!")}>
-          <Entypo style={styles.chat} name="chat" size={30} color="black" />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.titleContainer}>
         <Text style={styles.title}>Group Home</Text>
         <TouchableOpacity
           style={styles.topButtonContainer}
@@ -38,6 +29,7 @@ export default function Group() {
           <Text style={styles.buttonText}>Members</Text>
         </TouchableOpacity>
       </View>
+
       <Text style={styles.header}>Group Check-ins</Text>
       <View style={styles.tempText}>
         <Text>No group check-ins yet!</Text>
@@ -57,6 +49,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topNav: {
+    marginVertical: windowWidth * 0.1,
+    marginHorizontal: windowWidth * 0.07,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
