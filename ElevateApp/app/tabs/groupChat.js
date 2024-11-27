@@ -25,6 +25,7 @@ export default function Chat() {
           <Entypo style={styles.chat} name="cog" size={36} color="black" />
         </TouchableOpacity>
       </View>
+      <View style={styles.header}></View>
     </SafeAreaView>
   );
 }

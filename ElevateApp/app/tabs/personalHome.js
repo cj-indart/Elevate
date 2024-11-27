@@ -26,6 +26,19 @@ export default function Personal() {
           <Entypo style={styles.chat} name="cog" size={36} color="black" />
         </TouchableOpacity>
       </View>
+      <View style={styles.section}>
+        <Text style={styles.header}>Upcoming Targets</Text>
+        <View style={styles.content}>
+          <Text>Placeholder - No targets set yet</Text>
+        </View>
+      </View>
+      <View marginVertical={windowWidth * 0.07}></View>
+      <View style={styles.section}>
+        <Text style={styles.header}>Your Check-in</Text>
+        <View style={styles.content}>
+          <Text>Placeholder - Check-in goes here</Text>
+        </View>
+      </View>
     </SafeAreaView>
   );
 }
@@ -42,7 +55,19 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "Roboto",
     fontSize: 32,
-    backgroundColor: "gray",
+  },
+  header: {
+    marginVertical: windowWidth * 0.1,
+    marginHorizontal: windowWidth * 0.03,
+    fontFamily: "Roboto",
+    fontSize: 24,
+  },
+  section: {
+    marginHorizontal: windowWidth * 0.07,
+  },
+  content: {
+    marginVertical: windowWidth * 0.03,
+    alignItems: "center",
   },
   chat: {},
 });
