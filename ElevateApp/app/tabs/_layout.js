@@ -15,7 +15,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="groupHome"
           options={{
-            title: "Group Home",
+            title: "Group",
             tabBarIcon: ({ size, color }) => (
               <FontAwesome name="group" size={size} color={color} />
             ),
@@ -24,9 +24,18 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="personalHome"
           options={{
-            title: "Personal Home",
+            title: "Personal",
             tabBarIcon: ({ size, color }) => (
               <FontAwesome name="user" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="groupChat"
+          options={{
+            title: "Chat",
+            tabBarIcon: ({ size, color }) => (
+              <FontAwesome name="comments" size={size} color={color} />
             ),
           }}
         />
@@ -37,6 +46,6 @@ export default function TabsLayout() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
+    flex: 1,
   },
 });

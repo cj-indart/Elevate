@@ -8,7 +8,6 @@ import {
 } from "react-native";
 
 import { useRouter } from "expo-router";
-
 import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -17,11 +16,11 @@ import Entypo from "@expo/vector-icons/Entypo";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-export default function Personal() {
+export default function Chat() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topNav}>
-        <Text style={styles.title}>Personal Home</Text>
+        <Text style={styles.title}>Chat</Text>
         <TouchableOpacity onPress={() => alert("not implemented yet!")}>
           <Entypo style={styles.chat} name="cog" size={36} color="black" />
         </TouchableOpacity>
@@ -42,7 +41,6 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "Roboto",
     fontSize: 32,
-    backgroundColor: "gray",
   },
   chat: {},
 });
