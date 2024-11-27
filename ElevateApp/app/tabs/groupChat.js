@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontFamily: "Roboto",
+    fontWeight: "600",
     fontSize: 32,
   },
   chat: {},
