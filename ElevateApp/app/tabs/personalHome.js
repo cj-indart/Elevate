@@ -53,13 +53,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontFamily: "Roboto",
+    fontWeight: "600",
     fontSize: 32,
   },
   header: {
     marginVertical: windowWidth * 0.1,
     marginHorizontal: windowWidth * 0.03,
-    fontFamily: "Roboto",
     fontSize: 24,
   },
   section: {
