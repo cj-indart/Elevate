@@ -27,7 +27,7 @@ export default function Members() {
       id: "1",
       profilePicture: "https://via.placeholder.com/50",
       name: "CJ Indart",
-      bio: "Loves programming and open-source projects.",
+      bio: "Loves programming and open-source projects. Click to see full profile!",
     },
     {
       id: "2",
@@ -57,7 +57,7 @@ export default function Members() {
             <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
           </TouchableOpacity>
         </View>
-        <Text style={styles.title}>Members</Text>
+        <Text style={styles.title}>Group Members</Text>
       </View>
 
       <FlatList

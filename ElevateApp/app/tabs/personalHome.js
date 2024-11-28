@@ -13,7 +13,7 @@ import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Entypo from "@expo/vector-icons/Entypo";
-
+import Foundation from "@expo/vector-icons/Foundation";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
@@ -36,12 +36,16 @@ export default function Personal() {
             <Entypo style={styles.icon} name="info" size={12} color="black" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert("not implemented yet!")}
-        >
-          <Entypo style={styles.icon} name="target" size={20} color="black" />
-          <Text style={styles.content}>Set New Target</Text>
+        <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+          <View style={styles.button}>
+            <Foundation
+              style={styles.icon}
+              name="target"
+              size={24}
+              color="black"
+            />
+            <Text style={styles.content}>Set New Target</Text>
+          </View>
         </TouchableOpacity>
         <View style={styles.content}>
           <Text>Placeholder - No targets set yet</Text>
@@ -68,12 +72,11 @@ export default function Personal() {
         <View style={styles.content}>
           <Text>Placeholder - Check-in goes here</Text>
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert("not implemented yet!")}
-        >
-          <Entypo style={styles.icon} name="pencil" size={20} color="black" />
-          <Text style={styles.content}>Start Weekly Check-in</Text>
+        <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+          <View style={styles.button}>
+            <Entypo style={styles.icon} name="pencil" size={20} color="black" />
+            <Text style={styles.content}>Start Weekly Check-in</Text>
+          </View>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: Theme.colors.buttonBlue,
     borderRadius: 8,
-    width: windowWidth * 0.3,
+    width: windowWidth * 0.5,
     alignItems: "center",
     justifyContent: "center",
     marginVertical: windowWidth * 0.03,
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   icon: {
-    marginHorizontal: 2,
+    marginHorizontal: 10,
   },
   chat: {},
 });
