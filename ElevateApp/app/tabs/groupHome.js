@@ -24,7 +24,7 @@ export default function Group() {
         <Text style={styles.title}>Group Home</Text>
         <TouchableOpacity
           style={styles.topButtonContainer}
-          onPress={() => alert("not implemented yet!")}
+          onPress={() => router.push('/additional/members')}
         >
           <Text style={styles.buttonText}>Members</Text>
         </TouchableOpacity>
