@@ -64,11 +64,13 @@ export default function Members() {
         data={members}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <MemberCard
-            profilePicture={item.profilePicture}
-            name={item.name}
-            bio={item.bio}
-          />
+          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+            <MemberCard
+              profilePicture={item.profilePicture}
+              name={item.name}
+              bio={item.bio}
+            />
+          </TouchableOpacity>
         )}
         contentContainerStyle={styles.list}
       />
