@@ -2,9 +2,9 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   Dimensions,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
 
 import { useRouter } from "expo-router";
@@ -14,12 +14,40 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
+import MemberCard from "@/components/MemberCard";
 
 const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
 
 export default function Members() {
   const router = useRouter();
+
+  // temporary information before backend
+  const members = [
+    {
+      id: "1",
+      profilePicture: "https://via.placeholder.com/50",
+      name: "CJ Indart",
+      bio: "Loves programming and open-source projects.",
+    },
+    {
+      id: "2",
+      profilePicture: "https://via.placeholder.com/50",
+      name: "Riley Pittman",
+      bio: "Avid traveler and photography enthusiast.",
+    },
+    {
+      id: "3",
+      profilePicture: "https://via.placeholder.com/50",
+      name: "Grace Miller",
+      bio: "Music lover and aspiring DJ.",
+    },
+    {
+      id: "4",
+      profilePicture: "https://via.placeholder.com/50",
+      name: "Ginelle Servat",
+      bio: "Dog lover and extreme traveler.",
+    },
+  ];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -31,7 +59,19 @@ export default function Members() {
         </View>
         <Text style={styles.title}>Members</Text>
       </View>
-      <View style={styles.header}></View>
+
+      <FlatList
+        data={members}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <MemberCard
+            profilePicture={item.profilePicture}
+            name={item.name}
+            bio={item.bio}
+          />
+        )}
+        contentContainerStyle={styles.list}
+      />
     </SafeAreaView>
   );
 }
@@ -55,5 +95,8 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "600",
     fontSize: 32,
+  },
+  list: {
+    paddingBottom: 20,
   },
 });
