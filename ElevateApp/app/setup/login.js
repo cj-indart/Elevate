@@ -6,16 +6,18 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import db from "@/database/db";
 import { useRouter } from "expo-router";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-
 import Theme from "@/assets/theme";
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -49,98 +51,89 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
-      <View style={styles.splash}>
-        <MaterialCommunityIcons
-          size={64}
-          name="bee-flower"
-          color={Theme.colors.iconHighlighted}
-        />
-        <Text style={styles.splashText}>Buzz</Text>
-      </View>
+      <TouchableOpacity style={styles.backButton} onPress={router.back}>
+        <FontAwesomeIcon icon={faArrowLeft} size={24} color={"black"} />
+      </TouchableOpacity>
+      <Text style={styles.title}>Sign In</Text>
+
       <TextInput
-        onChangeText={(text) => setEmail(text)}
+        style={styles.inputBox}
+        placeholder="Email"
         value={email}
-        placeholder="email@address.com"
-        placeholderTextColor={Theme.colors.textSecondary}
-        autoCapitalize={"none"}
-        style={styles.input}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
       />
+
       <TextInput
-        onChangeText={(text) => setPassword(text)}
-        value={password}
+        style={styles.inputBox}
         placeholder="Password"
-        placeholderTextColor={Theme.colors.textSecondary}
+        value={password}
+        onChangeText={setPassword}
         secureTextEntry={true}
-        autoCapitalize={"none"}
-        style={styles.input}
+        autoCapitalize="none"
       />
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={() => signInWithEmail()}
-          disabled={isSignInDisabled}
-        >
-          <Text
-            style={[
-              styles.button,
-              isSignInDisabled ? styles.buttonDisabled : undefined,
-            ]}
-          >
-            Sign in
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-          style={styles.button}
-          onPress={() => router.back()} // Navigate on press
-        >
-          <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
-        </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 60,
-    padding: 12,
-    backgroundColor: Theme.colors.backgroundPrimary,
-    flex: 1,
-  },
-  splash: {
     alignItems: "center",
-    marginBottom: 12,
+    flex: 1,
+    padding: 20,
+    backgroundColor: Theme.colors.backgroundPrimary,
   },
-  splashText: {
+  title: {
+    marginTop: windowHeight * 0.15,
+    marginBottom: windowHeight * 0.15,
+    fontSize: Theme.sizes.titleText,
     fontWeight: "bold",
-    color: Theme.colors.textPrimary,
-    fontSize: 60,
+  },
+  header: {
+    marginTop: windowHeight * 0.02,
+    fontSize: Theme.sizes.headerText,
+    fontWeight: "bold",
+    marginBottom: windowHeight * 0.1,
+  },
+  inputBox: {
+    fontSize: Theme.sizes.bodyText,
+    height: windowHeight * 0.06,
+    width: windowWidth * 0.8,
+    borderColor: Theme.colors.border,
+    borderWidth: 0.5,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    margin: 10,
+    backgroundColor: Theme.colors.backgroundSecodary,
   },
   buttonContainer: {
-    marginTop: 12,
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  verticallySpaced: {
-    marginVertical: 4,
-    alignSelf: "stretch",
-  },
-  mt20: {
-    marginTop: 20,
-  },
-  input: {
-    color: Theme.colors.textPrimary,
-    backgroundColor: Theme.colors.backgroundSecondary,
     width: "100%",
-    padding: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    position: "absolute",
+    bottom: windowHeight * 0.065,
+    paddingHorizontal: windowWidth * 0.1,
   },
   button: {
-    color: Theme.colors.textHighlighted,
-    fontSize: 18,
-    fontWeight: 18,
-    padding: 8,
+    width: windowWidth * 0.18,
+    height: windowHeight * 0.06,
+    backgroundColor: Theme.colors.buttonBlue,
+    borderRadius: 5,
+    padding: 10,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  buttonDisabled: {
-    color: Theme.colors.textSecondary,
+  bar: {
+    position: "absolute",
+    bottom: windowHeight * 0.87,
+  },
+  backButton: {
+    position: "absolute",
+    top: 75, // Adjust for platform-specific offsets if needed
+    left: 20,
+    zIndex: 1,
+    color: "black",
   },
 });

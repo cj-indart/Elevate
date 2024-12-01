@@ -27,8 +27,7 @@ export default function Welcome() {
       />
       <TouchableOpacity
         style={styles.topButtonContainer}
-        // onPress={() => router.push("/setup/login")}
-        onPress={() => alert("not implemented yet!")}
+        onPress={() => router.push("/setup/login")}
       >
         <Text style={styles.buttonText}>Sign In</Text>
       </TouchableOpacity>
