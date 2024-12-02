@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   back: {
     position: "absolute",
     top: 75,
-    left: 25,
+    left: 20,
     zIndex: 1,
   },
   title: {

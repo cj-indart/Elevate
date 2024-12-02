@@ -19,6 +19,7 @@ import MemberCard from "@/components/MemberCard";
 import db from "@/database/db";
 
 const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 export default function Members() {
   const router = useRouter();
@@ -55,15 +56,13 @@ export default function Members() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => router.push("/tabs/groupHome")}
+      >
+        <Ionicons name="chevron-back" size={30} color="black" />
+      </TouchableOpacity>
       <View style={styles.topNav}>
-        <View style={styles.backButton}>
-          <TouchableOpacity
-            style={styles.back}
-            onPress={() => router.push("/tabs/groupHome")}
-          >
-            <Ionicons name="chevron-back" size={30} color="black" />
-          </TouchableOpacity>
-        </View>
         <Text style={styles.title}>Group Members</Text>
       </View>
 
@@ -87,25 +86,30 @@ export default function Members() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Theme.colors.backgroundPrimary,
     flex: 1,
+    paddingTop: 20,
+    backgroundColor: Theme.colors.backgroundPrimary,
   },
   topNav: {
-    marginVertical: windowWidth * 0.1,
-    marginHorizontal: windowWidth * 0.07,
+    marginBottom: windowWidth * 0.05,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
   backButton: {
     position: "absolute",
-    left: 0,
+    top: 75,
+    left: 20,
+    zIndex: 1,
   },
   title: {
-    fontWeight: "600",
-    fontSize: 32,
+    textAlign: "center",
+    marginTop: windowHeight * 0.02,
+    fontSize: Theme.sizes.titleText,
+    fontWeight: "bold",
   },
   list: {
     paddingBottom: 20,
+    width: "100%",
   },
 });
