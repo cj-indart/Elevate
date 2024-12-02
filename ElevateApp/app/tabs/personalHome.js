@@ -19,12 +19,11 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function Personal() {
-
   const router = useRouter();
-  
+
   return (
     <ImageBackground
-      source={require("@/assets/images/clouds.png")} 
+      source={require("@/assets/images/clouds.png")}
       style={styles.backgroundImage}
     >
       <SafeAreaView style={styles.container}>
@@ -80,7 +79,9 @@ export default function Personal() {
           <View style={styles.content}>
             <Text>Placeholder - Check-in goes here</Text>
           </View>
-          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+          <TouchableOpacity
+            onPress={() => router.push("/additional/checkin/begin")}
+          >
             <View style={styles.button}>
               <Entypo
                 style={styles.icon}
