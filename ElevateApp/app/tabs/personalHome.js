@@ -23,7 +23,7 @@ export default function Personal() {
 
   return (
     <ImageBackground
-      source={require("@/assets/images/clouds.png")}
+      source={require("@/assets/images/clouds1.png")}
       style={styles.backgroundImage}
     >
       <SafeAreaView style={styles.container}>

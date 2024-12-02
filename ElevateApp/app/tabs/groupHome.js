@@ -18,7 +18,7 @@ export default function Group() {
 
   return (
     <ImageBackground
-      source={require("@/assets/images/clouds.png")}
+      source={require("@/assets/images/clouds1.png")}
       style={styles.backgroundImage}
     >
       <SafeAreaView style={styles.container}>
@@ -31,17 +31,19 @@ export default function Group() {
             <Text style={styles.buttonText}>Members</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.checkInContainer}>
+        <View style={styles.content}>
           <Text style={styles.header}>Group Check-ins</Text>
-          <View style={styles.tempText}>
-            <Text>No group check-ins yet!</Text>
+          <View style={styles.checkInContainer}>
+            <View style={styles.tempText}>
+              <Text>No group check-ins yet!</Text>
+            </View>
           </View>
-        </View>
-<View style={styles.groupGoalsContaier}>
-        <Text style={styles.header}>Group Goals</Text>
-        <View style={styles.tempText}>
-          <Text>No group goals yet!</Text>
-        </View>
+          <Text style={styles.header}>Group Goals</Text>
+          <View style={styles.groupGoalsContaier}>
+            <View style={styles.tempText}>
+              <Text>No group goals yet!</Text>
+            </View>
+          </View>
         </View>
       </SafeAreaView>
     </ImageBackground>
@@ -56,6 +58,9 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   container: {},
+  content: {
+    flexDirection: "column",
+  },
   topNav: {
     marginVertical: windowWidth * 0.1,
     marginHorizontal: windowWidth * 0.07,
@@ -80,21 +85,28 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   checkInContainer: {
-    flexDirection: 'column',
-    height: windowHeight * 0.35
+    flexDirection: "column",
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: windowHeight * 0.3,
   },
   groupGoalsContaier: {
-    flexDirection: 'column',
-    height: windowHeight * 0.35,
+    flexDirection: "column",
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: windowHeight * 0.3,
   },
   header: {
     fontSize: Theme.sizes.headerText,
     paddingHorizontal: 35,
-    paddingBottom: 30,
   },
   tempText: {
-    marginTop: windowHeight * 0.1,
+    height: 20,
+    borderRadius: 5,
+    width: windowWidth * 0.5,
+    flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
+    alignContent: "center",
+    backgroundColor: "white",
   },
 });
