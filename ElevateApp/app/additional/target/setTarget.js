@@ -57,7 +57,7 @@ export default function SetTarget() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.back} onPress={() => router.back()}>
+      <TouchableOpacity style={styles.back} onPress={() => router.push("/tabs/personalHome")}>
         <Ionicons name="chevron-back" size={30} color="black" />
       </TouchableOpacity>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
