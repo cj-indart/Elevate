@@ -7,8 +7,7 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import { SelectList } from "react-native-dropdown-select-list";
 import Theme from "@/assets/theme";
@@ -103,6 +102,9 @@ export default function Background() {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.back} onPress={() => router.back()}>
+        <Ionicons name="chevron-back" size={30} color="black" />
+      </TouchableOpacity>
       <Text style={styles.title}>Create Account</Text>
       <Text style={styles.header}>Background</Text>
       <Text style={styles.body}>
@@ -171,22 +173,19 @@ export default function Background() {
         }}
       />
 
-      <ProgressBar
+      {/* <ProgressBar
         progress={0.666}
         width={windowWidth * 0.6}
         style={styles.bar}
         color="#A9A9A9"
-      />
+      /> */}
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => router.back()}>
-          <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
-        </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => router.push("./plane")}
         >
-          <FontAwesomeIcon icon={faArrowRight} size={24} color="black" />
+          <Ionicons name="chevron-forward" size={24} color="black" />
         </TouchableOpacity>
       </View>
     </View>
@@ -199,6 +198,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: Theme.colors.backgroundPrimary,
+  },
+  back: {
+    position: "absolute",
+    top: 75,
+    left: 20
   },
   title: {
     marginTop: windowHeight * 0.15,
@@ -230,7 +234,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     alignItems: "center",
     position: "absolute",
     bottom: windowHeight * 0.065,

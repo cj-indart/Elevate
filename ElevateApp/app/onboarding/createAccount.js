@@ -25,7 +25,11 @@ export default function CreateAccount() {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.back} onPress={() => router.back()}>
+        <Ionicons name="chevron-back" size={30} color="black" />
+      </TouchableOpacity>
       <Text style={styles.title}>Create Account</Text>
+
       <Text style={styles.header}>Account Information</Text>
 
       <TextInput
@@ -61,13 +65,13 @@ export default function CreateAccount() {
         secureTextEntry={true}
         autoCapitalize="none"
       />
-      <ProgressBar
+      {/* <ProgressBar
         progress={0.333}
         width={windowWidth * 0.6}
         style={styles.bar}
         // color={Theme.colors.backgroundSecodary}
         color="#A9A9A9"
-      />
+      /> */}
 
       <View style={styles.buttonContainer}>
         {/* <TouchableOpacity style={styles.button} onPress={() => router.back()}>
@@ -90,6 +94,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: Theme.colors.backgroundPrimary,
+  },
+  back: {
+    position: "absolute",
+    top: 75,
+    left: 20,
   },
   title: {
     marginTop: windowHeight * 0.15,
@@ -133,6 +142,6 @@ const styles = StyleSheet.create({
   },
   bar: {
     position: "absolute",
-    bottom: windowHeight * 0.87,
+    bottom: windowHeight * 0.8,
   },
 });
