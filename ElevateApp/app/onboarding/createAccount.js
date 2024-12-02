@@ -7,8 +7,7 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 import ProgressBar from "react-native-progress/Bar";
@@ -71,14 +70,14 @@ export default function CreateAccount() {
       />
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => router.back()}>
+        {/* <TouchableOpacity style={styles.button} onPress={() => router.back()}>
           <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
           style={styles.button}
           onPress={() => router.push("/onboarding/background")}
         >
-          <FontAwesomeIcon icon={faArrowRight} size={24} color="black" />
+          <Ionicons name="chevron-forward" size={24} color="black" />
         </TouchableOpacity>
       </View>
     </View>
@@ -117,7 +116,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     alignItems: "center",
     position: "absolute",
     bottom: windowHeight * 0.065,

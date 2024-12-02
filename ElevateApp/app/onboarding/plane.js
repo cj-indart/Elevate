@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
@@ -35,15 +36,8 @@ export default function Plane() {
         source={require("@/assets/images/dottedPlane.png")}
         resizeMode="contain"
       />
-
-      <ProgressBar
-        progress={1}
-        width={windowWidth * 0.6}
-        style={styles.bar}
-        color="#A9A9A9"
-      />
-
-      {/* <TouchableOpacity style={styles.button} onPress={() => router.back()}>
+      <ActivityIndicator size="large" color="black" />
+      {/* <TouchableOpacity style={styles.back} onPress={() => router.back()}>
         <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
       </TouchableOpacity> */}
     </View>
@@ -53,24 +47,22 @@ export default function Plane() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    justifyContent: "space-around",
+    justifyContent: "center",
     alignItems: "center",
     flex: 1,
     padding: 20,
     backgroundColor: Theme.colors.backgroundPrimary,
   },
   title: {
-    marginTop: windowHeight * 0.15,
     fontSize: 30,
     fontWeight: "bold",
   },
   image: {
     height: windowHeight * 0.4,
     aspectRatio: 1,
-    marginBottom: windowHeight * 0.15,
   },
-  bar: {
-    position: "absolute",
-    bottom: windowHeight * 0.87,
-  },
+  back: {
+    position: 'absolute',
+    bottom: 10,
+  }
 });

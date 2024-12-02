@@ -21,11 +21,6 @@ const styles = StyleSheet.create({
     padding: 15,
     marginVertical: 10,
     marginHorizontal: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3,
   },
   image: {
     width: 50,
