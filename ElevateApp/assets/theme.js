@@ -27,6 +27,7 @@ export default {
     headerText: 20,
     bodyText: 15,
     iconSmall: 16,
+    iconMedium: 25,
 
     textMedium: 16,
     textLarge: 20,

@@ -38,7 +38,7 @@ export default function Welcome() {
 
       <TouchableOpacity
         style={styles.temporaryButton}
-        onPress={() => router.push("/tabs/groupHome")}
+        onPress={() => router.push("/tabs/personalHome")}
       >
         <Text style={styles.buttonText}>Go to Home</Text>
       </TouchableOpacity>

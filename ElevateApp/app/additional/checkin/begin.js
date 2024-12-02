@@ -10,52 +10,91 @@ import {
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Checkbox from "expo-checkbox";
+import ProgressBar from "react-native-progress/Bar";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function Begin() {
-  const [major, setMajor] = useState("");
-  const [isSelected, setSelection] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [otherText, setOtherText] = useState(""); // State for "Other" input
 
   const router = useRouter();
+  const options = [
+    "Networking",
+    "Submitted Applications",
+    "Interview Prep",
+    "Community Building",
+    "Self Care",
+    "Other",
+  ];
+
+  const toggleSelection = (option) => {
+    setSelectedOptions((prev) => {
+      if (prev.includes(option)) {
+        // If unchecking "Other", clear the otherText state
+        if (option === "Other") setOtherText("");
+        return prev.filter((item) => item !== option);
+      }
+      return [...prev, option];
+    });
+  };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.back} onPress={() => router.back()}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => router.push("/tabs/personalHome")}
+      >
         <Ionicons name="chevron-back" size={30} color="black" />
       </TouchableOpacity>
       <Text style={styles.title}>Weekly Check-in</Text>
-      <View>
-        <Text style={styles.subHeaderText}>Let's begin...</Text>
-      </View>
-      <View>
-        <Text style={styles.questionText}>What did you do well last week?</Text>
+      <Text style={styles.subHeaderText}>Let's begin...</Text>
+      <Text style={styles.questionText}>What did you do well last week?</Text>
+
+      <View style={styles.options}>
+        {options.map((option) => (
+          <View key={option} style={styles.responses}>
+            <TouchableOpacity
+              style={styles.checkBox}
+              onPress={() => toggleSelection(option)}
+            >
+              {selectedOptions.includes(option) && (
+                <Text style={styles.checkMark}>✓</Text>
+              )}
+            </TouchableOpacity>
+            <Text style={styles.responseText}>{option}</Text>
+            {option === "Other" && selectedOptions.includes("Other") && (
+              <TextInput
+                style={styles.otherInput}
+                placeholder="Please specify..."
+                value={otherText}
+                onChangeText={setOtherText}
+              />
+            )}
+          </View>
+        ))}
       </View>
 
-      <TextInput
-        style={styles.inputBox}
-        placeholder="Major"
-        placeholderTextColor={Theme.colors.placeholderText}
-        value={major}
-        onChangeText={setMajor}
+      <ProgressBar
+        progress={0}
+        width={windowWidth * 0.6}
+        style={styles.bar}
+        color="#A9A9A9"
       />
-      <View style={styles.checkboxContainer}>
-        <Checkbox
-          style={styles.checkbox}
-          value={isChecked}
-          onValueChange={setChecked}
-          color={isChecked ? "#4630EB" : undefined}
-        />
-        <Text style={styles.label}>Do you like React Native?</Text>
-      </View>
 
       <TouchableOpacity
         style={styles.buttonContainer}
-        onPress={() => router.push("/onboarding/plane")}
+        // onPress={() => console.log({ selectedOptions, otherText })}
+        onPress={() => router.push("/additional/checkin/goingForward")}
       >
-        <Text style={styles.buttonText}>Find Group!</Text>
+        <View style={styles.nextButton}>
+          <Ionicons
+            name="arrow-forward"
+            size={Theme.sizes.iconMedium}
+            color="black"
+          />
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -63,68 +102,88 @@ export default function Begin() {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
+    // alignItems: "center",
     flex: 1,
     padding: 20,
     backgroundColor: Theme.colors.backgroundPrimary,
   },
-  back: {
+  options: {
+    marginTop: windowHeight * 0.025,
+    alignSelf: "flex-start",
+    marginLeft: windowWidth * 0.1,
+  },
+  checkBox: {
+    width: 25,
+    height: 25,
+    borderWidth: 2,
+    borderColor: "black",
+    marginRight: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  checkMark: {
+    fontSize: Theme.sizes.bodyText,
+    fontWeight: "700",
+    color: "black",
+  },
+  responses: {
+    flexDirection: "row",
+    marginVertical: 10,
+    alignItems: "center",
+  },
+  responseText: {
+    fontSize: Theme.sizes.bodyText,
+  },
+  otherInput: {
+    borderWidth: 1,
+    borderColor: "gray",
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginLeft: 10,
+    width: 150,
+    height: 40,
+  },
+  backButton: {
     position: "absolute",
     top: 75,
     left: 20,
   },
   title: {
+    textAlign: "center",
     marginTop: windowHeight * 0.15,
     fontSize: Theme.sizes.titleText,
     fontWeight: "bold",
   },
   subHeaderText: {
+    textAlign: "left",
+    marginLeft: windowWidth * 0.1,
     marginTop: windowHeight * 0.05,
-    fontSize: Theme.sizes.headerText,
+    fontSize: 25,
     fontWeight: "500",
   },
   questionText: {
-    marginTop: windowHeight * 0.05,
-    fontSize: Theme.sizes.textMedium,
+    textAlign: "left",
+    marginLeft: windowWidth * 0.1,
+    marginRight: windowWidth * 0.1,
+    marginTop: windowHeight * 0.025,
+    fontSize: 20,
   },
-  inputBox: {
-    height: windowHeight * 0.06,
-    width: windowWidth * 0.8,
-    borderColor: Theme.colors.border,
-    borderWidth: 0.5,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    margin: 10,
-    backgroundColor: Theme.colors.backgroundSecodary,
-    fontSize: Theme.sizes.bodyText,
-  },
-  dropdownTrigger: {
-    height: windowHeight * 0.06,
-    width: windowWidth * 0.8,
-    borderColor: Theme.colors.border,
-    borderWidth: 0.5,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    margin: 10,
-    backgroundColor: Theme.colors.backgroundSecodary,
-    justifyContent: "center",
-  },
-  dropdownTriggerText: {
-    fontSize: 16,
+  bar: {
+    position: "absolute",
+    bottom: 135,
+    alignSelf: "center",
   },
   buttonContainer: {
     position: "absolute",
-    bottom: 200,
+    bottom: 50,
+    right: 50,
     backgroundColor: Theme.colors.buttonBlue,
     padding: 15,
     borderRadius: 8,
-    width: windowWidth * 0.8,
-    alignItems: "center",
+    width: windowWidth * 0.2,
   },
-  buttonText: {
-    fontSize: Theme.sizes.headerText,
-    fontWeight: "500",
+  nextButton: {
+    flexDirection: "row",
     justifyContent: "center",
-    textAlign: "center",
   },
 });
