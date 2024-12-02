@@ -37,6 +37,13 @@ export default function Welcome() {
       >
         <Text style={styles.buttonText}>Create Account</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.temporaryButton}
+        onPress={() => router.push("/tabs/groupHome")}
+      >
+        <Text style={styles.buttonText}>Go to Home</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -76,6 +83,15 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 8,
     width: windowWidth * 0.8,
+    alignItems: "center",
+    alignSelf: "center",
+  },
+  temporaryButton: {
+    marginTop: 30,
+    backgroundColor: "red",
+    padding: 15,
+    borderRadius: 8,
+    width: windowWidth * 0.4,
     alignItems: "center",
     alignSelf: "center",
   },

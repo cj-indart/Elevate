@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   View,
   Text,
   TextInput,
@@ -10,7 +11,7 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
-import ProgressBar from "react-native-progress/Bar";
+import db from "@/database/db";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -20,8 +21,47 @@ export default function CreateAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+
+  const signUpWithEmailAndPassword = async () => {
+    setLoading(true);
+    try {
+      if (password !== confirmPassword) {
+        Alert.alert("Passwords do not match.");
+        setConfirmPassword("");
+        return;
+      }
+
+      const { data, error } = await db.auth.signUp({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        Alert.alert(error.message); // Display error if sign-up fails
+        return;
+      }
+
+      // if sign-up is successful, update the user's profile with a username
+      const { user } = data;
+
+      const { error: profileError } = await db
+        .from("user_info")
+        .upsert({ username: username });
+
+      if (profileError) {
+        Alert.alert(profileError.message); // Handle any error during profile update
+      } else {
+        router.push("/onboarding/background"); // Navigate to the group home page
+      }
+    } catch (err) {
+      console.error(err); // Log unexpected errors
+    } finally {
+      setLoading(false); // Reset loading state after the operation
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -72,7 +112,7 @@ export default function CreateAccount() {
 
       <TouchableOpacity
         style={styles.buttonContainer}
-        onPress={() => router.push("/onboarding/background")}
+        onPress={() => signUpWithEmailAndPassword()}
       >
         <Text style={styles.buttonText}>Create Account</Text>
       </TouchableOpacity>
