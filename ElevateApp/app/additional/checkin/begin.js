@@ -10,12 +10,14 @@ import {
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Checkbox from "expo-checkbox";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function Begin() {
   const [major, setMajor] = useState("");
+  const [isSelected, setSelection] = useState(false);
 
   const router = useRouter();
 
@@ -25,7 +27,12 @@ export default function Begin() {
         <Ionicons name="chevron-back" size={30} color="black" />
       </TouchableOpacity>
       <Text style={styles.title}>Weekly Check-in</Text>
-      <Text style={styles.subHeaderText}>Let's begin...</Text>
+      <View>
+        <Text style={styles.subHeaderText}>Let's begin...</Text>
+      </View>
+      <View>
+        <Text style={styles.questionText}>What did you do well last week?</Text>
+      </View>
 
       <TextInput
         style={styles.inputBox}
@@ -34,6 +41,15 @@ export default function Begin() {
         value={major}
         onChangeText={setMajor}
       />
+      <View style={styles.checkboxContainer}>
+        <Checkbox
+          style={styles.checkbox}
+          value={isChecked}
+          onValueChange={setChecked}
+          color={isChecked ? "#4630EB" : undefined}
+        />
+        <Text style={styles.label}>Do you like React Native?</Text>
+      </View>
 
       <TouchableOpacity
         style={styles.buttonContainer}
@@ -47,7 +63,7 @@ export default function Begin() {
 
 const styles = StyleSheet.create({
   container: {
-    // alignItems: "center",
+    alignItems: "center",
     flex: 1,
     padding: 20,
     backgroundColor: Theme.colors.backgroundPrimary,
@@ -58,15 +74,18 @@ const styles = StyleSheet.create({
     left: 20,
   },
   title: {
-    textAlign: "center",
     marginTop: windowHeight * 0.15,
-    fontSize: 30,
+    fontSize: Theme.sizes.titleText,
     fontWeight: "bold",
   },
-
   subHeaderText: {
     marginTop: windowHeight * 0.05,
-    textAlign: "left",
+    fontSize: Theme.sizes.headerText,
+    fontWeight: "500",
+  },
+  questionText: {
+    marginTop: windowHeight * 0.05,
+    fontSize: Theme.sizes.textMedium,
   },
   inputBox: {
     height: windowHeight * 0.06,
