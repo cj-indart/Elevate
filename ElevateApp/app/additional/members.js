@@ -53,7 +53,7 @@ export default function Members() {
     <SafeAreaView style={styles.container}>
       <View style={styles.topNav}>
         <View style={styles.backButton}>
-          <TouchableOpacity onPress={() => router.back()}>
+          <TouchableOpacity onPress={() => router.push("/tabs/groupHome")}>
             <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
           </TouchableOpacity>
         </View>
