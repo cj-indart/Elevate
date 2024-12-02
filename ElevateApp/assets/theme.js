@@ -19,6 +19,8 @@ export default {
 
     tabBarActive: "#FFFFFF",
     tabBarBorder: "#747474",
+
+    placeholderText: "#a8a8a8",
   },
   sizes: {
     titleText: 30,

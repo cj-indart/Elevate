@@ -36,6 +36,7 @@ export default function CreateAccount() {
         style={styles.inputBox}
         placeholder="Username"
         value={username}
+        placeholderTextColor={Theme.colors.placeholderText}
         onChangeText={setUsername}
       />
 
@@ -43,6 +44,7 @@ export default function CreateAccount() {
         style={styles.inputBox}
         placeholder="Email"
         value={email}
+        placeholderTextColor={Theme.colors.placeholderText}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
@@ -52,6 +54,7 @@ export default function CreateAccount() {
         style={styles.inputBox}
         placeholder="Password"
         value={password}
+        placeholderTextColor={Theme.colors.placeholderText}
         onChangeText={setPassword}
         secureTextEntry={true}
         autoCapitalize="none"
@@ -61,29 +64,18 @@ export default function CreateAccount() {
         style={styles.inputBox}
         placeholder="Confirm Password"
         value={confirmPassword}
+        placeholderTextColor={Theme.colors.placeholderText}
         onChangeText={setConfirmPassword}
         secureTextEntry={true}
         autoCapitalize="none"
       />
-      {/* <ProgressBar
-        progress={0.333}
-        width={windowWidth * 0.6}
-        style={styles.bar}
-        // color={Theme.colors.backgroundSecodary}
-        color="#A9A9A9"
-      /> */}
 
-      <View style={styles.buttonContainer}>
-        {/* <TouchableOpacity style={styles.button} onPress={() => router.back()}>
-          <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
-        </TouchableOpacity> */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => router.push("/onboarding/background")}
-        >
-          <Ionicons name="chevron-forward" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() => router.push("/onboarding/background")}
+      >
+        <Text style={styles.buttonText}>Create Account</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -109,7 +101,7 @@ const styles = StyleSheet.create({
     marginTop: windowHeight * 0.02,
     fontSize: Theme.sizes.headerText,
     fontWeight: "bold",
-    marginBottom: windowHeight * 0.1,
+    marginBottom: windowHeight * 0.05,
   },
   inputBox: {
     fontSize: Theme.sizes.bodyText,
@@ -123,22 +115,29 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.backgroundSecodary,
   },
   buttonContainer: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    marginTop: windowHeight * 0.1,
+    backgroundColor: Theme.colors.buttonBlue,
+    padding: 15,
+    borderRadius: 8,
+    width: windowWidth * 0.8,
     alignItems: "center",
-    position: "absolute",
-    bottom: windowHeight * 0.065,
-    paddingHorizontal: windowWidth * 0.1,
+    marginVertical: 20,
+    alignSelf: "center",
   },
   button: {
-    width: windowWidth * 0.18,
+    // width: windowWidth * 0.18,
     height: windowHeight * 0.06,
     backgroundColor: Theme.colors.buttonBlue,
     borderRadius: 5,
     padding: 10,
     alignItems: "center",
     justifyContent: "center",
+  },
+  buttonText: {
+    fontSize: Theme.sizes.headerText,
+    fontWeight: "500",
+    justifyContent: "center",
+    textAlign: "center",
   },
   bar: {
     position: "absolute",

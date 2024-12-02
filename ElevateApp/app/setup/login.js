@@ -9,7 +9,7 @@ import {
   Dimensions,
   Image,
 } from "react-native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import db from "@/database/db";
 import { useRouter } from "expo-router";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -58,8 +58,8 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={router.back}>
-        <FontAwesomeIcon icon={faArrowLeft} size={24} color={"black"} />
+      <TouchableOpacity style={styles.back} onPress={() => router.back()}>
+        <Ionicons name="chevron-back" size={30} color="black" />
       </TouchableOpacity>
       <Image
         style={styles.logo}
@@ -71,6 +71,7 @@ export default function Login() {
         style={styles.inputBox}
         placeholder="Email"
         value={email}
+        placeholderTextColor={Theme.colors.placeholderText}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
@@ -79,6 +80,7 @@ export default function Login() {
       <TextInput
         style={styles.inputBox}
         placeholder="Password"
+        placeholderTextColor={Theme.colors.placeholderText}
         value={password}
         onChangeText={setPassword}
         secureTextEntry={true}
@@ -105,6 +107,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: Theme.colors.backgroundPrimary,
+  },
+  back: {
+    position: "absolute",
+    top: 75,
+    left: 20,
   },
   title: {
     marginTop: windowHeight * 0.15,
