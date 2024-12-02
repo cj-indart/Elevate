@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   Dimensions,
+  Image,
 } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import db from "@/database/db";
@@ -39,10 +40,16 @@ export default function Login() {
 
       if (error) {
         Alert.alert(error.message);
+        setEmail("");
+        setPassword("");
+      } else {
+        console.log("Success");
+        router.push("/tabs/groupHome"); // Navigate to the group home page
       }
-      setLoading(false);
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false); // Ensure loading is reset even if there's an error
     }
   };
 
@@ -54,7 +61,11 @@ export default function Login() {
       <TouchableOpacity style={styles.backButton} onPress={router.back}>
         <FontAwesomeIcon icon={faArrowLeft} size={24} color={"black"} />
       </TouchableOpacity>
-      <Text style={styles.title}>Sign In</Text>
+      <Image
+        style={styles.logo}
+        source={require("@/assets/images/logo.png")}
+        resizeMode="contain"
+      />
 
       <TextInput
         style={styles.inputBox}
@@ -73,11 +84,22 @@ export default function Login() {
         secureTextEntry={true}
         autoCapitalize="none"
       />
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() => signInWithEmail()}
+      >
+        <Text style={styles.buttonText}>Sign In</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  logo: {
+    marginTop: windowHeight * 0.2,
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.2,
+  },
   container: {
     alignItems: "center",
     flex: 1,
@@ -108,13 +130,14 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.backgroundSecodary,
   },
   buttonContainer: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    marginTop: windowHeight * 0.1,
+    backgroundColor: Theme.colors.buttonBlue,
+    padding: 15,
+    borderRadius: 8,
+    width: windowWidth * 0.8,
     alignItems: "center",
-    position: "absolute",
-    bottom: windowHeight * 0.065,
-    paddingHorizontal: windowWidth * 0.1,
+    marginVertical: 20,
+    alignSelf: "center",
   },
   button: {
     width: windowWidth * 0.18,
@@ -135,5 +158,11 @@ const styles = StyleSheet.create({
     left: 20,
     zIndex: 1,
     color: "black",
+  },
+  buttonText: {
+    fontSize: Theme.sizes.headerText,
+    fontWeight: "500",
+    justifyContent: "center",
+    textAlign: "center",
   },
 });
