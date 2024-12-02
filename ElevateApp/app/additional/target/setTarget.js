@@ -14,6 +14,7 @@ import Theme from "@/assets/theme";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Slider from "@react-native-community/slider";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -55,14 +56,11 @@ export default function SetTarget() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <TouchableOpacity style={styles.back} onPress={() => router.back()}>
+        <Ionicons name="chevron-back" size={30} color="black" />
+      </TouchableOpacity>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.push("/tabs/personalHome")}
-        >
-          <Ionicons name="chevron-back" size={30} color="black" />
-        </TouchableOpacity>
         <Text style={styles.title}>Set Target</Text>
         <Text style={styles.subHeaderText}>Title</Text>
         <TextInput
@@ -71,7 +69,6 @@ export default function SetTarget() {
           placeholderTextColor={Theme.colors.placeholderText}
           value={title}
           onChangeText={setTitle}
-          secureTextEntry={true}
           autoCapitalize="none"
         />
         <Text style={styles.subHeaderText}>Deadline</Text>
@@ -152,7 +149,7 @@ export default function SetTarget() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -162,14 +159,18 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: Theme.colors.backgroundPrimary,
   },
-  backButton: {
+  scrollViewContent: {
+    flex: 1,
+  },
+  back: {
     position: "absolute",
     top: 75,
-    left: 0,
+    left: 25,
+    zIndex: 1,
   },
   title: {
     textAlign: "center",
-    marginTop: windowHeight * 0.1,
+    marginTop: windowHeight * 0.02,
     fontSize: Theme.sizes.titleText,
     fontWeight: "bold",
   },
