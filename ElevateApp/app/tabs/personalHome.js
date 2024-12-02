@@ -5,6 +5,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 
 import { useRouter } from "expo-router";
@@ -19,71 +20,87 @@ const windowHeight = Dimensions.get("window").height;
 
 export default function Personal() {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.topNav}>
-        <Text style={styles.title}>Personal Home</Text>
-        <TouchableOpacity onPress={() => alert("not implemented yet!")}>
-          <Entypo style={styles.cog} name="cog" size={36} color="black" />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.section}>
-        <View style={styles.headerRow}>
-          <Text style={styles.header}>Upcoming Targets</Text>
-          <TouchableOpacity
-            style={styles.info}
-            onPress={() => alert("not implemented yet!")}
-          >
-            <Entypo style={styles.icon} name="info" size={12} color="black" />
+    <ImageBackground
+      source={require("@/assets/images/clouds.png")} 
+      style={styles.backgroundImage}
+    >
+      <SafeAreaView style={styles.container}>
+        <View style={styles.topNav}>
+          <Text style={styles.title}>Personal Home</Text>
+          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+            <Entypo style={styles.cog} name="cog" size={36} color="black" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => alert("not implemented yet!")}>
-          <View style={styles.button}>
-            <Foundation
-              style={styles.icon}
-              name="target"
-              size={24}
-              color="black"
-            />
-            <Text style={styles.content}>Set New Target</Text>
+        <View style={styles.section}>
+          <View style={styles.headerRow}>
+            <Text style={styles.header}>Upcoming Targets</Text>
+            <TouchableOpacity
+              style={styles.info}
+              onPress={() => alert("not implemented yet!")}
+            >
+              <Entypo style={styles.icon} name="info" size={12} color="black" />
+            </TouchableOpacity>
           </View>
-        </TouchableOpacity>
-        <View style={styles.content}>
-          <Text>Placeholder - No targets set yet</Text>
-        </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert("not implemented yet!")}
-        >
-          <Text style={styles.content}>All Targets</Text>
-        </TouchableOpacity>
-      </View>
-      <View marginVertical={windowWidth * 0.07}></View>
-      <View style={styles.section}>
-        <View style={styles.headerRow}>
-          <Text style={styles.header}>Your Check-in</Text>
+          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+            <View style={styles.button}>
+              <Foundation
+                style={styles.icon}
+                name="target"
+                size={24}
+                color="black"
+              />
+              <Text style={styles.content}>Set New Target</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.content}>
+            <Text>Placeholder - No targets set yet</Text>
+          </View>
           <TouchableOpacity
-            style={styles.info}
+            style={styles.button}
             onPress={() => alert("not implemented yet!")}
           >
-            <Entypo style={styles.icon} name="info" size={12} color="black" />
+            <Text style={styles.content}>All Targets</Text>
           </TouchableOpacity>
         </View>
+        <View marginVertical={windowWidth * 0.07}></View>
+        <View style={styles.section}>
+          <View style={styles.headerRow}>
+            <Text style={styles.header}>Your Check-in</Text>
+            <TouchableOpacity
+              style={styles.info}
+              onPress={() => alert("not implemented yet!")}
+            >
+              <Entypo style={styles.icon} name="info" size={12} color="black" />
+            </TouchableOpacity>
+          </View>
 
-        <View style={styles.content}>
-          <Text>Placeholder - Check-in goes here</Text>
-        </View>
-        <TouchableOpacity onPress={() => alert("not implemented yet!")}>
-          <View style={styles.button}>
-            <Entypo style={styles.icon} name="pencil" size={20} color="black" />
-            <Text style={styles.content}>Start Weekly Check-in</Text>
+          <View style={styles.content}>
+            <Text>Placeholder - Check-in goes here</Text>
           </View>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+            <View style={styles.button}>
+              <Entypo
+                style={styles.icon}
+                name="pencil"
+                size={20}
+                color="black"
+              />
+              <Text style={styles.content}>Start Weekly Check-in</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    width: windowWidth,
+    height: windowHeight,
+    resizeMode: "cover",
+  },
   container: {},
   topNav: {
     marginVertical: windowWidth * 0.1,

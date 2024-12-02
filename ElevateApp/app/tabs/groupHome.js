@@ -2,15 +2,13 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   Dimensions,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-import Entypo from "@expo/vector-icons/Entypo";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -19,35 +17,45 @@ export default function Group() {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.topNav}>
-        <Text style={styles.title}>Group Home</Text>
-        <TouchableOpacity
-          style={styles.topButtonContainer}
-          onPress={() => router.push('/additional/members')}
-        >
-          <Text style={styles.buttonText}>Members</Text>
-        </TouchableOpacity>
-      </View>
-
-      <Text style={styles.header}>Group Check-ins</Text>
-      <View style={styles.tempText}>
-        <Text>No group check-ins yet!</Text>
-      </View>
-
-      <Text style={styles.groupGoals}>Group Goals</Text>
-      <View style={styles.tempText}>
-        <Text>No group goals yet!</Text>
-      </View>
-    </SafeAreaView>
+    <ImageBackground
+      source={require("@/assets/images/clouds.png")}
+      style={styles.backgroundImage}
+    >
+      <SafeAreaView style={styles.container}>
+        <View style={styles.topNav}>
+          <Text style={styles.title}>Group Home</Text>
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={() => router.push("/additional/members")}
+          >
+            <Text style={styles.buttonText}>Members</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.checkInContainer}>
+          <Text style={styles.header}>Group Check-ins</Text>
+          <View style={styles.tempText}>
+            <Text>No group check-ins yet!</Text>
+          </View>
+        </View>
+<View style={styles.groupGoalsContaier}>
+        <Text style={styles.header}>Group Goals</Text>
+        <View style={styles.tempText}>
+          <Text>No group goals yet!</Text>
+        </View>
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Theme.colors.backgroundPrimary,
+  backgroundImage: {
     flex: 1,
+    width: windowWidth,
+    height: windowHeight,
+    resizeMode: "cover",
   },
+  container: {},
   topNav: {
     marginVertical: windowWidth * 0.1,
     marginHorizontal: windowWidth * 0.07,
@@ -55,26 +63,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  logo: {
-    marginHorizontal: 15,
-    width: windowWidth * 0.3,
-    height: windowHeight * 0.07,
-  },
-  chat: {
-    marginHorizontal: 15,
-  },
   title: {
     fontSize: Theme.sizes.titleText,
     fontWeight: "600",
   },
-  titleContainer: {
-    // flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    paddingVertical: 25,
-  },
-  topButtonContainer: {
+  buttonContainer: {
     backgroundColor: Theme.colors.buttonBlue,
     borderRadius: 8,
     width: windowWidth * 0.25,
@@ -86,22 +79,22 @@ const styles = StyleSheet.create({
     fontSize: Theme.sizes.bodyText,
     fontWeight: "600",
   },
+  checkInContainer: {
+    flexDirection: 'column',
+    height: windowHeight * 0.35
+  },
+  groupGoalsContaier: {
+    flexDirection: 'column',
+    height: windowHeight * 0.35,
+  },
   header: {
     fontSize: Theme.sizes.headerText,
     paddingHorizontal: 35,
     paddingBottom: 30,
   },
-  checkIn: {
-    flexDirection: "row",
-  },
   tempText: {
     marginTop: windowHeight * 0.1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  groupGoals: {
-    fontSize: Theme.sizes.headerText,
-    paddingHorizontal: 35,
-    marginTop: windowHeight * 0.15,
   },
 });

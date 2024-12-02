@@ -44,12 +44,12 @@ export default function Login() {
         setPassword("");
       } else {
         console.log("Success");
-        router.push("/tabs/groupHome"); // Navigate to the group home page
+        router.push("/tabs/groupHome");
       }
     } catch (err) {
       console.error(err);
     } finally {
-      setLoading(false); // Ensure loading is reset even if there's an error
+      setLoading(false); 
     }
   };
 
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    top: 75, // Adjust for platform-specific offsets if needed
+    top: 75, 
     left: 20,
     zIndex: 1,
     color: "black",
