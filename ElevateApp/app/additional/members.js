@@ -7,54 +7,61 @@ import {
   FlatList,
 } from "react-native";
 
+import React, { useState, useEffect } from "react";
+
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import MemberCard from "@/components/MemberCard";
+
+import db from "@/database/db";
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function Members() {
   const router = useRouter();
+  const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // temporary information before backend
-  const members = [
-    {
-      id: "1",
-      profilePicture: "https://via.placeholder.com/50",
-      name: "CJ Indart",
-      bio: "Loves programming and open-source projects. Click to see full profile!",
-    },
-    {
-      id: "2",
-      profilePicture: "https://via.placeholder.com/50",
-      name: "Riley Pittman",
-      bio: "Avid traveler and photography enthusiast.",
-    },
-    {
-      id: "3",
-      profilePicture: "https://via.placeholder.com/50",
-      name: "Grace Miller",
-      bio: "Music lover and aspiring DJ.",
-    },
-    {
-      id: "4",
-      profilePicture: "https://via.placeholder.com/50",
-      name: "Ginelle Servat",
-      bio: "Dog lover and extreme traveler.",
-    },
-  ];
+  // Fetch data from Supabase
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        setLoading(true);
+        const { data, error } = await db
+          .from("user_info")
+          .select("username, bio, profile_pic");
+        if (error) {
+          throw error; // Throw the error to be caught in the catch block
+        }
+        const formattedData = data.map((item, index) => ({
+          id: String(index), // Use a unique key
+          profilePicture: item.profile_pic,
+          name: item.username,
+          bio: item.bio,
+        }));
+        setMembers(formattedData);
+      } catch (err) {
+        console.error("Error fetching members:", err.message || err);
+      } finally {
+        setLoading(false); // Ensure loading is turned off in both success and error cases
+      }
+    };
+
+    fetchMembers();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topNav}>
         <View style={styles.backButton}>
-          <TouchableOpacity onPress={() => router.push("/tabs/groupHome")}>
-            <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
+          <TouchableOpacity
+            style={styles.back}
+            onPress={() => router.push("/tabs/groupHome")}
+          >
+            <Ionicons name="chevron-back" size={30} color="black" />
           </TouchableOpacity>
         </View>
         <Text style={styles.title}>Group Members</Text>
