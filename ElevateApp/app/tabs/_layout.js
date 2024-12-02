@@ -22,20 +22,20 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
-          name="personalHome"
-          options={{
-            title: "Personal",
-            tabBarIcon: ({ size, color }) => (
-              <FontAwesome name="user" size={size} color={color} />
-            ),
-          }}
-        />
-        <Tabs.Screen
           name="groupChat"
           options={{
             title: "Chat",
             tabBarIcon: ({ size, color }) => (
               <FontAwesome name="comments" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="personalHome"
+          options={{
+            title: "Personal",
+            tabBarIcon: ({ size, color }) => (
+              <FontAwesome name="user" size={size} color={color} />
             ),
           }}
         />
