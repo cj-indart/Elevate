@@ -43,7 +43,9 @@ export default function Personal() {
               <Entypo style={styles.icon} name="info" size={12} color="black" />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+          <TouchableOpacity
+            onPress={() => router.push("/additional/target/setTarget")}
+          >
             <View style={styles.button}>
               <Foundation
                 style={styles.icon}

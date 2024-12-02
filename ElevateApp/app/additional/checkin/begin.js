@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    marginTop: windowHeight * 0.15,
+    marginTop: windowHeight * 0.1,
     fontSize: Theme.sizes.titleText,
     fontWeight: "bold",
   },
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   },
   bar: {
     position: "absolute",
-    bottom: 135,
+    bottom: 150,
     alignSelf: "center",
   },
   buttonContainer: {

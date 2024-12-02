@@ -7,6 +7,7 @@ export default {
     border: "#a9a9a9",
 
     buttonBlue: "#C0DFF0",
+    buttonRed: "#FF8A80",
 
     textPrimary: "#FFFFFF",
     textSecondary: "#B4B4B4",

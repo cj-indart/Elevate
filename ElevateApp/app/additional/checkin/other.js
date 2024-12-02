@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    marginTop: windowHeight * 0.15,
+    marginTop: windowHeight * 0.1,
     fontSize: Theme.sizes.titleText,
     fontWeight: "bold",
   },
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   bar: {
     position: "absolute",
-    bottom: 135,
+    bottom: 150,
     alignSelf: "center",
   },
   buttonContainer: {
@@ -111,14 +111,13 @@ const styles = StyleSheet.create({
   inputBox: {
     fontSize: Theme.sizes.bodyText,
     height: windowHeight * 0.06,
-    // width: windowWidth * 0.8,
     marginTop: windowWidth * 0.1,
     marginLeft: windowWidth * 0.1,
     marginRight: windowWidth * 0.1,
     borderColor: Theme.colors.border,
     borderWidth: 0.5,
     borderRadius: 5,
-    paddingHorizontal: 10,
+    padding: 10,
     backgroundColor: Theme.colors.backgroundSecodary,
   },
   multiLineInputBox: {
