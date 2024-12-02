@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flexDirection: "row",
-    backgroundColor: Theme.colors.buttonBlue,
+    backgroundColor: Theme.colors.buttonWhite,
     borderRadius: 8,
     width: windowWidth * 0.5,
     alignItems: "center",

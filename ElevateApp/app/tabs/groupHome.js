@@ -18,7 +18,7 @@ export default function Group() {
 
   return (
     <ImageBackground
-      source={require("@/assets/images/clouds1.png")}
+      source={require("@/assets/images/clouds2.png")}
       style={styles.backgroundImage}
     >
       <SafeAreaView style={styles.container}>
@@ -38,10 +38,10 @@ export default function Group() {
               <Text>No group check-ins yet!</Text>
             </View>
           </View>
-          <Text style={styles.header}>Group Goals</Text>
+          <Text style={styles.header}>Upcoming Member Targets</Text>
           <View style={styles.groupGoalsContaier}>
             <View style={styles.tempText}>
-              <Text>No group goals yet!</Text>
+              <Text>No member targets yet!</Text>
             </View>
           </View>
         </View>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   buttonContainer: {
-    backgroundColor: Theme.colors.buttonBlue,
+    backgroundColor: Theme.colors.buttonWhite,
     borderRadius: 8,
     width: windowWidth * 0.25,
     height: windowWidth * 0.08,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   tempText: {
     height: 20,
     borderRadius: 5,
-    width: windowWidth * 0.5,
+    width: windowWidth * 0.45,
     flexDirection: "row",
     justifyContent: "center",
     alignContent: "center",

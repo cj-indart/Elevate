@@ -8,6 +8,7 @@ export default {
 
     buttonBlue: "#C0DFF0",
     buttonRed: "#FF8A80",
+    buttonWhite: "#FFFFFF",
 
     textPrimary: "#FFFFFF",
     textSecondary: "#B4B4B4",
