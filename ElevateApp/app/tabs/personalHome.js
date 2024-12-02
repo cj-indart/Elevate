@@ -19,6 +19,9 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function Personal() {
+
+  const router = useRouter();
+  
   return (
     <ImageBackground
       source={require("@/assets/images/clouds.png")} 

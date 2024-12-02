@@ -40,11 +40,10 @@ export default function CreateAccount() {
       });
 
       if (error) {
-        Alert.alert(error.message); // Display error if sign-up fails
+        Alert.alert(error.message);
         return;
       }
 
-      // if sign-up is successful, update the user's profile with a username
       const { user } = data;
 
       const { error: profileError } = await db
@@ -52,14 +51,14 @@ export default function CreateAccount() {
         .upsert({ username: username });
 
       if (profileError) {
-        Alert.alert(profileError.message); // Handle any error during profile update
+        Alert.alert(profileError.message);
       } else {
-        router.push("/onboarding/background"); // Navigate to the group home page
+        router.push("/onboarding/background");
       }
     } catch (err) {
-      console.error(err); // Log unexpected errors
+      console.error(err);
     } finally {
-      setLoading(false); // Reset loading state after the operation
+      setLoading(false);
     }
   };
 
@@ -69,15 +68,14 @@ export default function CreateAccount() {
         <Ionicons name="chevron-back" size={30} color="black" />
       </TouchableOpacity>
       <Text style={styles.title}>Create Account</Text>
-
       <Text style={styles.header}>Account Information</Text>
-
       <TextInput
         style={styles.inputBox}
         placeholder="Username"
         value={username}
         placeholderTextColor={Theme.colors.placeholderText}
         onChangeText={setUsername}
+        autoCapitalize="none"
       />
 
       <TextInput
@@ -164,23 +162,10 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     alignSelf: "center",
   },
-  button: {
-    // width: windowWidth * 0.18,
-    height: windowHeight * 0.06,
-    backgroundColor: Theme.colors.buttonBlue,
-    borderRadius: 5,
-    padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   buttonText: {
     fontSize: Theme.sizes.headerText,
     fontWeight: "500",
     justifyContent: "center",
     textAlign: "center",
-  },
-  bar: {
-    position: "absolute",
-    bottom: windowHeight * 0.8,
   },
 });

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useRouter } from "expo-router";
 import {
   StyleSheet,
@@ -18,7 +17,6 @@ export default function Welcome() {
   const router = useRouter();
 
   return (
-    // TODO, make Sign In and Create Account Centered... confusing with Link
     <View style={styles.container}>
       <Image
         style={styles.logo}
@@ -58,9 +56,6 @@ const styles = StyleSheet.create({
     marginTop: windowHeight * 0.2,
     width: windowWidth * 0.9,
     height: windowHeight * 0.2,
-  },
-  button: {
-    alignItems: "center",
   },
   buttonText: {
     fontSize: Theme.sizes.headerText,

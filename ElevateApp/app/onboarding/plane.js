@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, React } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
   Dimensions,
   Image,
@@ -10,9 +9,6 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import ProgressBar from "react-native-progress/Bar";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
@@ -37,9 +33,6 @@ export default function Plane() {
         resizeMode="contain"
       />
       <ActivityIndicator size="large" color="black" />
-      {/* <TouchableOpacity style={styles.back} onPress={() => router.back()}>
-        <FontAwesomeIcon icon={faArrowLeft} size={24} color="black" />
-      </TouchableOpacity> */}
     </View>
   );
 }

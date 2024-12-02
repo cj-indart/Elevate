@@ -12,8 +12,6 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import db from "@/database/db";
 import { useRouter } from "expo-router";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 import Theme from "@/assets/theme";
 
@@ -113,18 +111,6 @@ const styles = StyleSheet.create({
     top: 75,
     left: 20,
   },
-  title: {
-    marginTop: windowHeight * 0.15,
-    marginBottom: windowHeight * 0.15,
-    fontSize: Theme.sizes.titleText,
-    fontWeight: "bold",
-  },
-  header: {
-    marginTop: windowHeight * 0.02,
-    fontSize: Theme.sizes.headerText,
-    fontWeight: "bold",
-    marginBottom: windowHeight * 0.1,
-  },
   inputBox: {
     fontSize: Theme.sizes.bodyText,
     height: windowHeight * 0.06,
@@ -145,26 +131,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 20,
     alignSelf: "center",
-  },
-  button: {
-    width: windowWidth * 0.18,
-    height: windowHeight * 0.06,
-    backgroundColor: Theme.colors.buttonBlue,
-    borderRadius: 5,
-    padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  bar: {
-    position: "absolute",
-    bottom: windowHeight * 0.87,
-  },
-  backButton: {
-    position: "absolute",
-    top: 75, 
-    left: 20,
-    zIndex: 1,
-    color: "black",
   },
   buttonText: {
     fontSize: Theme.sizes.headerText,
