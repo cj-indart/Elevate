@@ -25,6 +25,31 @@ export default function CreateAccount() {
 
   const router = useRouter();
 
+  const signInWithEmail = async () => {
+    setLoading(true);
+    try {
+      const { data, error: signInError } = await db.auth.signInWithPassword({
+        email: email,
+        password: password,
+        options: {
+          shouldCreateUser: false,
+        },
+      });
+
+      if (signInError) {
+        Alert.alert(signInError.message);
+        setEmail("");
+        setPassword("");
+      } else {
+        console.log("Success");
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const signUpWithEmailAndPassword = async () => {
     setLoading(true);
     try {
@@ -34,6 +59,7 @@ export default function CreateAccount() {
         return;
       }
 
+      // Sign up the user
       const { data, error } = await db.auth.signUp({
         email: email,
         password: password,
@@ -46,10 +72,7 @@ export default function CreateAccount() {
 
       const { user } = data;
 
-      if (signInError) {
-        Alert.alert("Error signing in", signInError.message);
-        return;
-      }
+      signInWithEmail();
 
       // Now, update the profile in the database
       const { error: profileError } = await db
