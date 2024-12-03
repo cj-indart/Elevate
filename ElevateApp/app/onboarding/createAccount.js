@@ -46,9 +46,15 @@ export default function CreateAccount() {
 
       const { user } = data;
 
+      if (signInError) {
+        Alert.alert("Error signing in", signInError.message);
+        return;
+      }
+
+      // Now, update the profile in the database
       const { error: profileError } = await db
-        .from("user_info")
-        .upsert({ username: username });
+        .from("users")
+        .upsert({ id: user.id, username: username });
 
       if (profileError) {
         Alert.alert(profileError.message);

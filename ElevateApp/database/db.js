@@ -21,11 +21,11 @@ const db = createClient(supabaseUrl, supabaseAnonKey, {
 // to receive `onAuthStateChange` events with the `TOKEN_REFRESHED` or
 // `SIGNED_OUT` event if the user's session is terminated. This should
 // only be registered once.
-AppState.addEventListener('change', (state) => {
-  if (state === 'active') {
-    db.auth.startAutoRefresh()
+AppState.addEventListener("change", (state) => {
+  if (state === "active") {
+    db.auth.startAutoRefresh();
   } else {
-    db.auth.stopAutoRefresh()
+    db.auth.stopAutoRefresh();
   }
 });
 

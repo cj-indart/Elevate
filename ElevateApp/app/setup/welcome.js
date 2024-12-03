@@ -48,6 +48,12 @@ export default function Welcome() {
       >
         <Text style={styles.buttonText}>Go to Background</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.temporaryButton}
+        onPress={() => router.push("/additional/profile")}
+      >
+        <Text style={styles.buttonText}>Go to Profile</Text>
+      </TouchableOpacity>
     </View>
   );
 }

@@ -6,7 +6,9 @@ import {
   Dimensions,
   TouchableOpacity,
   ImageBackground,
+  Modal,
 } from "react-native";
+import React, { useState } from "react";
 
 import { useRouter } from "expo-router";
 
@@ -22,6 +24,18 @@ const windowHeight = Dimensions.get("window").height;
 
 export default function Personal() {
   const router = useRouter();
+  const [modalVisible, setModalVisible] = useState(false);
+
+  // Function to handle the "View Profile" action
+  const handleViewProfile = () => {
+    router.push("/additional/profile"); // Navigate to profile page
+    setModalVisible(false); // Close modal
+  };
+
+  // Function to handle the settings button click
+  const handleSettingsClick = () => {
+    setModalVisible(true); // Show the modal
+  };
 
   return (
     <ImageBackground
@@ -31,9 +45,45 @@ export default function Personal() {
       <SafeAreaView>
         <View style={styles.topNav}>
           <Text style={styles.title}>Personal Home</Text>
-          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+          <TouchableOpacity onPress={() => handleSettingsClick()}>
             <Entypo style={styles.cog} name="cog" size={30} color="black" />
           </TouchableOpacity>
+          {/* Modal for Settings Options */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={handleViewProfile}
+                >
+                  <Text style={styles.modalButtonText}>View Profile</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={() => alert("Option 2 clicked!")}
+                >
+                  <Text style={styles.modalButtonText}>Option 2</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={() => alert("Option 3 clicked!")}
+                >
+                  <Text style={styles.modalButtonText}>Option 3</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={() => setModalVisible(false)}
+                >
+                  <Text style={styles.modalButtonText}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
         </View>
         <View style={styles.targetsNav}>
           <View style={styles.titleAndButton}>
@@ -171,5 +221,30 @@ const styles = StyleSheet.create({
     fontSize: Theme.sizes.headerText,
     paddingLeft: 35,
     paddingRight: 10,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    width: windowWidth * 0.7,
+    alignItems: "center",
+  },
+  modalButton: {
+    paddingVertical: 10,
+    width: "100%",
+    alignItems: "center",
+    backgroundColor: Theme.colors.buttonWhite,
+    borderRadius: 8,
+    marginVertical: 5,
+  },
+  modalButtonText: {
+    fontSize: 18,
+    color: "black",
   },
 });
