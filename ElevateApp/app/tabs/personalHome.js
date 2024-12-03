@@ -15,6 +15,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import Entypo from "@expo/vector-icons/Entypo";
 import Foundation from "@expo/vector-icons/Foundation";
+import Ionicons from "@expo/vector-icons/Ionicons";
+
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
@@ -26,71 +28,67 @@ export default function Personal() {
       source={require("@/assets/images/clouds1.png")}
       style={styles.backgroundImage}
     >
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView>
         <View style={styles.topNav}>
           <Text style={styles.title}>Personal Home</Text>
           <TouchableOpacity onPress={() => alert("not implemented yet!")}>
-            <Entypo style={styles.cog} name="cog" size={36} color="black" />
+            <Entypo style={styles.cog} name="cog" size={30} color="black" />
           </TouchableOpacity>
         </View>
-        <View style={styles.section}>
-          <View style={styles.headerRow}>
+        <View style={styles.targetsNav}>
+          <View style={styles.titleAndButton}>
             <Text style={styles.header}>Upcoming Targets</Text>
-            <TouchableOpacity
-              style={styles.info}
-              onPress={() => alert("not implemented yet!")}
-            >
-              <Entypo style={styles.icon} name="info" size={12} color="black" />
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity
-            onPress={() => router.push("/additional/target/setTarget")}
-          >
-            <View style={styles.button}>
-              <Foundation
-                style={styles.icon}
-                name="target"
-                size={24}
-                color="black"
-              />
-              <Text style={styles.content}>Set New Target</Text>
+            <View style={styles.infoCircle}>
+              <TouchableOpacity
+                style={styles.info}
+                onPress={() => alert("not implemented yet!")}
+              >
+                <Entypo
+                  style={styles.icon}
+                  name="info"
+                  size={12}
+                  color="black"
+                />
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
-          <View style={styles.content}>
-            <Text>Placeholder - No targets set yet</Text>
           </View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => alert("not implemented yet!")}
-          >
-            <Text style={styles.content}>All Targets</Text>
-          </TouchableOpacity>
-        </View>
-        <View marginVertical={windowWidth * 0.07}></View>
-        <View style={styles.section}>
-          <View style={styles.headerRow}>
-            <Text style={styles.header}>Your Check-in</Text>
+          <View style={styles.buttonContainer}>
             <TouchableOpacity
-              style={styles.info}
-              onPress={() => alert("not implemented yet!")}
+              style={styles.titleAndButton}
+              onPress={() => router.push("/additional/target/allTargets")}
             >
-              <Entypo style={styles.icon} name="info" size={12} color="black" />
+              <Text>See All</Text>
+              <Ionicons name="chevron-forward" size={20} color="black" />
             </TouchableOpacity>
           </View>
-
-          <View style={styles.content}>
-            <Text>Placeholder - Check-in goes here</Text>
+        </View>
+        <View style={styles.targets}>
+          <Text>No Targets Yet!</Text>
+        </View>
+        <View style={styles.targetsNav}>
+          <View style={styles.titleAndButton}>
+            <Text style={styles.header}>Your Check-in</Text>
+            <View style={styles.infoCircle}>
+              <TouchableOpacity
+                style={styles.info}
+                onPress={() => alert("not implemented yet!")}
+              >
+                <Entypo
+                  style={styles.icon}
+                  name="info"
+                  size={12}
+                  color="black"
+                />
+              </TouchableOpacity>
+            </View>
           </View>
+        </View>
+        <View style={styles.checkIn}>
           <TouchableOpacity
             onPress={() => router.push("/additional/checkin/begin")}
           >
             <View style={styles.button}>
-              <Entypo
-                style={styles.icon}
-                name="pencil"
-                size={20}
-                color="black"
-              />
+              <Entypo name="pencil" size={20} color="black" />
               <Text style={styles.content}>Start Weekly Check-in</Text>
             </View>
           </TouchableOpacity>
@@ -107,29 +105,6 @@ const styles = StyleSheet.create({
     height: windowHeight,
     resizeMode: "cover",
   },
-  container: {},
-  topNav: {
-    marginVertical: windowWidth * 0.1,
-    marginHorizontal: windowWidth * 0.07,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  headerRow: {
-    flexDirection: "row",
-  },
-  title: {
-    fontWeight: "600",
-    fontSize: 32,
-  },
-  header: {
-    marginVertical: windowWidth * 0.1,
-    marginHorizontal: windowWidth * 0.03,
-    fontSize: 24,
-  },
-  section: {
-    marginHorizontal: windowWidth * 0.07,
-  },
   button: {
     flexDirection: "row",
     backgroundColor: Theme.colors.buttonWhite,
@@ -140,22 +115,61 @@ const styles = StyleSheet.create({
     marginVertical: windowWidth * 0.03,
   },
   content: {
-    marginVertical: windowWidth * 0.03,
+    flexDirection: "column",
+  },
+  titleAndButton: {
+    flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
   },
-  info: {
+  topNav: {
     marginVertical: windowWidth * 0.1,
-    marginHorizontal: windowWidth * 0.03,
-    fontSize: 24,
-    width: windowWidth * 0.1,
+    marginHorizontal: windowWidth * 0.07,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "gray",
-    borderWidth: 2,
-    borderRadius: 100,
+    paddingRight: 20,
   },
-  icon: {
-    marginHorizontal: 10,
+  title: {
+    fontSize: Theme.sizes.titleText,
+    fontWeight: "600",
   },
-  chat: {},
+  targetsNav: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    // paddingHorizontal: 10
+  },
+  infoCircle: {
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    height: 20,
+    aspectRatio: 1,
+  },
+  targets: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: windowHeight * 0.4,
+    // backgroundColor: "blue",
+  },
+  checkIn: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: windowHeight * 0.25,
+    // backgroundColor: 'blue',
+  },
+  header: {
+    fontSize: Theme.sizes.headerText,
+    paddingLeft: 35,
+    paddingRight: 10,
+  },
 });

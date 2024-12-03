@@ -21,7 +21,7 @@ export default function Group() {
       source={require("@/assets/images/clouds2.png")}
       style={styles.backgroundImage}
     >
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView>
         <View style={styles.topNav}>
           <Text style={styles.title}>Group Home</Text>
           <TouchableOpacity
