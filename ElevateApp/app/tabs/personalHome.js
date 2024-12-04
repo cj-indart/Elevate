@@ -156,13 +156,13 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   button: {
-    flexDirection: "row",
     backgroundColor: Theme.colors.buttonWhite,
     borderRadius: 8,
     width: windowWidth * 0.5,
+    height: windowWidth * 0.08,
+    flexDirection: 'row',
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: windowWidth * 0.03,
   },
   content: {
     flexDirection: "column",

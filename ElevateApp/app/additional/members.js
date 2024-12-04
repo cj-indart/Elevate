@@ -32,13 +32,13 @@ export default function Members() {
       try {
         setLoading(true);
         const { data, error } = await db
-          .from("user_info")
-          .select("username, bio, profile_pic");
+          .from("users")
+          .select("id, username, bio, profile_pic");
         if (error) {
           throw error; // Throw the error to be caught in the catch block
         }
-        const formattedData = data.map((item, index) => ({
-          id: String(index), // Use a unique key
+        const formattedData = data.map((item) => ({
+          id: item.id, // Use a unique key
           profilePicture: item.profile_pic,
           name: item.username,
           bio: item.bio,
