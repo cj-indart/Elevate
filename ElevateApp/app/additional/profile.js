@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Alert,
   View,
@@ -23,14 +23,46 @@ export default function Profile() {
   const router = useRouter();
   const [profileImage, setProfileImage] = useState(null);
 
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const {
+          data: { session },
+        } = await db.auth.getSession();
+        const user_id = session?.user?.id;
+
+        if (!user_id) {
+          Alert.alert("Error", "Not logged in");
+          return;
+        }
+
+        const { data, error } = await db
+          .from("users")
+          .select("profile_pic")
+          .eq("id", user_id)
+          .single();
+
+        if (error) {
+          console.error("Error fetching user profile:", error);
+          Alert.alert("Error", "Failed to fetch profile picture");
+        } else if (data?.profile_pic) {
+          setProfileImage(data.profile_pic);
+        }
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+        Alert.alert("Error", "Failed to fetch profile picture");
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
   const handleSelectImage = async () => {
     try {
-      // First get the current user's session
       const {
         data: { session },
       } = await db.auth.getSession();
-      user_id = session.user.id;
-      console.log(user_id);
+      const user_id = session?.user?.id;
 
       if (!user_id) {
         Alert.alert("Error", "Not logged in");
@@ -58,8 +90,6 @@ export default function Profile() {
             .from("profile_pics")
             .getPublicUrl(imageName);
 
-          console.log(urlData.publicUrl);
-          // Update the profile_pic field for the current user
           const { data, error } = await db
             .from("users")
             .update({ profile_pic: urlData.publicUrl })
