@@ -30,6 +30,11 @@ export default function Members() {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
+        const {
+          data: { session },
+        } = await db.auth.getSession();
+        const user_id = session?.user?.id;
+
         setLoading(true);
         const { data, error } = await db
           .from("users")
@@ -37,7 +42,9 @@ export default function Members() {
         if (error) {
           throw error; // Throw the error to be caught in the catch block
         }
-        const formattedData = data.map((item) => ({
+        const filteredData = data.filter((item) => item.id !== user_id);
+
+        const formattedData = filteredData.map((item) => ({
           id: item.id, // Use a unique key
           profilePicture: item.profile_pic,
           name: item.username,

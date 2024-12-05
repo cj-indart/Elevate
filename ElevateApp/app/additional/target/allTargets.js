@@ -14,46 +14,57 @@ import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import MemberCard from "@/components/MemberCard";
-
 import Feather from "@expo/vector-icons/Feather";
 
 import db from "@/database/db";
 
+// Import TargetsCard
+import TargetsCard from "@/components/TargetsCard";
+
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-export default function allTargets() {
+export default function AllTargets() {
   const router = useRouter();
-  const [members, setMembers] = useState([]);
+  const [targets, setTargets] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch data from Supabase TODO change from members
+  // Fetch data from Supabase
   useEffect(() => {
-    const fetchMembers = async () => {
+    const fetchTargets = async () => {
       try {
+        const {
+          data: { session },
+        } = await db.auth.getSession();
+        const user_id = session?.user?.id;
+
         setLoading(true);
         const { data, error } = await db
-          .from("users")
-          .select("id, username, bio, profile_pic");
+          .from("targets")
+          .select("id, title, description, deadline, priority")
+          .eq("id", user_id);
+
         if (error) {
-          throw error; // Throw the error to be caught in the catch block
+          throw error;
         }
+
+        // Format the data as needed
         const formattedData = data.map((item) => ({
-          id: item.id, // Use a unique key
-          profilePicture: item.profile_pic,
-          name: item.username,
-          bio: item.bio,
+          id: item.id, // Unique key
+          title: item.title,
+          description: item.description,
+          deadline: item.deadline,
+          priority: item.priority,
         }));
-        setMembers(formattedData);
+        setTargets(formattedData);
       } catch (err) {
-        console.error("Error fetching members:", err.message || err);
+        console.error("Error fetching targets:", err.message || err);
       } finally {
-        setLoading(false); // Ensure loading is turned off in both success and error cases
+        setLoading(false);
       }
     };
 
-    fetchMembers();
+    fetchTargets();
   }, []);
 
   return (
@@ -75,14 +86,15 @@ export default function allTargets() {
       </View>
 
       <FlatList
-        data={members}
+        data={targets}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => alert("not implemented yet!")}>
-            <MemberCard
-              profilePicture={item.profilePicture}
-              name={item.name}
-              bio={item.bio}
+            <TargetsCard
+              title={item.title}
+              description={item.description}
+              deadline={item.deadline}
+              priority={item.priority}
             />
           </TouchableOpacity>
         )}
@@ -103,7 +115,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 20
+    gap: 20,
   },
   backButton: {
     position: "absolute",
@@ -121,7 +133,6 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    // marginTop: windowHeight * 0.02,
     fontSize: Theme.sizes.titleText,
     fontWeight: "bold",
   },

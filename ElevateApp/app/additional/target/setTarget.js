@@ -19,6 +19,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
+import db from "@/database/db";
+
 export default function SetTarget() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -57,7 +59,10 @@ export default function SetTarget() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.back} onPress={() => router.push("/additional/target/allTargets")}>
+      <TouchableOpacity
+        style={styles.back}
+        onPress={() => router.push("/additional/target/allTargets")}
+      >
         <Ionicons name="chevron-back" size={30} color="black" />
       </TouchableOpacity>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -143,7 +148,47 @@ export default function SetTarget() {
 
           <TouchableOpacity
             style={styles.saveButtonContainer}
-            onPress={() => router.push("/tabs/personalHome")}
+            onPress={async () => {
+              try {
+                const {
+                  data: { session },
+                } = await db.auth.getSession();
+                const user_id = session?.user?.id;
+
+                if (!title.trim() || !description.trim()) {
+                  alert("Please fill out all fields before saving.");
+                  return;
+                }
+
+                const deadline = new Date(
+                  date.getFullYear(),
+                  date.getMonth(),
+                  date.getDate(),
+                  time.getHours(),
+                  time.getMinutes()
+                ).toISOString();
+
+                const { data, error } = await db.from("targets").insert({
+                  id: user_id,
+                  title: title.trim(),
+                  description: description.trim(),
+                  deadline: deadline,
+                  priority: priority,
+                });
+
+                if (error) {
+                  console.error("Error inserting target data:", error.message);
+                  alert("Failed to save target. Please try again.");
+                } else {
+                  console.log("Target saved successfully:", data);
+                  alert("Target saved successfully!");
+                  router.push("/tabs/personalHome");
+                }
+              } catch (err) {
+                console.error("Unexpected error:", err);
+                alert("An unexpected error occurred. Please try again.");
+              }
+            }}
           >
             <Text style={styles.saveText}>Save</Text>
           </TouchableOpacity>
