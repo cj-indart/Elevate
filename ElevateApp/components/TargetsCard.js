@@ -1,6 +1,17 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import Theme from "@/assets/theme";
+import { AnimatedCircularProgress } from "react-native-circular-progress";
+import Ionicons from "@expo/vector-icons/Ionicons";
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const formatDate = (timestamp) => {
   const date = new Date(timestamp);
@@ -16,24 +27,51 @@ export default function TargetsCard({
   const priorityColor =
     priority === "3" ? "red" : priority === "2" ? "orange" : "#3366FF";
 
+  const [isChecked, setIsChecked] = useState(false);
+
+  const toggleCheckBox = () => {
+    setIsChecked(!isChecked); // Toggle the checkbox state
+  };
+
   return (
     <View style={styles.cardContainer}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
-      <Text style={styles.deadline}>Deadline: {formatDate(deadline)}</Text>
-      <Text style={[styles.priority, { color: priorityColor }]}>
-        Priority: {priority}
-      </Text>
+      <AnimatedCircularProgress
+        size={windowWidth * 0.15}
+        width={3}
+        fill={66}
+        tintColor="#00e0ff"
+        backgroundColor="#3d5875"
+      >
+        {(fill) => <Text style={styles.progressText}>2 days</Text>}
+      </AnimatedCircularProgress>
+      <View style={styles.columnContainer}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.deadline}>Deadline: {formatDate(deadline)}</Text>
+        <Text style={[styles.priority, { color: priorityColor }]}>
+          Priority: {priority}
+        </Text>
+      </View>
+      <TouchableOpacity
+        style={[
+          styles.checkBox,
+          isChecked && styles.checkedBox, // Add additional style when checked
+        ]}
+        onPress={toggleCheckBox}
+      >
+        {isChecked && <Ionicons name="checkmark" size={20} color="black" />}
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   cardContainer: {
-    backgroundColor: Theme.colors.buttonWhite,
+    flexDirection: "row",
+    backgroundColor: Theme.colors.buttonBlue,
     padding: 15,
     marginBottom: 10,
-    borderRadius: 10,
+    borderRadius: 20,
     marginVertical: 10,
     marginHorizontal: 20,
     shadowColor: "#000",
@@ -41,6 +79,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    alignItems: "center",
+  },
+  columnContainer: {
+    marginLeft: 10,
+    flexDirection: "column",
   },
   title: {
     fontSize: 18,
@@ -50,15 +93,30 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     marginBottom: 5,
-    color: Theme.colors.textSecondary,
+    color: "black",
   },
   deadline: {
     fontSize: 12,
     marginBottom: 5,
-    color: Theme.colors.textSecondary,
+    color: "black",
   },
   priority: {
     fontSize: 12,
     fontWeight: "bold",
+  },
+  checkBox: {
+    position: "absolute",
+    right: 10,
+    width: 25,
+    height: 25,
+    borderWidth: 2,
+    borderColor: "black",
+    marginRight: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white", // Add this to make the background visible
+  },
+  checkedBox: {
+    backgroundColor: Theme.colors.buttonBlue, // Or any color you prefer for the checked state
   },
 });

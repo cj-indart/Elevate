@@ -10,43 +10,81 @@ import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { useEffect, useState } from "react";
+
+import db from "@/database/db";
+
+import MemberGrid from "@/components/MemberGrid";
+
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function Group() {
   const router = useRouter();
+  const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const {
+          data: { session },
+        } = await db.auth.getSession();
+        const user_id = session?.user?.id;
+
+        setLoading(true);
+        const { data, error } = await db
+          .from("users")
+          .select("id, username, profile_pic");
+        if (error) {
+          throw error;
+        }
+        const filteredData = data.filter((item) => item.id !== user_id);
+
+        const formattedData = filteredData.map((item) => ({
+          id: item.id,
+          profilePicture: item.profile_pic,
+          name: item.username,
+          bio: item.bio,
+        }));
+        setMembers(formattedData);
+      } catch (err) {
+        console.error("Error fetching members:", err.message || err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMembers();
+  }, []);
 
   return (
-    <ImageBackground
-      source={require("@/assets/images/clouds2.png")}
-      style={styles.backgroundImage}
-    >
-      <SafeAreaView>
-        <View style={styles.topNav}>
-          <Text style={styles.title}>Group Home</Text>
-          <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={() => router.push("/additional/members")}
-          >
-            <Text style={styles.buttonText}>Members</Text>
-          </TouchableOpacity>
+    <SafeAreaView>
+      <View style={styles.topNav}>
+        <Text style={styles.title}>Group Home</Text>
+        {/* <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => router.push("/additional/members")}
+        >
+          <Text style={styles.buttonText}>Members</Text>
+        </TouchableOpacity> */}
+      </View>
+      <View style={styles.content}>
+        <View style={styles.group}>
+          {loading ? (
+            <Text>Loading members...</Text> // Show loading state while fetching members
+          ) : (
+            <MemberGrid members={members} /> // Render MemberGrid with the fetched members
+          )}
         </View>
-        <View style={styles.content}>
-          <Text style={styles.header}>Group Check-ins</Text>
-          <View style={styles.checkInContainer}>
-            <View style={styles.tempText}>
-              <Text>No group check-ins yet!</Text>
-            </View>
-          </View>
-          <Text style={styles.header}>Upcoming Member Targets</Text>
-          <View style={styles.groupGoalsContaier}>
-            <View style={styles.tempText}>
-              <Text>No member targets yet!</Text>
-            </View>
+        <Text style={styles.header}>Upcoming Member Targets</Text>
+        <View style={styles.groupGoalsContaier}>
+          <View style={styles.tempText}>
+            <Text>No member targets yet!</Text>
           </View>
         </View>
-      </SafeAreaView>
-    </ImageBackground>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -84,16 +122,16 @@ const styles = StyleSheet.create({
     fontSize: Theme.sizes.bodyText,
     fontWeight: "600",
   },
-  checkInContainer: {
+  group: {
     flexDirection: "column",
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: windowHeight * 0.3,
+    alignItems: "center",
+    justifyContent: "center",
+    height: windowHeight * 0.4,
   },
   groupGoalsContaier: {
     flexDirection: "column",
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     height: windowHeight * 0.3,
   },
   header: {

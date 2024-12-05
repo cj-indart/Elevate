@@ -20,16 +20,21 @@ const windowHeight = Dimensions.get("window").height;
 
 export default function Personal() {
   const router = useRouter();
-  const [modalVisible, setModalVisible] = useState(false);
+  const [settingsModalVisible, setSettingsModalVisible] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [targetModalVisible, setTargetModalVisible] = useState(false);
 
   const handleViewProfile = () => {
     router.push("/additional/profile");
-    setModalVisible(false);
+    setSettingsModalVisible(false);
   };
 
   const handleSettingsClick = () => {
-    setModalVisible(true);
+    setSettingsModalVisible(true);
+  };
+
+  const handleTargetClick = () => {
+    setTargetModalVisible(true);
   };
 
   const toggleCheckBox = () => {
@@ -49,8 +54,8 @@ export default function Personal() {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
+        visible={settingsModalVisible}
+        onRequestClose={() => setSettingsModalVisible(false)}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -74,7 +79,7 @@ export default function Personal() {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.modalButton}
-              onPress={() => setModalVisible(false)}
+              onPress={() => setSettingsModalVisible(false)}
             >
               <Text style={styles.modalButtonText}>Cancel</Text>
             </TouchableOpacity>
@@ -113,7 +118,7 @@ export default function Personal() {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.targetButton}>
+      <TouchableOpacity style={styles.targetButton} onPress={handleTargetClick}>
         <View style={styles.row}>
           <AnimatedCircularProgress
             size={windowWidth * 0.15}
@@ -137,11 +142,89 @@ export default function Personal() {
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
+
+      {/* Modal for clicking on the Target */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={targetModalVisible}
+        onRequestClose={() => setTargetModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalTopContainer}>
+              <Text style={styles.modalTitleText}>Go to CAPS Meeting</Text>
+              <Text style={styles.modalPriorityText}>Priority: 3</Text>
+            </View>
+
+            <View style={styles.modalMiddleContainer}>
+              <AnimatedCircularProgress
+                size={windowWidth * 0.15}
+                width={3}
+                fill={66}
+                tintColor="#00e0ff"
+                backgroundColor="#3d5875"
+              >
+                {(fill) => <Text style={styles.progressText}>2 days</Text>}
+              </AnimatedCircularProgress>
+              <TouchableOpacity
+                style={[
+                  styles.checkBox,
+                  isChecked && styles.checkedBox, // Add additional style when checked
+                ]}
+                onPress={toggleCheckBox}
+              >
+                {isChecked && (
+                  <Ionicons name="checkmark" size={20} color="black" />
+                )}
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.modalBottomContainer}>
+              <Text style={styles.modalBottomText}>Tue, Dec. 10</Text>
+              <Text style={styles.modalBottomText}>11:00 AM</Text>
+              <Text></Text>
+              <Text style={styles.modalBottomText}>Can't miss this!</Text>
+            </View>
+
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => setTargetModalVisible(false)}
+            >
+              <Text style={styles.modalButtonText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  modalTitleText: {
+    fontSize: Theme.sizes.headerText,
+    fontWeight: "500",
+  },
+  modalPriorityText: {
+    color: "red",
+  },
+  modalTopContainer: {
+    textAlign: "center",
+  },
+  modalMiddleContainer: {
+    marginTop: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalBottomContainer: {
+    marginTop: 15,
+    marginBottom: 15,
+    textAlign: "left",
+  },
+  modalBottomText: {
+    fontSize: Theme.sizes.bodyText,
+  },
   targetsNav: {
     marginTop: windowHeight * 0.05,
     flexDirection: "row",
@@ -197,7 +280,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     width: windowWidth * 0.7,
-    alignItems: "center",
+    // alignItems: "center",
   },
   modalButton: {
     paddingVertical: 10,
@@ -256,7 +339,7 @@ const styles = StyleSheet.create({
     marginRight: 10, // Space between the indicator and the text
   },
   checkBox: {
-    marginLeft: 10,
+    marginLeft: 20,
     width: 25,
     height: 25,
     borderWidth: 2,
