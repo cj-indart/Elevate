@@ -28,12 +28,12 @@ export default function Plane() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Matching you to a group!</Text>
-      <Image
-        style={styles.image}
-        source={require("@/assets/images/dottedPlane.png")}
+      <LottieView
         resizeMode="contain"
+        source={require("@/assets/images/dots.json")}
+        autoPlay
+        loop
       />
-      <LottieView source={require("@/assets/images/dots.json")} autoPlay loop />
     </View>
   );
 }
