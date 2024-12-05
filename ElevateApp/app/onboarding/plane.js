@@ -33,11 +33,7 @@ export default function Plane() {
         source={require("@/assets/images/dottedPlane.png")}
         resizeMode="contain"
       />
-      <LottieView
-        source={require("../assets/images/dots.json")}
-        autoPlay
-        loop
-      />
+      <LottieView source={require("@/assets/images/dots.json")} autoPlay loop />
     </View>
   );
 }
