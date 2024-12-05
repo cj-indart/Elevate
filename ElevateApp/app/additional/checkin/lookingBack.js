@@ -15,6 +15,8 @@ import ProgressBar from "react-native-progress/Bar";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
+import db from "@/database/db";
+
 export default function LookingBack() {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [otherText, setOtherText] = useState(""); // State for "Other" input
@@ -85,8 +87,43 @@ export default function LookingBack() {
 
       <TouchableOpacity
         style={styles.buttonContainer}
-        // onPress={() => console.log({ selectedOptions, otherText })}
-        onPress={() => router.push("/additional/checkin/other")}
+        onPress={async () => {
+          try {
+            const {
+              data: { session },
+            } = await db.auth.getSession();
+            const user_id = session?.user?.id;
+
+            if (selectedOptions.length === 0) {
+              alert("Please select at least one option.");
+              return;
+            }
+
+            // Prepare the data
+            const dataToInsert = selectedOptions.map((option) =>
+              option === "Other" && otherText ? otherText : option
+            );
+
+            console.log(dataToInsert);
+
+            // Insert data into the Supabase database
+            const { data, error } = await db
+              .from("checkins")
+              .update({ looking_back: dataToInsert })
+              .eq("id", user_id);
+
+            if (error) {
+              console.error("Error inserting data:", error.message);
+              alert("Failed to submit. Please try again.");
+            } else {
+              console.log("Data inserted successfully:", data);
+              router.push("/additional/checkin/other");
+            }
+          } catch (err) {
+            console.error("Unexpected error:", err);
+            alert("An unexpected error occurred. Please try again.");
+          }
+        }}
       >
         <View style={styles.nextButton}>
           <Ionicons

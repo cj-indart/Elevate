@@ -15,6 +15,8 @@ import ProgressBar from "react-native-progress/Bar";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
+import db from "@/database/db";
+
 export default function Other() {
   const [inputText, setInputText] = useState(""); // State for "Other" input
 
@@ -50,8 +52,38 @@ export default function Other() {
 
       <TouchableOpacity
         style={styles.buttonContainer}
-        // onPress={() => console.log({ selectedOptions, otherText })}
-        onPress={() => router.push("/additional/checkin/plane")}
+        onPress={async () => {
+          try {
+            const {
+              data: { session },
+            } = await db.auth.getSession();
+            const user_id = session?.user?.id;
+
+            if (!inputText.trim()) {
+              alert("Please enter some text before submitting.");
+              return;
+            }
+
+            const { data, error } = await db
+              .from("checkins")
+              .update({ other: inputText.trim() })
+              .eq("id", user_id);
+
+            if (error) {
+              console.error(
+                "Error updating the 'other' column:",
+                error.message
+              );
+              alert("Failed to submit. Please try again.");
+            } else {
+              console.log("Data updated successfully:", data);
+              router.push("/additional/checkin/plane");
+            }
+          } catch (err) {
+            console.error("Unexpected error:", err);
+            alert("An unexpected error occurred. Please try again.");
+          }
+        }}
       >
         <Text style={styles.submitText}>Submit</Text>
       </TouchableOpacity>
