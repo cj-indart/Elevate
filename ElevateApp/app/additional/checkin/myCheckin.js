@@ -14,7 +14,7 @@ import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import MemberCard from "@/components/MemberCard";
+import MemberCard from "@/components/MemberGrid";
 
 import db from "@/database/db";
 
