@@ -45,7 +45,7 @@ export default function Chat() {
       <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
         <Ionicons name="chevron-back" size={30} color="black" />
       </TouchableOpacity>
-      <Text style={styles.title}>Group Chat</Text>
+      <Text style={styles.title}>Chat with Members</Text>
       <FlatList
         data={messages.slice().reverse()}
         renderItem={({ item }) => (
@@ -113,9 +113,9 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    marginTop: windowHeight * 0.1,
+    marginTop: 100,
     fontSize: Theme.sizes.titleText,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   messageContainer: {
     padding: 10,

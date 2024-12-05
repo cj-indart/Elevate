@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-    gap: 30,
+    gap: 20,
     marginBottom: 20,
   },
   card: {
@@ -80,9 +80,9 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   image: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: 140,
+    height: 140,
+    borderRadius: 70,
     marginBottom: 10,
   },
   name: {
