@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
+import LottieView from "lottie-react-native";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
@@ -32,7 +33,11 @@ export default function Plane() {
         source={require("@/assets/images/dottedPlane.png")}
         resizeMode="contain"
       />
-      <ActivityIndicator size="large" color="black" />
+      <LottieView
+        source={require("../assets/images/dots.json")}
+        autoPlay
+        loop
+      />
     </View>
   );
 }
@@ -55,7 +60,7 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
   },
   back: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 10,
-  }
+  },
 });
