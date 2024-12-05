@@ -15,14 +15,39 @@ import Theme from "@/assets/theme";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
+import db from "@/database/db"
+
 export default function Background() {
   const [major, setMajor] = useState("");
+  const [bio, setBio] = useState("");
   const [selectedGrad, setSelectedGrad] = useState("");
   const [selectedCareer, setSelectedCareer] = useState("");
   const [graduationModalVisible, setGraduationModalVisible] = useState(false);
   const [careerModalVisible, setCareerModalVisible] = useState(false);
 
   const router = useRouter();
+
+  const updateBio = async () => {
+    try {
+      const {
+        data: { session },
+      } = await db.auth.getSession();
+      const user_id = session?.user?.id;
+
+      const { error } = await db
+        .from("users")
+        .update({ bio: bio })
+        .eq("id", user_id);
+
+      if (error) {
+        console.error("Error updating bio:", error.message);
+      } else {
+        console.log("Bio updated successfully!");
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error.message);
+    }
+  };
 
   const years = Array.from({ length: 2035 - 1970 + 1 }, (_, i) =>
     (2035 - i).toString()
@@ -113,8 +138,23 @@ export default function Background() {
       <Text style={styles.title}>Background</Text>
       <Text style={styles.body}>
         This information will help connect you with like-minded students and
-        graduates!
+        graduates.
       </Text>
+
+      <Text style={styles.bodyBottom}>Biography</Text>
+
+      <View style={styles.inputBoxContainer}>
+        <TextInput
+          style={[styles.inputBox, styles.multiLineInputBox]} // Add a new style for multi-line input
+          placeholder="Write something about yourself!"
+          value={bio}
+          placeholderTextColor={Theme.colors.placeholderText}
+          onChangeText={setBio}
+          keyboardType="default"
+          autoCapitalize="none"
+          multiline={true} // Enable multi-line input
+        />
+      </View>
 
       <TextInput
         style={styles.inputBox}
@@ -172,7 +212,10 @@ export default function Background() {
 
       <TouchableOpacity
         style={styles.buttonContainer}
-        onPress={() => router.push("/onboarding/plane")}
+        onPress={() => {
+          updateBio();
+          router.push("/onboarding/plane");
+        }}
       >
         <Text style={styles.buttonText}>Find Group!</Text>
       </TouchableOpacity>
@@ -187,6 +230,10 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: Theme.colors.backgroundPrimary,
   },
+  multiLineInputBox: {
+    height: windowHeight * 0.1,
+    textAlignVertical: "top",
+  },
   title: {
     marginTop: windowHeight * 0.15,
     fontSize: 30,
@@ -198,6 +245,10 @@ const styles = StyleSheet.create({
     margin: windowHeight * 0.02,
     paddingBottom: 15,
   },
+  bodyBottom: {
+    fontSize: Theme.sizes.bodyText,
+    textAlign: "justify",
+  },
   inputBox: {
     height: windowHeight * 0.06,
     width: windowWidth * 0.8,
@@ -206,6 +257,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     margin: 10,
+    padding: 10,
     backgroundColor: Theme.colors.backgroundSecodary,
     fontSize: Theme.sizes.bodyText,
   },
@@ -225,7 +277,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     position: "absolute",
-    bottom: 200,
+    bottom: 150,
     backgroundColor: Theme.colors.buttonBlue,
     padding: 15,
     borderRadius: 8,

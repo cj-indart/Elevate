@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 
+import Theme from "@/assets/theme";
+
 const MemberCard = ({ profilePicture, name, bio }) => {
   return (
     <View style={styles.card}>
@@ -16,11 +18,15 @@ const MemberCard = ({ profilePicture, name, bio }) => {
 const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
-    backgroundColor: "white",
+    backgroundColor: Theme.colors.buttonWhite,
     borderRadius: 10,
     padding: 15,
     marginVertical: 10,
     marginHorizontal: 20,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   image: {
     width: 50,

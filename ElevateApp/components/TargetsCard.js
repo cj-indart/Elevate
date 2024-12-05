@@ -1,25 +1,41 @@
-// TargetsCard.js
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Theme from "@/assets/theme"; // Assuming you have a theme file for styling
+import Theme from "@/assets/theme";
 
-export default function TargetsCard({ title, description, deadline, priority }) {
+const formatDate = (timestamp) => {
+  const date = new Date(timestamp);
+  return date.toLocaleString();
+};
+
+export default function TargetsCard({
+  title,
+  description,
+  deadline,
+  priority,
+}) {
+  const priorityColor =
+    priority === "3" ? "red" : priority === "2" ? "orange" : "#3366FF";
+
   return (
     <View style={styles.cardContainer}>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
-      <Text style={styles.deadline}>Deadline: {deadline}</Text>
-      <Text style={styles.priority}>Priority: {priority}</Text>
+      <Text style={styles.deadline}>Deadline: {formatDate(deadline)}</Text>
+      <Text style={[styles.priority, { color: priorityColor }]}>
+        Priority: {priority}
+      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   cardContainer: {
-    backgroundColor: Theme.colors.cardBackground,
+    backgroundColor: Theme.colors.buttonWhite,
     padding: 15,
     marginBottom: 10,
-    borderRadius: 8,
+    borderRadius: 10,
+    marginVertical: 10,
+    marginHorizontal: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
@@ -44,6 +60,5 @@ const styles = StyleSheet.create({
   priority: {
     fontSize: 12,
     fontWeight: "bold",
-    color: Theme.colors.textPrimary,
   },
 });
