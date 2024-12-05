@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   buttonContainer: {
-    backgroundColor: Theme.colors.buttonWhite,
+    backgroundColor: Theme.colors.buttonBlue,
     borderRadius: 8,
     width: windowWidth * 0.1,
     aspectRatio: 1,
