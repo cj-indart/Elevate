@@ -9,6 +9,7 @@ import {
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 import { useEffect, useState } from "react";
 
@@ -23,6 +24,11 @@ export default function Group() {
   const router = useRouter();
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [targetModalVisible, setTargetModalVisible] = useState(false);
+
+  const handleTargetClick = () => {
+    setTargetModalVisible(true);
+  };
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -78,9 +84,23 @@ export default function Group() {
           )}
         </View>
         <Text style={styles.header}>Upcoming Member Targets</Text>
-        <View style={styles.groupGoalsContaier}>
-          <View style={styles.tempText}>
-            <Text>No member targets yet!</Text>
+        <View style={styles.targetButton} onPress={handleTargetClick}>
+          <View style={styles.row}>
+            {/* Profile picture from URL */}
+            <ImageBackground
+              source={{
+                uri: "https://exompwzaiobmsbxmircf.supabase.co/storage/v1/object/public/profile_pics/1733380179984.jpg",
+              }} // Replace with your URL
+              style={styles.profileImage}
+              imageStyle={{ borderRadius: 50 }} // Optional: Makes the image round
+            ></ImageBackground>
+
+            <View style={styles.targetButtonTextContainer}>
+              <Text style={styles.targetButtonText}>Give everyone an F!</Text>
+              <Text style={styles.targetButtonTextBottom}>
+                due Tue. Dec. 10
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -107,6 +127,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
+    marginBottom: 20,
     fontSize: Theme.sizes.titleText,
     fontWeight: "600",
   },
@@ -135,6 +156,7 @@ const styles = StyleSheet.create({
     height: windowHeight * 0.3,
   },
   header: {
+    marginTop: windowHeight * 0.05,
     fontSize: Theme.sizes.headerText,
     paddingHorizontal: 35,
   },
@@ -146,5 +168,42 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     // backgroundColor: "white",
+  },
+  targetButton: {
+    backgroundColor: Theme.colors.buttonBlue, // Customize color
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    marginTop: 20,
+    alignSelf: "center",
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.1,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  targetButtonTextContainer: {
+    marginLeft: 10,
+  },
+  targetButtonText: {
+    marginLeft: 10,
+    fontSize: Theme.sizes.bodyText,
+    fontWeight: "500",
+    color: "black",
+  },
+  targetButtonTextBottom: {
+    marginLeft: 10,
+    fontSize: 14,
+    color: "black",
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center", // Vertically center the image and text
+    justifyContent: "flex-start",
+    width: "100%", // Ensure it takes full width
+  },
+  profileImage: {
+    aspectRatio: 1,
+    width: windowWidth * 0.15, // Adjust width as necessary
+    marginRight: 10, // Add space between image and text
   },
 });
