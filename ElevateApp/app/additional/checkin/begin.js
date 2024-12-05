@@ -89,7 +89,6 @@ export default function Begin() {
         style={styles.buttonContainer}
         onPress={async () => {
           try {
-
             const {
               data: { session },
             } = await db.auth.getSession();
@@ -108,9 +107,9 @@ export default function Begin() {
             console.log(dataToInsert);
 
             // Insert data into the Supabase database
-            const { data, error } = await db.from("checkins").insert([
-              { id: user_id, did_well: dataToInsert },
-            ]);
+            const { data, error } = await db
+              .from("checkins")
+              .upsert([{ id: user_id, did_well: dataToInsert }]);
 
             if (error) {
               console.error("Error inserting data:", error.message);

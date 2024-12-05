@@ -1,23 +1,19 @@
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
-  Image,
-  Dimensions,
-  TouchableOpacity,
   ImageBackground,
+  TouchableOpacity,
   Modal,
+  Dimensions,
 } from "react-native";
-import React, { useState } from "react";
-
 import { useRouter } from "expo-router";
-
-import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import Entypo from "@expo/vector-icons/Entypo";
-import Foundation from "@expo/vector-icons/Foundation";
+import Theme from "@/assets/theme";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -25,152 +21,143 @@ const windowHeight = Dimensions.get("window").height;
 export default function Personal() {
   const router = useRouter();
   const [modalVisible, setModalVisible] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
-  // Function to handle the "View Profile" action
   const handleViewProfile = () => {
-    router.push("/additional/profile"); // Navigate to profile page
-    setModalVisible(false); // Close modal
+    router.push("/additional/profile");
+    setModalVisible(false);
   };
 
-  // Function to handle the settings button click
   const handleSettingsClick = () => {
-    setModalVisible(true); // Show the modal
+    setModalVisible(true);
+  };
+
+  const toggleCheckBox = () => {
+    setIsChecked(!isChecked); // Toggle the checkbox state
   };
 
   return (
-    <ImageBackground
-      source={require("@/assets/images/clouds1.png")}
-      style={styles.backgroundImage}
-    >
-      <SafeAreaView>
-        <View style={styles.topNav}>
-          <Text style={styles.title}>Personal Home</Text>
-          <TouchableOpacity onPress={() => handleSettingsClick()}>
-            <Entypo style={styles.cog} name="cog" size={30} color="black" />
-          </TouchableOpacity>
-          {/* Modal for Settings Options */}
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => setModalVisible(false)}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
-                <TouchableOpacity
-                  style={styles.modalButton}
-                  onPress={handleViewProfile}
-                >
-                  <Text style={styles.modalButtonText}>View Profile</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.modalButton}
-                  onPress={() => alert("Option 2 clicked!")}
-                >
-                  <Text style={styles.modalButtonText}>Option 2</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.modalButton}
-                  onPress={() => alert("Option 3 clicked!")}
-                >
-                  <Text style={styles.modalButtonText}>Option 3</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.modalButton}
-                  onPress={() => setModalVisible(false)}
-                >
-                  <Text style={styles.modalButtonText}>Cancel</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal>
-        </View>
-        <View style={styles.targetsNav}>
-          <View style={styles.titleAndButton}>
-            <Text style={styles.header}>Upcoming Targets</Text>
-            <View style={styles.infoCircle}>
-              <TouchableOpacity
-                style={styles.info}
-                onPress={() => alert("not implemented yet!")}
-              >
-                <Entypo
-                  style={styles.icon}
-                  name="info"
-                  size={12}
-                  color="black"
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.buttonContainer}>
+    <SafeAreaView>
+      <View style={styles.topNav}>
+        <Text style={styles.title}>Personal Home</Text>
+        <TouchableOpacity onPress={handleSettingsClick}>
+          <Entypo style={styles.cog} name="cog" size={30} color="black" />
+        </TouchableOpacity>
+      </View>
+
+      {/* Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
             <TouchableOpacity
-              style={styles.titleAndButton}
-              onPress={() => router.push("/additional/target/allTargets")}
+              style={styles.modalButton}
+              onPress={handleViewProfile}
             >
-              <Text>See All</Text>
-              <Ionicons name="chevron-forward" size={20} color="black" />
+              <Text style={styles.modalButtonText}>View Profile</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => alert("Option 2 clicked!")}
+            >
+              <Text style={styles.modalButtonText}>Option 2</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => alert("Option 3 clicked!")}
+            >
+              <Text style={styles.modalButtonText}>Option 3</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.modalButtonText}>Cancel</Text>
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.targets}>
-          <Text>No Targets Yet!</Text>
-        </View>
-        <View style={styles.targetsNav}>
-          <View style={styles.titleAndButton}>
-            <Text style={styles.header}>Your Check-in</Text>
-            <View style={styles.infoCircle}>
-              <TouchableOpacity
-                style={styles.info}
-                onPress={() => alert("not implemented yet!")}
-              >
-                <Entypo
-                  style={styles.icon}
-                  name="info"
-                  size={12}
-                  color="black"
-                />
-              </TouchableOpacity>
-            </View>
+      </Modal>
+
+      {/* Background Container */}
+      <ImageBackground
+        source={require("../../assets/images/skyWithPlane.png")}
+        style={styles.backgroundContainer}
+      >
+        <TouchableOpacity
+          style={styles.checkinButtonContainer}
+          onPress={() => router.push("/additional/checkin/myCheckin")}
+        >
+          <View style={styles.myCheckinButton}>
+            <Text style={styles.myCheckinText}>My Check-in</Text>
+            <Ionicons name="chevron-forward" size={20} color="black" />
           </View>
+        </TouchableOpacity>
+      </ImageBackground>
+
+      <View style={styles.targetsNav}>
+        <View style={styles.titleAndButton}>
+          <Text style={styles.header}>My Targets</Text>
         </View>
-        <View style={styles.checkIn}>
+        <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={() => router.push("/additional/checkin/begin")}
+            style={styles.titleAndButton}
+            onPress={() => router.push("/additional/target/allTargets")}
           >
-            <View style={styles.button}>
-              <Entypo name="pencil" size={20} color="black" />
-              <Text style={styles.content}>Start Weekly Check-in</Text>
-            </View>
+            <Text>See All</Text>
+            <Ionicons name="chevron-forward" size={20} color="black" />
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
-    </ImageBackground>
+      </View>
+
+      <TouchableOpacity style={styles.targetButton}>
+        <View style={styles.row}>
+          <AnimatedCircularProgress
+            size={windowWidth * 0.15}
+            width={3}
+            fill={66}
+            tintColor="#00e0ff"
+            backgroundColor="#3d5875"
+          >
+            {(fill) => <Text style={styles.progressText}>2 days</Text>}
+          </AnimatedCircularProgress>
+
+          <Text style={styles.targetButtonText}>Go to CAPS Meeting</Text>
+          <TouchableOpacity
+            style={[
+              styles.checkBox,
+              isChecked && styles.checkedBox, // Add additional style when checked
+            ]}
+            onPress={toggleCheckBox}
+          >
+            {isChecked && <Ionicons name="checkmark" size={20} color="black" />}
+          </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    width: windowWidth,
-    height: windowHeight,
-    resizeMode: "cover",
-  },
-  button: {
-    backgroundColor: Theme.colors.buttonWhite,
-    borderRadius: 8,
-    width: windowWidth * 0.5,
-    height: windowWidth * 0.08,
-    flexDirection: 'row',
+  targetsNav: {
+    marginTop: windowHeight * 0.05,
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-  },
-  content: {
-    flexDirection: "column",
+    justifyContent: "space-between",
+    marginRight: windowWidth * 0.1,
   },
   titleAndButton: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  header: {
+    fontSize: Theme.sizes.headerText,
+    paddingLeft: 35,
+    paddingRight: 10,
   },
   topNav: {
     marginVertical: windowWidth * 0.1,
@@ -189,38 +176,15 @@ const styles = StyleSheet.create({
     fontSize: Theme.sizes.titleText,
     fontWeight: "600",
   },
-  targetsNav: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    // paddingHorizontal: 10
-  },
-  infoCircle: {
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    height: 20,
-    aspectRatio: 1,
-  },
-  targets: {
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
+  backgroundContainer: {
+    width: windowWidth * 0.8,
     height: windowHeight * 0.4,
-    // backgroundColor: "blue",
-  },
-  checkIn: {
-    flexDirection: "column",
-    alignItems: "center",
+    alignSelf: "center",
     justifyContent: "center",
-    height: windowHeight * 0.25,
-    // backgroundColor: 'blue',
-  },
-  header: {
-    fontSize: Theme.sizes.headerText,
-    paddingLeft: 35,
-    paddingRight: 10,
+    alignItems: "center",
+    marginVertical: 10,
+    borderRadius: 20,
+    overflow: "hidden", // Ensures the corners are clipped for the child components
   },
   modalContainer: {
     flex: 1,
@@ -246,5 +210,63 @@ const styles = StyleSheet.create({
   modalButtonText: {
     fontSize: 18,
     color: "black",
+  },
+  checkinButtonContainer: {
+    position: "absolute",
+    bottom: 50,
+    backgroundColor: Theme.colors.buttonBlue,
+    padding: 15,
+    borderRadius: 8,
+    width: windowWidth * 0.35,
+  },
+  myCheckinButton: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  myCheckinText: {
+    fontWeight: "500",
+    fontSize: Theme.sizes.bodyText,
+  },
+  targetButton: {
+    backgroundColor: Theme.colors.buttonBlue, // Customize color
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    marginTop: 20,
+    alignSelf: "center",
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.1,
+    alignItems: "center",
+    justifyContent: "center", // Center content vertically
+  },
+  targetButtonText: {
+    marginLeft: 10,
+    fontSize: 18,
+    fontWeight: "500",
+    color: "black",
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center", // Center vertically
+    justifyContent: "center",
+    width: "100%", // Ensure it takes full width
+  },
+  progressIndicator: {
+    marginRight: 10, // Space between the indicator and the text
+  },
+  checkBox: {
+    marginLeft: 10,
+    width: 25,
+    height: 25,
+    borderWidth: 2,
+    borderColor: "black",
+    marginRight: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white", // Add this to make the background visible
+  },
+  checkedBox: {
+    backgroundColor: Theme.colors.buttonBlue, // Or any color you prefer for the checked state
   },
 });

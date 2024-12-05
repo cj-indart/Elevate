@@ -6,7 +6,9 @@ export default {
 
     border: "#a9a9a9",
 
+    lightBlue: "#EEF7FB",
     buttonBlue: "#C0DFF0",
+    darkerBlue: "#133C53",
     buttonRed: "#FF8A80",
     buttonWhite: "#FFFFFF",
 
