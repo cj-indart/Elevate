@@ -20,7 +20,7 @@ export default function Plane() {
   useEffect(() => {
     const timer = setTimeout(() => {
       router.push("/tabs/groupHome");
-    }, 3000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [router]);
@@ -29,10 +29,9 @@ export default function Plane() {
     <View style={styles.container}>
       <Text style={styles.title}>Matching you to a group!</Text>
       <LottieView
-        resizeMode="contain"
+        style={styles.image}
         source={require("@/assets/images/dots.json")}
         autoPlay
-        loop
       />
     </View>
   );
