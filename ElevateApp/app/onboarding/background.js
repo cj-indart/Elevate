@@ -15,7 +15,7 @@ import Theme from "@/assets/theme";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-import db from "@/database/db"
+import db from "@/database/db";
 
 export default function Background() {
   const [major, setMajor] = useState("");
@@ -137,16 +137,16 @@ export default function Background() {
     <View style={styles.container}>
       <Text style={styles.title}>Background</Text>
       <Text style={styles.body}>
-        This information will help connect you with like-minded students and
+        This information will be used match you with like-minded students and
         graduates.
       </Text>
 
-      <Text style={styles.bodyBottom}>Biography</Text>
+      <Text style={styles.bodyBottom}></Text>
 
       <View style={styles.inputBoxContainer}>
         <TextInput
           style={[styles.inputBox, styles.multiLineInputBox]} // Add a new style for multi-line input
-          placeholder="Write something about yourself!"
+          placeholder="Short bio!"
           value={bio}
           placeholderTextColor={Theme.colors.placeholderText}
           onChangeText={setBio}
@@ -188,7 +188,7 @@ export default function Background() {
             { color: selectedCareer ? "black" : Theme.colors.placeholderText },
           ]}
         >
-          {selectedCareer || "Desired Career Path(s)"}
+          {selectedCareer || "Desired career path(s)"}
         </Text>
       </TouchableOpacity>
 
@@ -217,7 +217,7 @@ export default function Background() {
           router.push("/onboarding/plane");
         }}
       >
-        <Text style={styles.buttonText}>Find Group!</Text>
+        <Text style={styles.buttonText}>Find Crew</Text>
       </TouchableOpacity>
     </View>
   );
