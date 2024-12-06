@@ -96,8 +96,10 @@ export default function CreateAccount() {
       <TouchableOpacity style={styles.back} onPress={() => router.back()}>
         <Ionicons name="chevron-back" size={30} color="black" />
       </TouchableOpacity>
-      <Text style={styles.title}>Create Account</Text>
-      <Text style={styles.header}>Account Information</Text>
+      <Text style={styles.title}>Setting Up</Text>
+      <Text style={styles.header}>
+        Fill out the information below to set up your account.
+      </Text>
       <TextInput
         style={styles.inputBox}
         placeholder="Username"
@@ -165,9 +167,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   header: {
+    textAlign: "center",
     marginTop: windowHeight * 0.02,
-    fontSize: Theme.sizes.headerText,
-    fontWeight: "bold",
+    fontSize: Theme.sizes.bodyText,
     marginBottom: windowHeight * 0.05,
   },
   inputBox: {

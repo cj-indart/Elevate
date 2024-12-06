@@ -36,7 +36,7 @@ export default function Welcome() {
         <Text style={styles.buttonText}>Create Account</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
+      {/*<TouchableOpacity
         style={styles.temporaryButton}
         onPress={() => router.push("/tabs/groupHome")}
       >
@@ -53,7 +53,7 @@ export default function Welcome() {
         onPress={() => router.push("/additional/profile")}
       >
         <Text style={styles.buttonText}>Go to Profile</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 }

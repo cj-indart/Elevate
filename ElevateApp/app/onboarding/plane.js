@@ -27,7 +27,7 @@ export default function Plane() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Matching you to a group!</Text>
+      <Text style={styles.title}>Searching for your Crew!</Text>
       <LottieView
         style={styles.image}
         source={require("@/assets/images/dots.json")}

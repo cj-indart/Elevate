@@ -37,7 +37,7 @@ export default function Other() {
           width={windowWidth * 0.75}
           height={40}
           style={styles.bar}
-          color="#A9A9A9"
+          color={Theme.colors.buttonBlue}
         />
       </View>
       <Text style={styles.title}>Any other comments?</Text>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //padding: 20,
-    backgroundColor: Theme.colors.backgroundPrimary,
+    backgroundColor: "#EEF7FB",
   },
   top: {
     flexDirection: "row",
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     right: 50,
     backgroundColor: Theme.colors.buttonBlue,
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 12,
     width: windowWidth * 0.3,
   },
   nextButton: {
@@ -163,10 +163,9 @@ const styles = StyleSheet.create({
     marginLeft: windowWidth * 0.1,
     marginRight: windowWidth * 0.1,
     borderColor: Theme.colors.border,
-    borderWidth: 0.5,
     borderRadius: 5,
     padding: 10,
-    backgroundColor: Theme.colors.backgroundSecodary,
+    backgroundColor: "white",
   },
   multiLineInputBox: {
     height: windowHeight * 0.2, // Adjust height for multi-line input

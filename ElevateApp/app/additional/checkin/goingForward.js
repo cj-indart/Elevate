@@ -24,10 +24,10 @@ export default function GoingForward() {
   const router = useRouter();
   const options = [
     "Networking",
-    "Submitted Applications",
+    "Submitting Applications",
     "Interview Prep",
     "Community Building",
-    "Self Care",
+    "Self-care",
     "Other",
   ];
 
@@ -57,7 +57,7 @@ export default function GoingForward() {
           width={windowWidth * 0.75}
           height={40}
           style={styles.bar}
-          color="#A9A9A9"
+          color={Theme.colors.buttonBlue}
         />
       </View>
       <Text style={styles.title}>Going forward...</Text>
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   container: {
     // alignItems: "center",
     flex: 1,
-    backgroundColor: Theme.colors.backgroundPrimary,
+    backgroundColor: "#EEF7FB",
   },
   top: {
     flexDirection: "row",
@@ -157,8 +157,7 @@ const styles = StyleSheet.create({
   },
   options: {
     marginTop: windowHeight * 0.025,
-    alignSelf: "flex-start",
-    marginLeft: windowWidth * 0.1,
+    marginHorizontal: windowWidth * 0.1,
   },
   checkBox: {
     width: 25,
@@ -177,8 +176,13 @@ const styles = StyleSheet.create({
   },
   responses: {
     flexDirection: "row",
-    marginVertical: 10,
+    marginVertical: 5,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
     alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 12,
+    borderColor: "#A9A9A9",
   },
   responseText: {
     fontSize: Theme.sizes.bodyText,
@@ -227,7 +231,7 @@ const styles = StyleSheet.create({
     right: 50,
     backgroundColor: Theme.colors.buttonBlue,
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 12,
     width: windowWidth * 0.2,
   },
   nextButton: {

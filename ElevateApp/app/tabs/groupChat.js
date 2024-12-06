@@ -45,7 +45,7 @@ export default function Chat() {
       <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
         <Ionicons name="chevron-back" size={30} color="black" />
       </TouchableOpacity>
-      <Text style={styles.title}>Chat with Members</Text>
+      <Text style={styles.title}>Crew Chat</Text>
       <FlatList
         data={messages.slice().reverse()}
         renderItem={({ item }) => (
@@ -85,7 +85,7 @@ export default function Chat() {
         <TextInput
           style={styles.input}
           multiline
-          placeholder="Say something to your group..."
+          placeholder="Say something to your crew..."
           value={message}
           onChangeText={setMessage}
         />
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    marginTop: 100,
+    top: 75,
     fontSize: Theme.sizes.titleText,
     fontWeight: "600",
   },
