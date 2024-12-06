@@ -8,7 +8,8 @@ export default function TabsLayout() {
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: "black",
-          tabBarStyle: { backgroundColor: "white" },
+          tabBarLabelStyle: { fontSize: 18 },
+          tabBarStyle: { backgroundColor: "white", height: 80 },
           headerShown: false,
         }}
       >
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   icon: {
-    height: 20,
+    height: 36,
     resizeMode: "contain",
   },
 });
