@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 20,
-    fontSize: Theme.sizes.titleText,
+    fontSize: 34,
     fontWeight: "600",
   },
   buttonContainer: {
