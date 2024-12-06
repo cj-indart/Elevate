@@ -4,71 +4,63 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function TabsLayout() {
   return (
-    <View style={styles.container}>
-      <Tabs
-        screenOptions={{
-          tabBarActiveTintColor: "black",
-          tabBarLabelStyle: { fontSize: 18 },
-          tabBarStyle: { backgroundColor: "white", height: 80 },
-          headerShown: false,
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: "black",
+        tabBarLabelStyle: { fontSize: 18 },
+        tabBarStyle: { backgroundColor: "white", height: 80 },
+        headerShown: false,
+      }}
+    >
+      <Tabs.Screen
+        name="groupHome"
+        options={{
+          title: "Crew",
+          tabBarIcon: ({ color, focused }) => (
+            <Image
+              style={styles.icon}
+              source={
+                focused
+                  ? require("@/assets/icons/focusedcrew.png")
+                  : require("@/assets/icons/crew.png")
+              }
+            />
+          ),
         }}
-      >
-        <Tabs.Screen
-          name="groupHome"
-          options={{
-            title: "Crew",
-            tabBarIcon: ({ focused }) =>
-              focused ? (
-                <Image
-                  style={styles.icon}
-                  source={require("@/assets/icons/focusedcrew.png")}
-                ></Image>
-              ) : (
-                <Image
-                  style={styles.icon}
-                  source={require("@/assets/icons/crew.png")}
-                ></Image>
-              ),
-          }}
-        />
-        <Tabs.Screen
-          name="groupChat"
-          options={{
-            title: "Chat",
-            tabBarIcon: ({ focused }) =>
-              focused ? (
-                <Image
-                  style={styles.icon}
-                  source={require("@/assets/icons/focusedchat.png")}
-                ></Image>
-              ) : (
-                <Image
-                  style={styles.icon}
-                  source={require("@/assets/icons/chat.png")}
-                ></Image>
-              ),
-          }}
-        />
-        <Tabs.Screen
-          name="personalHome"
-          options={{
-            title: "Me",
-            tabBarIcon: ({ focused }) =>
-              focused ? (
-                <Image
-                  style={styles.icon}
-                  source={require("@/assets/icons/focusedperson.png")}
-                ></Image>
-              ) : (
-                <Image
-                  style={styles.icon}
-                  source={require("@/assets/icons/person.png")}
-                ></Image>
-              ),
-          }}
-        />
-      </Tabs>
-    </View>
+      />
+      <Tabs.Screen
+        name="groupChat"
+        options={{
+          title: "Chat",
+          tabBarIcon: ({ color, focused }) => (
+            <Image
+              style={styles.icon}
+              source={
+                focused
+                  ? require("@/assets/icons/focusedchat.png")
+                  : require("@/assets/icons/chat.png")
+              }
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="personalHome"
+        options={{
+          title: "Me",
+          tabBarIcon: ({ color, focused }) => (
+            <Image
+              style={styles.icon}
+              source={
+                focused
+                  ? require("@/assets/icons/focusedperson.png")
+                  : require("@/assets/icons/person.png")
+              }
+            />
+          ),
+        }}
+      />
+    </Tabs>
   );
 }
 
