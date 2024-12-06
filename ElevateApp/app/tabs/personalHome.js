@@ -56,7 +56,7 @@ export default function Personal() {
   return (
     <SafeAreaView>
       <View style={styles.topNav}>
-        <Text style={styles.title}>Personal Home</Text>
+        <Text style={styles.title}>My Home</Text>
         <TouchableOpacity onPress={handleSettingsClick}>
           <Image
             source={require("@/assets/icons/setup-button.png")}
@@ -123,20 +123,24 @@ export default function Personal() {
       </Modal>
 
       {/* Background Container */}
-      <ImageBackground
-        source={require("../../assets/images/skyWithPlane.png")}
-        style={styles.backgroundContainer}
+      <TouchableOpacity
+        onPress={() => router.push("/additional/checkin/myCheckin")}
       >
-        <TouchableOpacity
-          style={styles.checkinButtonContainer}
-          onPress={() => router.push("/additional/checkin/myCheckin")}
+        <ImageBackground
+          source={require("../../assets/images/skyWithPlane.png")}
+          style={styles.backgroundContainer}
         >
-          <View style={styles.myCheckinButton}>
-            <Text style={styles.myCheckinText}>My Check-in</Text>
-            <Ionicons name="chevron-forward" size={20} color="black" />
-          </View>
-        </TouchableOpacity>
-      </ImageBackground>
+          <TouchableOpacity
+            style={styles.checkinButtonContainer}
+            onPress={() => router.push("/additional/checkin/myCheckin")}
+          >
+            <View style={styles.myCheckinButton}>
+              <Text style={styles.myCheckinText}>My Check-ins</Text>
+              <Ionicons name="chevron-forward" size={20} color="black" />
+            </View>
+          </TouchableOpacity>
+        </ImageBackground>
+      </TouchableOpacity>
 
       <View style={styles.targetsNav}>
         <View style={styles.titleAndButton}>
@@ -338,11 +342,10 @@ const styles = StyleSheet.create({
   },
   checkinButtonContainer: {
     position: "absolute",
-    bottom: 50,
-    backgroundColor: Theme.colors.buttonBlue,
+    top: 10,
+    left: 10,
     padding: 15,
     borderRadius: 8,
-    width: windowWidth * 0.35,
   },
   myCheckinButton: {
     flexDirection: "row",
@@ -350,8 +353,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   myCheckinText: {
-    fontWeight: "500",
-    fontSize: Theme.sizes.bodyText,
+    //fontWeight: "500",
+    fontSize: Theme.sizes.textLarge,
   },
   targetButton: {
     backgroundColor: Theme.colors.buttonBlue, // Customize color
@@ -385,6 +388,7 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     borderWidth: 2,
+    borderRadius: 8,
     borderColor: "black",
     marginRight: 10,
     alignItems: "center",
