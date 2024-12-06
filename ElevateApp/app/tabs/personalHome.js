@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   ImageBackground,
   TouchableOpacity,
   Modal,
@@ -46,7 +47,10 @@ export default function Personal() {
       <View style={styles.topNav}>
         <Text style={styles.title}>Personal Home</Text>
         <TouchableOpacity onPress={handleSettingsClick}>
-          <Entypo style={styles.cog} name="cog" size={30} color="black" />
+          <Image
+            source={require("@/assets/icons/setup-button.png")}
+            style={styles.setting}
+          ></Image>
         </TouchableOpacity>
       </View>
 
@@ -181,8 +185,10 @@ export default function Personal() {
             </View>
 
             <View style={styles.modalBottomContainer}>
-              <Text style={styles.modalBottomText}>Tue, Dec. 10</Text>
-              <Text style={styles.modalBottomText}>11:00 AM</Text>
+              <Text style={styles.modalBottomText}>
+                Tue, Dec. 10 at 11:00 AM
+              </Text>
+              <Text style={styles.modalBottomText}></Text>
               <Text></Text>
               <Text style={styles.modalBottomText}>Can't miss this!</Text>
             </View>
@@ -236,6 +242,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  setting: {
+    width: 50,
+    height: 50,
+    resizeMode: "contain",
   },
   header: {
     fontSize: Theme.sizes.headerText,
