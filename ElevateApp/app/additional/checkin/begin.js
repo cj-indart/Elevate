@@ -24,10 +24,10 @@ export default function Begin() {
   const router = useRouter();
   const options = [
     "Networking",
-    "Submitted Applications",
+    "Submitting Applications",
     "Interview Prep",
     "Community Building",
-    "Self Care",
+    "Self-care",
     "Other",
   ];
 
@@ -57,7 +57,7 @@ export default function Begin() {
           width={windowWidth * 0.75}
           height={28}
           style={styles.bar}
-          color="#A9A9A9"
+          color={Theme.colors.buttonBlue}
         />
       </View>
 
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //padding: 20,
-    backgroundColor: Theme.colors.backgroundPrimary,
+    backgroundColor: "#EEF7FB",
   },
   top: {
     flexDirection: "row",
@@ -179,7 +179,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     alignItems: "center",
     backgroundColor: "white",
-    borderWidth: 2,
     borderRadius: 12,
     borderColor: "#A9A9A9",
   },

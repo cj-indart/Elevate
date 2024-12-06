@@ -19,11 +19,7 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, focused }) => (
             <Image
               style={styles.icon}
-              source={
-                focused
-                  ? require("@/assets/icons/focusedcrew.png")
-                  : require("@/assets/icons/crew.png")
-              }
+              source={require("@/assets/icons/crew.png")}
             />
           ),
         }}
@@ -35,11 +31,7 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, focused }) => (
             <Image
               style={styles.icon}
-              source={
-                focused
-                  ? require("@/assets/icons/focusedchat.png")
-                  : require("@/assets/icons/chat.png")
-              }
+              source={require("@/assets/icons/chat.png")}
             />
           ),
         }}
@@ -48,14 +40,10 @@ export default function TabsLayout() {
         name="personalHome"
         options={{
           title: "Me",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ color, size, focused }) => (
             <Image
               style={styles.icon}
-              source={
-                focused
-                  ? require("@/assets/icons/focusedperson.png")
-                  : require("@/assets/icons/person.png")
-              }
+              source={require("@/assets/icons/person.png")}
             />
           ),
         }}
@@ -65,9 +53,6 @@ export default function TabsLayout() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   icon: {
     height: 36,
     resizeMode: "contain",

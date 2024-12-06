@@ -58,7 +58,7 @@ export default function LookingBack() {
           width={windowWidth * 0.75}
           height={40}
           style={styles.bar}
-          color="#A9A9A9"
+          color={Theme.colors.buttonBlue}
         />
       </View>
       <Text style={styles.title}>Looking back...</Text>
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     // alignItems: "center",
     flex: 1,
     //padding: 20,
-    backgroundColor: Theme.colors.backgroundPrimary,
+    backgroundColor: "#EEF7FB",
   },
   top: {
     flexDirection: "row",
@@ -159,8 +159,7 @@ const styles = StyleSheet.create({
   },
   options: {
     marginTop: windowHeight * 0.025,
-    alignSelf: "flex-start",
-    marginLeft: windowWidth * 0.1,
+    marginHorizontal: windowWidth * 0.1,
   },
   checkBox: {
     width: 25,
@@ -179,8 +178,13 @@ const styles = StyleSheet.create({
   },
   responses: {
     flexDirection: "row",
-    marginVertical: 10,
+    marginVertical: 2.5,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 12,
+    borderColor: "#A9A9A9",
   },
   responseText: {
     fontSize: Theme.sizes.bodyText,
