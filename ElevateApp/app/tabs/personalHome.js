@@ -24,6 +24,7 @@ export default function Personal() {
   const [settingsModalVisible, setSettingsModalVisible] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [targetModalVisible, setTargetModalVisible] = useState(false);
+  const [logOutVisible, setLogOutVisible] = useState(false);
 
   const handleViewProfile = () => {
     router.push("/additional/profile");
@@ -36,6 +37,16 @@ export default function Personal() {
 
   const handleTargetClick = () => {
     setTargetModalVisible(true);
+  };
+
+  const handleLogOutClick = () => {
+    setLogOutVisible(true);
+  };
+
+  const logOut = () => {
+    router.push("/setup/welcome");
+    setSettingsModalVisible(false);
+    setLogOutVisible(false);
   };
 
   const toggleCheckBox = () => {
@@ -54,7 +65,7 @@ export default function Personal() {
         </TouchableOpacity>
       </View>
 
-      {/* Modal */}
+      {/* Settings Modal */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -71,15 +82,9 @@ export default function Personal() {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.modalButton}
-              onPress={() => alert("Option 2 clicked!")}
+              onPress={handleLogOutClick}
             >
-              <Text style={styles.modalButtonText}>Option 2</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={() => alert("Option 3 clicked!")}
-            >
-              <Text style={styles.modalButtonText}>Option 3</Text>
+              <Text style={styles.modalButtonText}>Log Out</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.modalButton}
@@ -87,6 +92,32 @@ export default function Personal() {
             >
               <Text style={styles.modalButtonText}>Cancel</Text>
             </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        transparent={true}
+        animationType="slide"
+        visible={logOutVisible}
+        onRequestClose={() => setLogOutVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.logoutHeader}>
+              Are you sure you want to log out?
+            </Text>
+            <View style={styles.logout}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => setLogOutVisible(false)}
+              >
+                <Text style={styles.logoutText}>No</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={logOut}>
+                <Text style={styles.logoutText}>Yes, Log Out</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
@@ -362,5 +393,18 @@ const styles = StyleSheet.create({
   },
   checkedBox: {
     backgroundColor: Theme.colors.buttonBlue, // Or any color you prefer for the checked state
+  },
+  logoutHeader: {
+    textAlign: "center",
+    fontSize: 24,
+    marginBottom: 24,
+  },
+  logoutText: {
+    alignText: "center",
+    fontSize: 24,
+  },
+  logout: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
   },
 });
