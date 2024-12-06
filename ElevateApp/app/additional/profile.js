@@ -15,6 +15,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import db from "@/database/db";
+import Entypo from "@expo/vector-icons/Entypo";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 const windowWidth = Dimensions.get("window").width;
@@ -154,8 +155,13 @@ export default function Profile() {
     }
   };
 
+  const handleSettingsClick = () => {
+    setSettingsModalVisible(true);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
+
       <TouchableOpacity
         style={styles.back}
         onPress={() => router.push("/tabs/personalHome")}
