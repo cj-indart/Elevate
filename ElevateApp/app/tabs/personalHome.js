@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   ImageBackground,
   TouchableOpacity,
   Modal,
@@ -23,6 +24,7 @@ export default function Personal() {
   const [settingsModalVisible, setSettingsModalVisible] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [targetModalVisible, setTargetModalVisible] = useState(false);
+  const [logOutVisible, setLogOutVisible] = useState(false);
 
   const handleViewProfile = () => {
     router.push("/additional/profile");
@@ -37,6 +39,16 @@ export default function Personal() {
     setTargetModalVisible(true);
   };
 
+  const handleLogOutClick = () => {
+    setLogOutVisible(true);
+  };
+
+  const logOut = () => {
+    router.push("/setup/welcome");
+    setSettingsModalVisible(false);
+    setLogOutVisible(false);
+  };
+
   const toggleCheckBox = () => {
     setIsChecked(!isChecked); // Toggle the checkbox state
   };
@@ -44,13 +56,16 @@ export default function Personal() {
   return (
     <SafeAreaView>
       <View style={styles.topNav}>
-        <Text style={styles.title}>Personal Home</Text>
+        <Text style={styles.title}>My Home</Text>
         <TouchableOpacity onPress={handleSettingsClick}>
-          <Entypo style={styles.cog} name="cog" size={30} color="black" />
+          <Image
+            source={require("@/assets/icons/setup-button.png")}
+            style={styles.setting}
+          ></Image>
         </TouchableOpacity>
       </View>
 
-      {/* Modal */}
+      {/* Settings Modal */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -67,15 +82,9 @@ export default function Personal() {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.modalButton}
-              onPress={() => alert("Option 2 clicked!")}
+              onPress={handleLogOutClick}
             >
-              <Text style={styles.modalButtonText}>Option 2</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={() => alert("Option 3 clicked!")}
-            >
-              <Text style={styles.modalButtonText}>Option 3</Text>
+              <Text style={styles.modalButtonText}>Log Out</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.modalButton}
@@ -87,21 +96,51 @@ export default function Personal() {
         </View>
       </Modal>
 
-      {/* Background Container */}
-      <ImageBackground
-        source={require("../../assets/images/skyWithPlane.png")}
-        style={styles.backgroundContainer}
+      <Modal
+        transparent={true}
+        animationType="slide"
+        visible={logOutVisible}
+        onRequestClose={() => setLogOutVisible(false)}
       >
-        <TouchableOpacity
-          style={styles.checkinButtonContainer}
-          onPress={() => router.push("/additional/checkin/myCheckin")}
-        >
-          <View style={styles.myCheckinButton}>
-            <Text style={styles.myCheckinText}>My Check-in</Text>
-            <Ionicons name="chevron-forward" size={20} color="black" />
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.logoutHeader}>
+              Are you sure you want to log out?
+            </Text>
+            <View style={styles.logout}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => setLogOutVisible(false)}
+              >
+                <Text style={styles.logoutText}>No</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={logOut}>
+                <Text style={styles.logoutText}>Yes, Log Out</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </TouchableOpacity>
-      </ImageBackground>
+        </View>
+      </Modal>
+
+      {/* Background Container */}
+      <TouchableOpacity
+        onPress={() => router.push("/additional/checkin/myCheckin")}
+      >
+        <ImageBackground
+          source={require("../../assets/images/skyWithPlane.png")}
+          style={styles.backgroundContainer}
+        >
+          <TouchableOpacity
+            style={styles.checkinButtonContainer}
+            onPress={() => router.push("/additional/checkin/myCheckin")}
+          >
+            <View style={styles.myCheckinButton}>
+              <Text style={styles.myCheckinText}>My Check-ins</Text>
+              <Ionicons name="chevron-forward" size={20} color="black" />
+            </View>
+          </TouchableOpacity>
+        </ImageBackground>
+      </TouchableOpacity>
 
       <View style={styles.targetsNav}>
         <View style={styles.titleAndButton}>
@@ -181,8 +220,10 @@ export default function Personal() {
             </View>
 
             <View style={styles.modalBottomContainer}>
-              <Text style={styles.modalBottomText}>Tue, Dec. 10</Text>
-              <Text style={styles.modalBottomText}>11:00 AM</Text>
+              <Text style={styles.modalBottomText}>
+                Tue, Dec. 10 at 11:00 AM
+              </Text>
+              <Text style={styles.modalBottomText}></Text>
               <Text></Text>
               <Text style={styles.modalBottomText}>Can't miss this!</Text>
             </View>
@@ -236,6 +277,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  setting: {
+    width: 50,
+    height: 50,
+    resizeMode: "contain",
   },
   header: {
     fontSize: Theme.sizes.headerText,
@@ -296,11 +342,10 @@ const styles = StyleSheet.create({
   },
   checkinButtonContainer: {
     position: "absolute",
-    bottom: 50,
-    backgroundColor: Theme.colors.buttonBlue,
+    top: 10,
+    left: 10,
     padding: 15,
     borderRadius: 8,
-    width: windowWidth * 0.35,
   },
   myCheckinButton: {
     flexDirection: "row",
@@ -308,8 +353,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   myCheckinText: {
-    fontWeight: "500",
-    fontSize: Theme.sizes.bodyText,
+    //fontWeight: "500",
+    fontSize: Theme.sizes.textLarge,
   },
   targetButton: {
     backgroundColor: Theme.colors.buttonBlue, // Customize color
@@ -343,6 +388,7 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     borderWidth: 2,
+    borderRadius: 8,
     borderColor: "black",
     marginRight: 10,
     alignItems: "center",
@@ -351,5 +397,18 @@ const styles = StyleSheet.create({
   },
   checkedBox: {
     backgroundColor: Theme.colors.buttonBlue, // Or any color you prefer for the checked state
+  },
+  logoutHeader: {
+    textAlign: "center",
+    fontSize: 24,
+    marginBottom: 24,
+  },
+  logoutText: {
+    alignText: "center",
+    fontSize: 24,
+  },
+  logout: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
   },
 });

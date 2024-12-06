@@ -24,12 +24,25 @@ export default function Other() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-        <Ionicons name="chevron-back" size={30} color="black" />
-      </TouchableOpacity>
-      <Text style={styles.title}>Weekly Check-in</Text>
+      <View style={styles.top}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.push("/tabs/personalHome")}
+        >
+          <Ionicons name="chevron-back" size={30} color="black" />
+        </TouchableOpacity>
+
+        <ProgressBar
+          progress={0.75}
+          width={windowWidth * 0.75}
+          height={40}
+          style={styles.bar}
+          color="#A9A9A9"
+        />
+      </View>
+      <Text style={styles.title}>Any other comments?</Text>
       <Text style={styles.questionText}>
-        Any other updates or feelings you'd like to share with your team?
+        Feel free to write as much as you prefer.
       </Text>
 
       <TextInput
@@ -41,13 +54,6 @@ export default function Other() {
         keyboardType="default"
         autoCapitalize="none"
         multiline={true} // Enable multi-line input
-      />
-
-      <ProgressBar
-        progress={0.75}
-        width={windowWidth * 0.6}
-        style={styles.bar}
-        color="#A9A9A9"
       />
 
       <TouchableOpacity
@@ -94,8 +100,13 @@ export default function Other() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    //padding: 20,
     backgroundColor: Theme.colors.backgroundPrimary,
+  },
+  top: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
   },
   backButton: {
     position: "absolute",
@@ -104,9 +115,9 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    marginTop: windowHeight * 0.1,
-    fontSize: Theme.sizes.titleText,
-    fontWeight: "bold",
+    marginTop: windowHeight * 0.12 + windowHeight * 0.05,
+    fontSize: 25,
+    fontWeight: "500",
   },
   subHeaderText: {
     textAlign: "left",
@@ -116,16 +127,21 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   questionText: {
-    textAlign: "left",
-    marginLeft: windowWidth * 0.1,
-    marginRight: windowWidth * 0.1,
-    marginTop: windowHeight * 0.03,
-    fontSize: 20,
+    textAlign: "center",
+    color: "gray",
+    marginHorizontal: windowWidth * 0.05,
+    marginTop: windowHeight * 0.025,
+    fontSize: Theme.sizes.bodyText,
+  },
+  backButton: {
+    top: 75,
   },
   bar: {
-    position: "absolute",
-    bottom: 150,
-    alignSelf: "center",
+    top: 75,
+    borderRadius: 12,
+    borderWidth: 2,
+    width: windowWidth * 0.75,
+    height: 40,
   },
   buttonContainer: {
     position: "absolute",

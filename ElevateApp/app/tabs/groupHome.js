@@ -67,7 +67,7 @@ export default function Group() {
   return (
     <SafeAreaView>
       <View style={styles.topNav}>
-        <Text style={styles.title}>Group Home</Text>
+        <Text style={styles.title}>Crew</Text>
         {/* <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => router.push("/additional/members")}

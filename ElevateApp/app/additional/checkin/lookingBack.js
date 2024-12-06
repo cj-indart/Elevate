@@ -45,13 +45,28 @@ export default function LookingBack() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-        <Ionicons name="chevron-back" size={30} color="black" />
-      </TouchableOpacity>
-      <Text style={styles.title}>Weekly Check-in</Text>
-      <Text style={styles.subHeaderText}>Looking Back...</Text>
+      <View style={styles.top}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.push("/tabs/personalHome")}
+        >
+          <Ionicons name="chevron-back" size={30} color="black" />
+        </TouchableOpacity>
+
+        <ProgressBar
+          progress={0.5}
+          width={windowWidth * 0.75}
+          height={40}
+          style={styles.bar}
+          color="#A9A9A9"
+        />
+      </View>
+      <Text style={styles.title}>Looking back...</Text>
+      <Text style={styles.subHeaderText}>
+        This week, how have you been feeling?
+      </Text>
       <Text style={styles.questionText}>
-        Select the words that best describe how you felt this week.
+        Select the words that best describe how you felt, even if they conflict.
       </Text>
 
       <View style={styles.options}>
@@ -77,13 +92,6 @@ export default function LookingBack() {
           </View>
         ))}
       </View>
-
-      <ProgressBar
-        progress={0.5}
-        width={windowWidth * 0.6}
-        style={styles.bar}
-        color="#A9A9A9"
-      />
 
       <TouchableOpacity
         style={styles.buttonContainer}
@@ -141,8 +149,13 @@ const styles = StyleSheet.create({
   container: {
     // alignItems: "center",
     flex: 1,
-    padding: 20,
+    //padding: 20,
     backgroundColor: Theme.colors.backgroundPrimary,
+  },
+  top: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
   },
   options: {
     marginTop: windowHeight * 0.025,
@@ -152,8 +165,9 @@ const styles = StyleSheet.create({
   checkBox: {
     width: 25,
     height: 25,
+    borderRadius: 4,
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: "#A9A9A9",
     marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
@@ -181,34 +195,33 @@ const styles = StyleSheet.create({
     height: 40,
   },
   backButton: {
-    position: "absolute",
     top: 75,
-    left: 20,
+  },
+  bar: {
+    top: 75,
+    borderRadius: 12,
+    borderWidth: 2,
+    width: windowWidth * 0.75,
+    height: 40,
   },
   title: {
     textAlign: "center",
-    marginTop: windowHeight * 0.1,
+    marginTop: windowHeight * 0.12,
     fontSize: Theme.sizes.titleText,
-    fontWeight: "bold",
   },
   subHeaderText: {
-    textAlign: "left",
-    marginLeft: windowWidth * 0.1,
-    marginTop: windowHeight * 0.05,
+    textAlign: "center",
+    marginHorizontal: windowWidth * 0.05,
+    marginTop: windowHeight * 0.025,
     fontSize: 25,
     fontWeight: "500",
   },
   questionText: {
-    textAlign: "left",
-    marginLeft: windowWidth * 0.1,
-    marginRight: windowWidth * 0.1,
-    marginTop: windowHeight * 0.03,
-    fontSize: 20,
-  },
-  bar: {
-    position: "absolute",
-    bottom: 150,
-    alignSelf: "center",
+    textAlign: "center",
+    color: "gray",
+    marginHorizontal: windowWidth * 0.05,
+    marginTop: windowHeight * 0.025,
+    fontSize: Theme.sizes.bodyText,
   },
   buttonContainer: {
     position: "absolute",
