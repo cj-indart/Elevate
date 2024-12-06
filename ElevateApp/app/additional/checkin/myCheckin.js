@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.buttonBlue, // Customize color
     paddingVertical: 15,
     paddingHorizontal: 20,
-    borderRadius: 10,
+    borderRadius: 12,
     marginTop: 20,
     alignSelf: "center",
     width: windowWidth * 0.8,

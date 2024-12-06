@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     right: 50,
     backgroundColor: Theme.colors.buttonBlue,
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 12,
     width: windowWidth * 0.3,
   },
   nextButton: {
