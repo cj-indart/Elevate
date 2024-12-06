@@ -27,7 +27,7 @@ export default function Other() {
       <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
         <Ionicons name="chevron-back" size={30} color="black" />
       </TouchableOpacity>
-      <Text style={styles.title}>Weekly Check-in</Text>
+      <Text style={styles.title}>Any other comments?</Text>
       <Text style={styles.questionText}>
         Any other updates or feelings you'd like to share with your team?
       </Text>
@@ -104,9 +104,9 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    marginTop: windowHeight * 0.1,
-    fontSize: Theme.sizes.titleText,
-    fontWeight: "bold",
+    marginTop: windowHeight * 0.12 + windowHeight * 0.05,
+    fontSize: 25,
+    fontWeight: "500",
   },
   subHeaderText: {
     textAlign: "left",

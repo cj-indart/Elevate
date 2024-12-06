@@ -44,15 +44,28 @@ export default function Begin() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => router.push("/tabs/personalHome")}
-      >
-        <Ionicons name="chevron-back" size={30} color="black" />
-      </TouchableOpacity>
-      <Text style={styles.title}>Weekly Check-in</Text>
-      <Text style={styles.subHeaderText}>Let's begin...</Text>
-      <Text style={styles.questionText}>What did you do well last week?</Text>
+      <View style={styles.top}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.push("/tabs/personalHome")}
+        >
+          <Ionicons name="chevron-back" size={30} color="black" />
+        </TouchableOpacity>
+
+        <ProgressBar
+          progress={0}
+          width={windowWidth * 0.75}
+          height={28}
+          style={styles.bar}
+          color="#A9A9A9"
+        />
+      </View>
+
+      <Text style={styles.title}>Let's begin...</Text>
+      <Text style={styles.subHeaderText}>What did you do well last week?</Text>
+      <Text style={styles.questionText}>
+        Select things you've accomplished, even if it's just one!
+      </Text>
 
       <View style={styles.options}>
         {options.map((option) => (
@@ -77,13 +90,6 @@ export default function Begin() {
           </View>
         ))}
       </View>
-
-      <ProgressBar
-        progress={0}
-        width={windowWidth * 0.6}
-        style={styles.bar}
-        color="#A9A9A9"
-      />
 
       <TouchableOpacity
         style={styles.buttonContainer}
@@ -138,21 +144,25 @@ export default function Begin() {
 
 const styles = StyleSheet.create({
   container: {
-    // alignItems: "center",
     flex: 1,
-    padding: 20,
+    //padding: 20,
     backgroundColor: Theme.colors.backgroundPrimary,
+  },
+  top: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
   },
   options: {
     marginTop: windowHeight * 0.025,
-    alignSelf: "flex-start",
-    marginLeft: windowWidth * 0.1,
+    marginHorizontal: windowWidth * 0.05,
   },
   checkBox: {
     width: 25,
     height: 25,
+    borderRadius: 4,
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: "#A9A9A9",
     marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
@@ -164,54 +174,60 @@ const styles = StyleSheet.create({
   },
   responses: {
     flexDirection: "row",
-    marginVertical: 10,
+    marginVertical: 5,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
     alignItems: "center",
+    backgroundColor: "white",
+    borderWidth: 2,
+    borderRadius: 12,
+    borderColor: "#A9A9A9",
   },
   responseText: {
     fontSize: Theme.sizes.bodyText,
   },
   otherInput: {
-    borderWidth: 1,
-    borderColor: "gray",
-    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: "#A9A9A9",
+    borderRadius: 10,
     paddingHorizontal: 10,
     marginLeft: 10,
     width: 150,
     height: 40,
   },
   backButton: {
-    position: "absolute",
     top: 75,
-    left: 20,
   },
   title: {
     textAlign: "center",
-    marginTop: windowHeight * 0.1,
+    marginTop: windowHeight * 0.12,
     fontSize: Theme.sizes.titleText,
-    fontWeight: "bold",
   },
   subHeaderText: {
-    textAlign: "left",
-    marginLeft: windowWidth * 0.1,
-    marginTop: windowHeight * 0.05,
+    textAlign: "center",
+    marginHorizontal: windowWidth * 0.1,
+    marginTop: windowHeight * 0.025,
     fontSize: 25,
     fontWeight: "500",
   },
   questionText: {
-    textAlign: "left",
+    textAlign: "center",
+    color: "gray",
     marginLeft: windowWidth * 0.1,
     marginRight: windowWidth * 0.1,
     marginTop: windowHeight * 0.025,
-    fontSize: 20,
+    fontSize: Theme.sizes.bodyText,
   },
   bar: {
-    position: "absolute",
-    bottom: 150,
-    alignSelf: "center",
+    top: 75,
+    borderRadius: 12,
+    borderWidth: 2,
+    width: windowWidth * 0.75,
+    height: 40,
   },
   buttonContainer: {
     position: "absolute",
-    bottom: 50,
+    bottom: 35,
     right: 50,
     backgroundColor: Theme.colors.buttonBlue,
     padding: 15,
