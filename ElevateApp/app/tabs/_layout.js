@@ -1,60 +1,54 @@
 import { Tabs } from "expo-router";
-import { View, Image, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function TabsLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: "black",
-        tabBarLabelStyle: { fontSize: 18 },
-        tabBarStyle: { backgroundColor: "white", height: 80 },
-        headerShown: false,
-      }}
-    >
-      <Tabs.Screen
-        name="groupHome"
-        options={{
-          title: "Crew",
-          tabBarIcon: ({ color, focused }) => (
-            <Image
-              style={styles.icon}
-              source={require("@/assets/icons/crew.png")}
-            />
-          ),
+    <View style={styles.container}>
+      <Tabs
+        screenOptions={{
+          tabBarActiveTintColor: "white",
+          tabBarStyle: { backgroundColor: "black" },
+          headerShown: false,
         }}
-      />
-      <Tabs.Screen
-        name="groupChat"
-        options={{
-          title: "Chat",
-          tabBarIcon: ({ color, focused }) => (
-            <Image
-              style={styles.icon}
-              source={require("@/assets/icons/chat.png")}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="personalHome"
-        options={{
-          title: "Me",
-          tabBarIcon: ({ color, size, focused }) => (
-            <Image
-              style={styles.icon}
-              source={require("@/assets/icons/person.png")}
-            />
-          ),
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="groupHome"
+          options={{
+            title: "Group",
+            tabBarIcon: ({ size, color }) => (
+              <FontAwesome name="group" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="groupChat"
+          options={{
+            title: "Personal",
+            title: "Chat",
+            tabBarIcon: ({ size, color }) => (
+              <FontAwesome name="comments" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="groupChat"
+          name="personalHome"
+          options={{
+            title: "Chat",
+            title: "Personal",
+            tabBarIcon: ({ size, color }) => (
+              <FontAwesome name="user" size={size} color={color} />
+            ),
+          }}
+        />
+      </Tabs>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  icon: {
-    height: 36,
-    resizeMode: "contain",
+  container: {
+    flex: 1,
   },
 });
