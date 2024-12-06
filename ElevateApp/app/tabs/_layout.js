@@ -32,7 +32,6 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
-          name="groupChat"
           name="personalHome"
           options={{
             title: "Chat",
