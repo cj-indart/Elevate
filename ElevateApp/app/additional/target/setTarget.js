@@ -190,7 +190,7 @@ export default function SetTarget() {
               }
             }}
           >
-            <Text style={styles.saveText}>Save</Text>
+            <Text style={styles.saveText}>Set</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: Theme.colors.backgroundPrimary,
+    backgroundColor: "#EEF7FB",
   },
   scrollViewContent: {
     flex: 1,
@@ -232,11 +232,10 @@ const styles = StyleSheet.create({
     marginLeft: windowWidth * 0.05,
     marginRight: windowWidth * 0.05,
     borderColor: Theme.colors.border,
-    borderWidth: 0.5,
     borderRadius: 5,
     paddingHorizontal: 10,
     margin: 10,
-    backgroundColor: Theme.colors.backgroundSecodary,
+    backgroundColor: "white",
   },
   dateTimeRow: {
     margin: 10,
@@ -250,10 +249,9 @@ const styles = StyleSheet.create({
     marginLeft: windowWidth * 0.05,
     marginRight: windowWidth * 0.05,
     borderColor: Theme.colors.border,
-    borderWidth: 0.5,
     borderRadius: 5,
     padding: 10,
-    backgroundColor: Theme.colors.backgroundSecodary,
+    backgroundColor: "white",
   },
   multiLineInputBox: {
     height: windowHeight * 0.1,

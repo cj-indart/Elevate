@@ -98,7 +98,7 @@ export default function Group() {
             <View style={styles.targetButtonTextContainer}>
               <Text style={styles.targetButtonText}>Give everyone an F!</Text>
               <Text style={styles.targetButtonTextBottom}>
-                due Tue. Dec. 10
+                due Tuesday, Dec. 10
               </Text>
             </View>
           </View>
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignContent: "center",
-    // backgroundColor: "white",
+    //backgroundColor: "#EEF7FB",
   },
   targetButton: {
     backgroundColor: Theme.colors.buttonBlue, // Customize color

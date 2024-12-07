@@ -54,7 +54,7 @@ export default function Personal() {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView backgroundColor={"#EEF7FB"}>
       <View style={styles.topNav}>
         <Text style={styles.title}>My Home</Text>
         <TouchableOpacity onPress={handleSettingsClick}>
@@ -144,7 +144,7 @@ export default function Personal() {
 
       <View style={styles.targetsNav}>
         <View style={styles.titleAndButton}>
-          <Text style={styles.header}>My Targets</Text>
+          <Text style={styles.header}>Targets</Text>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity

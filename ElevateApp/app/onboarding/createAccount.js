@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     padding: 20,
-    backgroundColor: Theme.colors.backgroundPrimary,
+    backgroundColor: "#EEF7FB",
   },
   back: {
     position: "absolute",
@@ -177,11 +177,10 @@ const styles = StyleSheet.create({
     height: windowHeight * 0.06,
     width: windowWidth * 0.8,
     borderColor: Theme.colors.border,
-    borderWidth: 0.5,
     borderRadius: 5,
     paddingHorizontal: 10,
     margin: 10,
-    backgroundColor: Theme.colors.backgroundSecodary,
+    backgroundColor: "white",
   },
   buttonContainer: {
     marginTop: windowHeight * 0.1,
