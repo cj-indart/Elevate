@@ -396,7 +396,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white", // Add this to make the background visible
   },
   checkedBox: {
-    backgroundColor: Theme.colors.buttonBlue, // Or any color you prefer for the checked state
+    backgroundColor: Theme.colors.buttonBlue, 
   },
   logoutHeader: {
     textAlign: "center",

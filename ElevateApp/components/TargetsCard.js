@@ -83,11 +83,12 @@ const styles = StyleSheet.create({
   },
   columnContainer: {
     marginLeft: 10,
+    width: '65%',
     flexDirection: "column",
   },
   title: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "500",
     marginBottom: 5,
   },
   description: {
@@ -111,6 +112,7 @@ const styles = StyleSheet.create({
     height: 25,
     borderWidth: 2,
     borderColor: "black",
+    borderRadius: 8,
     marginRight: 10,
     alignItems: "center",
     justifyContent: "center",

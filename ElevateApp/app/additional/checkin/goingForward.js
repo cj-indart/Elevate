@@ -65,7 +65,7 @@ export default function GoingForward() {
         What do you want to focus on next?
       </Text>
       <Text style={styles.questionText}>
-        Select any targets that call out to you
+        Select any targets that call out to you.
       </Text>
 
       <View style={styles.options}>

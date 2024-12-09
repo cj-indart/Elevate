@@ -94,9 +94,8 @@ export default function Group() {
               style={styles.profileImage}
               imageStyle={{ borderRadius: 50 }} // Optional: Makes the image round
             ></ImageBackground>
-
             <View style={styles.targetButtonTextContainer}>
-              <Text style={styles.targetButtonText}>Give everyone an F!</Text>
+              <Text style={styles.targetButtonText}>Give everyone an A!</Text>
               <Text style={styles.targetButtonTextBottom}>
                 due Tue. Dec. 10
               </Text>

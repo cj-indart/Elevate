@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 
 const MemberCard = ({ profilePicture, name }) => {
@@ -12,6 +13,7 @@ const MemberCard = ({ profilePicture, name }) => {
 };
 
 const MemberGrid = ({ members }) => {
+  const router = useRouter();
   return (
     <View style={styles.gridContainer}>
       <View style={styles.row}>
@@ -36,7 +38,7 @@ const MemberGrid = ({ members }) => {
       </View>
       <View style={styles.row}>
         {members[2] && (
-          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+          <TouchableOpacity onPress={() => router.push("/additional/landayprofile")}>
             <MemberCard
               key={members[2].id}
               profilePicture={members[2].profilePicture}

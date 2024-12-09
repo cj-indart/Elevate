@@ -161,22 +161,23 @@ export default function Profile() {
 
   return (
     <SafeAreaView style={styles.container}>
+
       <TouchableOpacity
         style={styles.back}
-        onPress={() => router.push("/tabs/personalHome")}
+        onPress={() => router.push("/tabs/groupHome")}
       >
         <Ionicons name="chevron-back" size={30} color="black" />
       </TouchableOpacity>
-      <View style={styles.headerContainer}>
-        <Text style={styles.title}>My Profile</Text>
-      </View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <View style={styles.headerContainer}>
+        <Text style={styles.title}>James Landay</Text>
+      </View>
         <TouchableOpacity
           style={styles.imageContainer}
           onPress={handleSelectImage}
         >
           {profileImage ? (
-            <Image source={require("@/assets/images/cj_profile.png")} style={styles.profileImage} />
+            <Image source={require("@/assets/images/landay_profile.png")} style={styles.profileImage} />
           ) : (
             <Text style={styles.imagePlaceholderText}>+</Text>
           )}
@@ -187,7 +188,7 @@ export default function Profile() {
             style={[styles.icon, { height: 20, width: 20 }]}
           />
           <Text style={styles.infoText}>
-            Stanford '24
+            Berkeley '90
           </Text>
         </View>
         <View style={styles.basicInfo}>
@@ -199,13 +200,13 @@ export default function Profile() {
         </View>
         <View style={styles.centeredView}>
                 <Text style={styles.bioText}>
-                I’m an upcoming Stanford CS grad seeking jobs in software engineering, product design, and data science. This is my bio!
+                I'm a Stanford Computer Science professor specializing in HCI and the co-founder and Co-Director of the Stanford Institute for Human-centered Artificial Intelligence (HAI). I don't actually need a job--I'm just here to take a look at your app!
                 </Text>
         </View>
         <View style={styles.textBox}>
-            <Text style={styles.textBoxText}>CJ's Weekly Check-In</Text>
+            <Text style={styles.textBoxText}>James's Weekly Check-In</Text>
         </View>
-        <TouchableOpacity style={styles.checkinButton}>
+        <TouchableOpacity style={styles.checkinButton} onPress={() => router.push("/additional/checkin/landaycheckin")}>
             <Text style={styles.targetButtonText}>See complete</Text>
             <Image
             source={require("@/assets/images/right_arrow.png")}
@@ -213,9 +214,9 @@ export default function Profile() {
           />
         </TouchableOpacity>
         <View style={styles.textBox}>
-            <Text style={styles.textBoxText}>CJ's Upcoming Targets</Text>
+            <Text style={styles.textBoxText}>James's Upcoming Targets</Text>
         </View>
-        <TouchableOpacity style={styles.targetButton}>
+        <View style={styles.targetButton}>
         <View style={styles.row}>
           <AnimatedCircularProgress
             size={windowWidth * 0.15}
@@ -224,12 +225,12 @@ export default function Profile() {
             tintColor="#00e0ff"
             backgroundColor="#3d5875"
           >
-            {(fill) => <Text style={styles.progressText}>2 days</Text>}
+            {(fill) => <Text style={styles.progressText}>5 days</Text>}
           </AnimatedCircularProgress>
 
-          <Text style={styles.targetButtonText}>Go to CAPS Meeting</Text>
+          <Text style={styles.targetButtonText}>Give everyone an A!</Text>
         </View>
-      </TouchableOpacity>
+      </View>
       </ScrollView>
     </SafeAreaView>
   );
