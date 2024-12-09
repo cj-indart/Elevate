@@ -103,7 +103,7 @@ export default function Chat() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Theme.colors.backgroundPrimary,
+    backgroundColor: "#EEF7FB",
   },
   backButton: {
     position: "absolute",
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
-    borderTopWidth: 1,
+    borderTopWidth: 0.5,
     borderTopColor: "#ccc",
     padding: 10,
   },

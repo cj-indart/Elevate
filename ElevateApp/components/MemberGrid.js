@@ -85,10 +85,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   name: {
-    fontSize: 14,
-    fontWeight: "bold",
+    fontSize: 16,
     textAlign: "center",
-    width: 100,
+    width: 130,
   },
 });
 

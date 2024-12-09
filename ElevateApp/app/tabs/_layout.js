@@ -8,7 +8,7 @@ export default function TabsLayout() {
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: "white",
-          tabBarStyle: { backgroundColor: "black" },
+          tabBarStyle: { backgroundColor: "black", height: 60 },
           headerShown: false,
         }}
       >
@@ -32,7 +32,6 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
-          name="groupChat"
           name="personalHome"
           options={{
             title: "Chat",
