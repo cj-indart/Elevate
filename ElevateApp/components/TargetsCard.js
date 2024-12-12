@@ -11,7 +11,6 @@ import { AnimatedCircularProgress } from "react-native-circular-progress";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
 
 const formatDate = (timestamp) => {
   const date = new Date(timestamp);

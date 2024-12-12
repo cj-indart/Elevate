@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -16,6 +16,8 @@ import Theme from "@/assets/theme";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 
+import db from "@/database/db";
+
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
@@ -25,6 +27,61 @@ export default function Personal() {
   const [isChecked, setIsChecked] = useState(false);
   const [targetModalVisible, setTargetModalVisible] = useState(false);
   const [logOutVisible, setLogOutVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [targets, setTargets] = useState([]);
+
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString();
+  };
+
+  // Fetch data from Supabase
+  useEffect(() => {
+    const fetchTargets = async () => {
+      try {
+        const {
+          data: { session },
+        } = await db.auth.getSession();
+        const user_id = session?.user?.id;
+
+        setLoading(true);
+        const { data, error } = await db
+          .from("targets")
+          .select("id, title, description, deadline, priority")
+          .eq("id", user_id);
+
+        if (error) {
+          throw error;
+        }
+
+        // Format the data and sort by closest deadline
+        const formattedData = data
+          .map((item) => ({
+            id: item.id,
+            title: item.title,
+            description: item.description,
+            deadline: item.deadline,
+            priority: item.priority,
+          }))
+          .sort((a, b) => {
+            // Convert deadlines to Date objects for comparison
+            const dateA = new Date(a.deadline);
+            const dateB = new Date(b.deadline);
+
+            // Sort in ascending order (closest deadline first)
+            return dateA - dateB;
+          });
+
+        setTargets(formattedData);
+      } catch (err) {
+        console.error("Error fetching targets:", err.message || err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTargets();
+  }, []);
 
   const handleViewProfile = () => {
     router.push("/additional/profile");
@@ -157,86 +214,106 @@ export default function Personal() {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.targetButton} onPress={handleTargetClick}>
-        <View style={styles.row}>
-          <AnimatedCircularProgress
-            size={windowWidth * 0.15}
-            width={3}
-            fill={66}
-            tintColor="#00e0ff"
-            backgroundColor="#3d5875"
-          >
-            {(fill) => <Text style={styles.progressText}>2 days</Text>}
-          </AnimatedCircularProgress>
-
-          <Text style={styles.targetButtonText}>Go to CAPS Meeting</Text>
-          <TouchableOpacity
-            style={[
-              styles.checkBox,
-              isChecked && styles.checkedBox, // Add additional style when checked
-            ]}
-            onPress={toggleCheckBox}
-          >
-            {isChecked && <Ionicons name="checkmark" size={20} color="black" />}
-          </TouchableOpacity>
-        </View>
-      </TouchableOpacity>
-
-      {/* Modal for clicking on the Target */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={targetModalVisible}
-        onRequestClose={() => setTargetModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalTopContainer}>
-              <Text style={styles.modalTitleText}>Go to CAPS Meeting</Text>
-              <Text style={styles.modalPriorityText}>Priority: 3</Text>
-            </View>
-
-            <View style={styles.modalMiddleContainer}>
-              <AnimatedCircularProgress
-                size={windowWidth * 0.15}
-                width={3}
-                fill={66}
-                tintColor="#00e0ff"
-                backgroundColor="#3d5875"
-              >
-                {(fill) => <Text style={styles.progressText}>2 days</Text>}
-              </AnimatedCircularProgress>
-              <TouchableOpacity
-                style={[
-                  styles.checkBox,
-                  isChecked && styles.checkedBox, // Add additional style when checked
-                ]}
-                onPress={toggleCheckBox}
-              >
-                {isChecked && (
-                  <Ionicons name="checkmark" size={20} color="black" />
-                )}
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.modalBottomContainer}>
-              <Text style={styles.modalBottomText}>
-                Tue, Dec. 10 at 11:00 AM
-              </Text>
-              <Text style={styles.modalBottomText}></Text>
-              <Text></Text>
-              <Text style={styles.modalBottomText}>Can't miss this!</Text>
-            </View>
-
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={() => setTargetModalVisible(false)}
+      {targets.length > 0 ? (
+        <TouchableOpacity
+          style={styles.targetButton}
+          onPress={handleTargetClick}
+        >
+          <View style={styles.row}>
+            <AnimatedCircularProgress
+              size={windowWidth * 0.15}
+              width={3}
+              fill={66}
+              tintColor="#00e0ff"
+              backgroundColor="#3d5875"
             >
-              <Text style={styles.modalButtonText}>Cancel</Text>
+              {(fill) => <Text style={styles.progressText}>2 days</Text>}
+            </AnimatedCircularProgress>
+
+            <Text style={styles.targetButtonText}>{targets[0].title}</Text>
+            <TouchableOpacity
+              style={[
+                styles.checkBox,
+                isChecked && styles.checkedBox, // Add additional style when checked
+              ]}
+              onPress={toggleCheckBox}
+            >
+              {isChecked && (
+                <Ionicons name="checkmark" size={20} color="black" />
+              )}
             </TouchableOpacity>
           </View>
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.noTargetsContainer}>
+          <Text style={styles.noTargetsText}>No targets set!</Text>
         </View>
-      </Modal>
+      )}
+
+      {/* Modal for clicking on the Target */}
+      {targets.length > 0 ? (
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={targetModalVisible}
+          onRequestClose={() => setTargetModalVisible(false)}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalTopContainer}>
+                <Text style={styles.modalTitleText}>{targets[0].title}</Text>
+                <Text style={styles.modalPriorityText}>
+                  Priority: {targets[0].priority}
+                </Text>
+              </View>
+
+              <View style={styles.modalMiddleContainer}>
+                <AnimatedCircularProgress
+                  size={windowWidth * 0.15}
+                  width={3}
+                  fill={66}
+                  tintColor="#00e0ff"
+                  backgroundColor="#3d5875"
+                >
+                  {(fill) => <Text style={styles.progressText}>2 days</Text>}
+                </AnimatedCircularProgress>
+                <TouchableOpacity
+                  style={[
+                    styles.checkBox,
+                    isChecked && styles.checkedBox, // Add additional style when checked
+                  ]}
+                  onPress={toggleCheckBox}
+                >
+                  {isChecked && (
+                    <Ionicons name="checkmark" size={20} color="black" />
+                  )}
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.modalBottomContainer}>
+                <Text style={styles.modalBottomText}>
+                  Deadline: {formatDate(targets[0].deadline)}
+                </Text>
+                <Text style={styles.modalBottomText}></Text>
+                <Text></Text>
+                <Text style={styles.modalBottomText}>
+                  {targets[0].description}
+                </Text>
+              </View>
+
+              <TouchableOpacity
+                style={styles.modalButton}
+                onPress={() => setTargetModalVisible(false)}
+              >
+                <Text style={styles.modalButtonText}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      ) : (
+        <Text>
+        </Text>
+      )}
     </SafeAreaView>
   );
 }
@@ -251,6 +328,12 @@ const styles = StyleSheet.create({
   },
   modalTopContainer: {
     textAlign: "center",
+  },
+  noTargetsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 150
   },
   modalMiddleContainer: {
     marginTop: 20,
@@ -313,7 +396,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 10,
     borderRadius: 20,
-    overflow: "hidden", // Ensures the corners are clipped for the child components
+    overflow: "hidden", 
   },
   modalContainer: {
     flex: 1,
@@ -373,6 +456,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     color: "black",
+    alignText: "center",
+    width: "65%",
   },
   row: {
     flexDirection: "row",
@@ -396,7 +481,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white", // Add this to make the background visible
   },
   checkedBox: {
-    backgroundColor: Theme.colors.buttonBlue, 
+    backgroundColor: Theme.colors.buttonBlue,
   },
   logoutHeader: {
     textAlign: "center",

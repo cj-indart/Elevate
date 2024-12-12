@@ -49,14 +49,24 @@ export default function AllTargets() {
           throw error;
         }
 
-        // Format the data as needed
-        const formattedData = data.map((item) => ({
-          id: item.id, // Unique key
-          title: item.title,
-          description: item.description,
-          deadline: item.deadline,
-          priority: item.priority,
-        }));
+        // Format the data and sort by closest deadline
+        const formattedData = data
+          .map((item) => ({
+            id: item.id,
+            title: item.title,
+            description: item.description,
+            deadline: item.deadline,
+            priority: item.priority,
+          }))
+          .sort((a, b) => {
+            // Convert deadlines to Date objects for comparison
+            const dateA = new Date(a.deadline);
+            const dateB = new Date(b.deadline);
+            
+            // Sort in ascending order (closest deadline first)
+            return dateA - dateB;
+          });
+
         setTargets(formattedData);
       } catch (err) {
         console.error("Error fetching targets:", err.message || err);
@@ -66,7 +76,7 @@ export default function AllTargets() {
     };
 
     fetchTargets();
-  }, []);
+}, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -87,10 +97,11 @@ export default function AllTargets() {
       </View>
 
       <FlatList
+      style={styles.list}
         data={targets}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+          <TouchableOpacity>
             <TargetsCard
               title={item.title}
               description={item.description}
