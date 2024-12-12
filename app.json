@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "Elevate",
+    "slug": "elevate",
+    "version": "1.0.0",
+    "platforms": ["ios", "android"],
+    "extra": {
+      "eas": {
+        "projectId": "143864f4-1371-47e8-a12e-11e5e5e65147"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/143864f4-1371-47e8-a12e-11e5e5e65147",
+      "enabled": true,
+      "fallbackToCacheTimeout": 0,
+      "checkAutomatically": "ON_LOAD"
+    },
+    "android": {
+      "package": "com.yourdomain.elevate",
+      "versionCode": 1
+    },
+    "ios": {
+      "bundleIdentifier": "com.yourdomain.elevate",
+      "buildNumber": "1.0.0"
+    }
+  }
+}

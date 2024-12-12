@@ -24,6 +24,7 @@ const windowHeight = Dimensions.get("window").height;
 export default function Profile() {
   const router = useRouter();
   const [profileImage, setProfileImage] = useState(null);
+  const [bioText, setBioText] = useState("no bio yet!");
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -40,15 +41,16 @@ export default function Profile() {
 
         const { data, error } = await db
           .from("users")
-          .select("profile_pic")
+          .select("*")
           .eq("id", user_id)
           .single();
 
         if (error) {
           console.error("Error fetching user profile:", error);
           Alert.alert("Error", "Failed to fetch profile picture");
-        } else if (data?.profile_pic) {
+        } else if (data) {
           setProfileImage(data.profile_pic);
+          setBioText(data.bio);
         }
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -155,10 +157,6 @@ export default function Profile() {
     }
   };
 
-  const handleSettingsClick = () => {
-    setSettingsModalVisible(true);
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
@@ -177,7 +175,9 @@ export default function Profile() {
         >
           {profileImage ? (
             <Image
-              source={require("@/assets/images/cj_profile.png")}
+              source={{
+                uri: profileImage,
+              }}
               style={styles.profileImage}
             />
           ) : (
@@ -199,13 +199,10 @@ export default function Profile() {
           <Text style={styles.infoText}>Stanford, CA</Text>
         </View>
         <View style={styles.centeredView}>
-          <Text style={styles.bioText}>
-            I’m an upcoming Stanford CS grad seeking jobs in software
-            engineering, product design, and data science. This is my bio!
-          </Text>
+          <Text style={styles.bioText}>{bioText}</Text>
         </View>
         <View style={styles.textBox}>
-          <Text style={styles.textBoxText}>CJ's Weekly Check-In</Text>
+          <Text style={styles.textBoxText}>My Weekly Check-In</Text>
         </View>
         <TouchableOpacity style={styles.checkinButton}>
           <Text style={styles.targetButtonText}>See complete</Text>
@@ -215,7 +212,7 @@ export default function Profile() {
           />
         </TouchableOpacity>
         <View style={styles.textBox}>
-          <Text style={styles.textBoxText}>CJ's Upcoming Targets</Text>
+          <Text style={styles.textBoxText}>My Upcoming Targets</Text>
         </View>
         <TouchableOpacity style={styles.targetButton}>
           <View style={styles.row}>
