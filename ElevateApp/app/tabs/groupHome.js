@@ -89,7 +89,7 @@ export default function Group() {
             {/* Profile picture from URL */}
             <ImageBackground
               source={{
-                uri: "https://exompwzaiobmsbxmircf.supabase.co/storage/v1/object/public/profile_pics/1733380179984.jpg",
+                uri: "https://exompwzaiobmsbxmircf.supabase.co/storage/v1/object/public/profile_pics/1733955670854.jpg",
               }} // Replace with your URL
               style={styles.profileImage}
               imageStyle={{ borderRadius: 50 }} // Optional: Makes the image round

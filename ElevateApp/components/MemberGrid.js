@@ -18,7 +18,7 @@ const MemberGrid = ({ members }) => {
     <View style={styles.gridContainer}>
       <View style={styles.row}>
         {members[0] && (
-          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+          <TouchableOpacity onPress={() => router.push("/additional/landayprofile")}>
             <MemberCard
               key={members[0].id}
               profilePicture={members[0].profilePicture}
@@ -38,7 +38,7 @@ const MemberGrid = ({ members }) => {
       </View>
       <View style={styles.row}>
         {members[2] && (
-          <TouchableOpacity onPress={() => router.push("/additional/landayprofile")}>
+          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
             <MemberCard
               key={members[2].id}
               profilePicture={members[2].profilePicture}
