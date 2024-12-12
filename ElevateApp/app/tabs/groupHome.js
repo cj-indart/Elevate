@@ -25,9 +25,12 @@ export default function Group() {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [targetModalVisible, setTargetModalVisible] = useState(false);
+  const [targets, setTargets] = useState([]);
+  const [prof, setProf] = useState(null);
 
-  const handleTargetClick = () => {
-    setTargetModalVisible(true);
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString();
   };
 
   useEffect(() => {
@@ -64,6 +67,64 @@ export default function Group() {
     fetchMembers();
   }, []);
 
+  // Fetch data from Supabase
+  useEffect(() => {
+    const fetchTargets = async () => {
+      try {
+        const {
+          data: { session },
+        } = await db.auth.getSession();
+        const user_id = session?.user?.id;
+
+        setLoading(true);
+        const { data, error } = await db
+          .from("targets")
+          .select("id, title, description, deadline, priority");
+
+        if (error) {
+          throw error;
+        }
+        const filteredData = data.filter((item) => item.id !== user_id);
+
+        // Format the data and sort by closest deadline
+        const formattedData = filteredData
+          .map((item) => ({
+            id: item.id,
+            title: item.title,
+            description: item.description,
+            deadline: item.deadline,
+            priority: item.priority,
+          }))
+          .sort((a, b) => {
+            // Convert deadlines to Date objects for comparison
+            const dateA = new Date(a.deadline);
+            const dateB = new Date(b.deadline);
+
+            // Sort in ascending order (closest deadline first)
+            return dateA - dateB;
+          });
+        if (formattedData.length > 0) {
+          const { data: pic, error: pic_error } = await db
+            .from("users")
+            .select("profile_pic")
+            .eq("id", formattedData[0].id);
+
+          if (pic_error) throw pic_error;
+
+          setProf(pic[0].profile_pic);
+        }
+
+        setTargets(formattedData);
+      } catch (err) {
+        console.error("Error fetching targets:", err.message || err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTargets();
+  }, []);
+
   return (
     <SafeAreaView>
       <View style={styles.topNav}>
@@ -84,24 +145,30 @@ export default function Group() {
           )}
         </View>
         <Text style={styles.header}>Upcoming Member Targets</Text>
-        <View style={styles.targetButton} onPress={handleTargetClick}>
-          <View style={styles.row}>
-            {/* Profile picture from URL */}
-            <ImageBackground
-              source={{
-                uri: "https://exompwzaiobmsbxmircf.supabase.co/storage/v1/object/public/profile_pics/1733955670854.jpg",
-              }} // Replace with your URL
-              style={styles.profileImage}
-              imageStyle={{ borderRadius: 50 }} // Optional: Makes the image round
-            ></ImageBackground>
-            <View style={styles.targetButtonTextContainer}>
-              <Text style={styles.targetButtonText}>Give everyone an A!</Text>
-              <Text style={styles.targetButtonTextBottom}>
-                due Tuesday, Dec. 10
-              </Text>
+        {targets.length > 0 ? (
+          <View style={styles.targetButton}>
+            <View style={styles.row}>
+              {/* Profile picture from URL */}
+              <ImageBackground
+                source={{
+                  uri: prof,
+                }} // Replace with your URL
+                style={styles.profileImage}
+                imageStyle={{ borderRadius: 50 }} // Optional: Makes the image round
+              ></ImageBackground>
+              <View style={styles.targetButtonTextContainer}>
+                <Text style={styles.targetButtonText}>{targets[0].title}</Text>
+                <Text style={styles.targetButtonTextBottom}>
+                  due: {formatDate(targets[0].deadline)}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
+        ) : (
+          <View style={styles.noTargetsContainer}>
+            <Text style={styles.noTargetsText}>No targets set!</Text>
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );
@@ -129,6 +196,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 34,
     fontWeight: "600",
+  },
+  noTargetsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 150,
   },
   buttonContainer: {
     backgroundColor: Theme.colors.buttonWhite,
