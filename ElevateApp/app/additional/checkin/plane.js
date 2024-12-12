@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
+import LottieView from "lottie-react-native";
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -18,7 +19,7 @@ export default function Plane() {
   useEffect(() => {
     const timer = setTimeout(() => {
       router.push("/tabs/personalHome");
-    }, 3000);
+    }, 3500);
 
     return () => clearTimeout(timer);
   }, [router]);
@@ -26,12 +27,12 @@ export default function Plane() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Your weekly check-in is submitted!</Text>
-      <Image
+      <LottieView
         style={styles.image}
-        source={require("@/assets/images/dottedPlane.png")}
-        resizeMode="contain"
+        source={require("@/assets/images/animation.json")}
+        autoPlay
       />
-      <ActivityIndicator size="large" color="black" />
+      {/* <ActivityIndicator size="large" color="black" /> */}
     </View>
   );
 }
@@ -48,8 +49,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: "bold",
+    justifyContent: "center",
+    textAlign: "center",
   },
   image: {
+    marginTop: 30,
     height: windowHeight * 0.4,
     aspectRatio: 1,
   },

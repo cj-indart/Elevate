@@ -181,8 +181,8 @@ export default function SetTarget() {
                   alert("Failed to save target. Please try again.");
                 } else {
                   console.log("Target saved successfully:", data);
-                  alert("Target saved successfully!");
-                  router.push("/tabs/personalHome");
+                  // alert("Target saved successfully!");
+                  router.push("/additional/target/plane");
                 }
               } catch (err) {
                 console.error("Unexpected error:", err);

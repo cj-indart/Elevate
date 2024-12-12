@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Modal,
   Dimensions,
+  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -26,7 +27,6 @@ export default function Personal() {
   const [settingsModalVisible, setSettingsModalVisible] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [targetModalVisible, setTargetModalVisible] = useState(false);
-  const [logOutVisible, setLogOutVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [targets, setTargets] = useState([]);
 
@@ -97,13 +97,25 @@ export default function Personal() {
   };
 
   const handleLogOutClick = () => {
-    setLogOutVisible(true);
-  };
-
-  const logOut = () => {
-    router.push("/setup/welcome");
-    setSettingsModalVisible(false);
-    setLogOutVisible(false);
+    Alert.alert(
+      "Logout Confirmation",
+      "Are you sure you want to log out?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Logout",
+          onPress: () => {
+            setSettingsModalVisible(false);
+            router.push("setup/welcome");
+          },
+          style: "destructive",
+        },
+      ],
+      { cancelable: true }
+    );
   };
 
   const toggleCheckBox = () => {
@@ -149,32 +161,6 @@ export default function Personal() {
             >
               <Text style={styles.modalButtonText}>Cancel</Text>
             </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-
-      <Modal
-        transparent={true}
-        animationType="slide"
-        visible={logOutVisible}
-        onRequestClose={() => setLogOutVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.logoutHeader}>
-              Are you sure you want to log out?
-            </Text>
-            <View style={styles.logout}>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => setLogOutVisible(false)}
-              >
-                <Text style={styles.logoutText}>No</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={logOut}>
-                <Text style={styles.logoutText}>Yes, Log Out</Text>
-              </TouchableOpacity>
-            </View>
           </View>
         </View>
       </Modal>
@@ -311,8 +297,7 @@ export default function Personal() {
           </View>
         </Modal>
       ) : (
-        <Text>
-        </Text>
+        <Text></Text>
       )}
     </SafeAreaView>
   );
@@ -330,10 +315,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   noTargetsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 150
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 150,
   },
   modalMiddleContainer: {
     marginTop: 20,
@@ -396,7 +381,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 10,
     borderRadius: 20,
-    overflow: "hidden", 
+    overflow: "hidden",
   },
   modalContainer: {
     flex: 1,
