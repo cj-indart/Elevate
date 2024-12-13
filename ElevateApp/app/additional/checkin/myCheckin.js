@@ -14,10 +14,6 @@ import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import MemberCard from "@/components/MemberGrid";
-
-import db from "@/database/db";
-
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
@@ -74,7 +70,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   checkInButton: {
-    backgroundColor: Theme.colors.buttonBlue, // Customize color
+    backgroundColor: Theme.colors.buttonBlue,
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 12,
@@ -90,7 +86,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    alignItems: "center", // Align text and icon vertically
+    alignItems: "center",
   },
   icon: {
     marginLeft: 30,

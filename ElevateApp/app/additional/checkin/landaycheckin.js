@@ -33,7 +33,6 @@ export default function LandayCheckin() {
   const [loading, setLoading] = useState(true);
 
   const params = useLocalSearchParams();
-  console.log(params);
 
   // Fetch data from Supabase
   useEffect(() => {

@@ -1,7 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { Link, useRouter } from "expo-router";
-import Theme from "@/assets/theme";
 
 const MemberCard = ({ profile_pic, name }) => {
   return (

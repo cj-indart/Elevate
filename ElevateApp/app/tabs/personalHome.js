@@ -12,7 +12,6 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Entypo from "@expo/vector-icons/Entypo";
 import Theme from "@/assets/theme";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
@@ -218,10 +217,7 @@ export default function Personal() {
 
             <Text style={styles.targetButtonText}>{targets[0].title}</Text>
             <TouchableOpacity
-              style={[
-                styles.checkBox,
-                isChecked && styles.checkedBox, // Add additional style when checked
-              ]}
+              style={[styles.checkBox, isChecked && styles.checkedBox]}
               onPress={toggleCheckBox}
             >
               {isChecked && (
@@ -264,10 +260,7 @@ export default function Personal() {
                   {(fill) => <Text style={styles.progressText}>2 days</Text>}
                 </AnimatedCircularProgress>
                 <TouchableOpacity
-                  style={[
-                    styles.checkBox,
-                    isChecked && styles.checkedBox, // Add additional style when checked
-                  ]}
+                  style={[styles.checkBox, isChecked && styles.checkedBox]}
                   onPress={toggleCheckBox}
                 >
                   {isChecked && (
@@ -394,7 +387,6 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     width: windowWidth * 0.7,
-    // alignItems: "center",
   },
   modalButton: {
     paddingVertical: 10,
@@ -421,11 +413,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   myCheckinText: {
-    //fontWeight: "500",
     fontSize: Theme.sizes.textLarge,
   },
   targetButton: {
-    backgroundColor: Theme.colors.buttonBlue, // Customize color
+    backgroundColor: Theme.colors.buttonBlue,
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 20,
@@ -434,7 +425,7 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.8,
     height: windowHeight * 0.1,
     alignItems: "center",
-    justifyContent: "center", // Center content vertically
+    justifyContent: "center",
   },
   targetButtonText: {
     marginLeft: 10,
@@ -446,12 +437,12 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    alignItems: "center", // Center vertically
+    alignItems: "center",
     justifyContent: "center",
-    width: "100%", // Ensure it takes full width
+    width: "100%",
   },
   progressIndicator: {
-    marginRight: 10, // Space between the indicator and the text
+    marginRight: 10,
   },
   checkBox: {
     marginLeft: 20,
@@ -463,7 +454,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white", // Add this to make the background visible
+    backgroundColor: "white",
   },
   checkedBox: {
     backgroundColor: Theme.colors.buttonBlue,

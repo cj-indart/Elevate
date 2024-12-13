@@ -1,12 +1,5 @@
 import { useEffect, React } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  Image,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 import LottieView from "lottie-react-native";
@@ -32,7 +25,6 @@ export default function Plane() {
         source={require("@/assets/images/animation.json")}
         autoPlay
       />
-      {/* <ActivityIndicator size="large" color="black" /> */}
     </View>
   );
 }

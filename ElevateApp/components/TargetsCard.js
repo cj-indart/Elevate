@@ -52,10 +52,7 @@ export default function TargetsCard({
         </Text>
       </View>
       <TouchableOpacity
-        style={[
-          styles.checkBox,
-          isChecked && styles.checkedBox, // Add additional style when checked
-        ]}
+        style={[styles.checkBox, isChecked && styles.checkedBox]}
         onPress={toggleCheckBox}
       >
         {isChecked && <Ionicons name="checkmark" size={20} color="black" />}
@@ -82,7 +79,7 @@ const styles = StyleSheet.create({
   },
   columnContainer: {
     marginLeft: 10,
-    width: '65%',
+    width: "65%",
     flexDirection: "column",
   },
   title: {
@@ -115,9 +112,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white", // Add this to make the background visible
+    backgroundColor: "white",
   },
   checkedBox: {
-    backgroundColor: Theme.colors.buttonBlue, // Or any color you prefer for the checked state
+    backgroundColor: Theme.colors.buttonBlue,
   },
 });

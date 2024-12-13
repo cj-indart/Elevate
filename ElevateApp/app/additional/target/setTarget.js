@@ -26,7 +26,7 @@ export default function SetTarget() {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
-  const [priority, setPriority] = useState(1); // State to track slider value
+  const [priority, setPriority] = useState(1);
   const router = useRouter();
 
   const onDateChange = (event, selectedDate) => {
@@ -50,7 +50,7 @@ export default function SetTarget() {
         },
         {
           text: "OK",
-          onPress: () => router.push("/tabs/personalHome"), // Replace with the correct route
+          onPress: () => router.push("/tabs/personalHome"),
         },
       ],
       { cancelable: true }
@@ -181,7 +181,6 @@ export default function SetTarget() {
                   alert("Failed to save target. Please try again.");
                 } else {
                   console.log("Target saved successfully:", data);
-                  // alert("Target saved successfully!");
                   router.push("/additional/target/plane");
                 }
               } catch (err) {
@@ -265,7 +264,6 @@ const styles = StyleSheet.create({
   slider: {
     width: windowWidth * 0.8,
     height: 40,
-    // marginBottom: 20,
   },
   labelContainer: {
     flexDirection: "row",
@@ -309,7 +307,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 8,
     width: windowWidth * 0.3,
-    marginBottom: 10, // Space between buttons
+    marginBottom: 10,
   },
   saveText: {
     textAlign: "center",

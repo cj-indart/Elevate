@@ -19,7 +19,7 @@ import db from "@/database/db";
 
 export default function Begin() {
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [otherText, setOtherText] = useState(""); // State for "Other" input
+  const [otherText, setOtherText] = useState("");
 
   const router = useRouter();
   const options = [
@@ -145,7 +145,6 @@ export default function Begin() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //padding: 20,
     backgroundColor: "#EEF7FB",
   },
   top: {

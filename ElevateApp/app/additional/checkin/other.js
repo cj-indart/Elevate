@@ -46,14 +46,14 @@ export default function Other() {
       </Text>
 
       <TextInput
-        style={[styles.inputBox, styles.multiLineInputBox]} // Add a new style for multi-line input
+        style={[styles.inputBox, styles.multiLineInputBox]}
         placeholder="Type here..."
         value={inputText}
         placeholderTextColor={Theme.colors.placeholderText}
         onChangeText={setInputText}
         keyboardType="default"
         autoCapitalize="none"
-        multiline={true} // Enable multi-line input
+        multiline={true}
       />
 
       <TouchableOpacity
@@ -100,7 +100,6 @@ export default function Other() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //padding: 20,
     backgroundColor: "#EEF7FB",
   },
   top: {
@@ -168,8 +167,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   multiLineInputBox: {
-    height: windowHeight * 0.2, // Adjust height for multi-line input
-    textAlignVertical: "top", // Align text to the top
+    height: windowHeight * 0.2,
+    textAlignVertical: "top",
   },
   submitText: {
     textAlign: "center",

@@ -8,17 +8,11 @@ import {
   KeyboardAvoidingView,
   Platform,
   Image,
-  Dimensions,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
-// let res = "";
 
 export default function Chat() {
   const [message, setMessage] = useState("");
@@ -76,10 +70,7 @@ export default function Chat() {
         inverted // To display the newest messages at the bottom
       />
       <View style={[styles.messageRow, { justifyContent: "flex-start" }]}>
-        <Image
-          // source={require("./../images/mingle.png")}
-          style={styles.profileImage}
-        />
+        <Image style={styles.profileImage} />
       </View>
       <View style={styles.inputContainer}>
         <TextInput
@@ -129,7 +120,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 5,
     paddingHorizontal: 10,
-    maxWidth: "100%", // Ensure the messages and images are contained within the screen width
+    maxWidth: "100%",
   },
   messageText: {
     fontSize: 16,

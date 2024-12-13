@@ -145,14 +145,14 @@ export default function Background() {
 
       <View style={styles.inputBoxContainer}>
         <TextInput
-          style={[styles.inputBox2, styles.multiLineInputBox]} // Add a new style for multi-line input
+          style={[styles.inputBox2, styles.multiLineInputBox]}
           placeholder="Short bio!"
           value={bio}
           placeholderTextColor={Theme.colors.placeholderText}
           onChangeText={setBio}
           keyboardType="default"
           autoCapitalize="none"
-          multiline={true} // Enable multi-line input
+          multiline={true}
         />
       </View>
 
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     margin: 10,
     backgroundColor: "white",
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   dropdownTriggerText: {
     fontSize: 16,

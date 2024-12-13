@@ -5,7 +5,6 @@ import {
   Dimensions,
   TouchableOpacity,
   FlatList,
-  ImageBackground,
 } from "react-native";
 
 import React, { useState, useEffect } from "react";
@@ -62,7 +61,7 @@ export default function AllTargets() {
             // Convert deadlines to Date objects for comparison
             const dateA = new Date(a.deadline);
             const dateB = new Date(b.deadline);
-            
+
             // Sort in ascending order (closest deadline first)
             return dateA - dateB;
           });
@@ -76,7 +75,7 @@ export default function AllTargets() {
     };
 
     fetchTargets();
-}, []);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -97,7 +96,7 @@ export default function AllTargets() {
       </View>
 
       <FlatList
-      style={styles.list}
+        style={styles.list}
         data={targets}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (

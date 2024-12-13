@@ -3,13 +3,11 @@ import {
   Text,
   View,
   Dimensions,
-  TouchableOpacity,
   ImageBackground,
 } from "react-native";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 import { useEffect, useState } from "react";
 
@@ -24,7 +22,6 @@ export default function Group() {
   const router = useRouter();
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [targetModalVisible, setTargetModalVisible] = useState(false);
   const [targets, setTargets] = useState([]);
   const [prof, setProf] = useState(null);
 
@@ -130,19 +127,13 @@ export default function Group() {
     <SafeAreaView>
       <View style={styles.topNav}>
         <Text style={styles.title}>Crew</Text>
-        {/* <TouchableOpacity
-          style={styles.buttonContainer}
-          onPress={() => router.push("/additional/members")}
-        >
-          <Text style={styles.buttonText}>Members</Text>
-        </TouchableOpacity> */}
       </View>
       <View style={styles.content}>
         <View style={styles.group}>
           {loading ? (
-            <Text>Loading members...</Text> // Show loading state while fetching members
+            <Text>Loading members...</Text>
           ) : (
-            <MemberGrid members={members} /> // Render MemberGrid with the fetched members
+            <MemberGrid members={members} />
           )}
         </View>
         <Text style={styles.header}>Upcoming Member Targets</Text>
@@ -153,9 +144,9 @@ export default function Group() {
               <ImageBackground
                 source={{
                   uri: prof,
-                }} // Replace with your URL
+                }}
                 style={styles.profileImage}
-                imageStyle={{ borderRadius: 50 }} // Optional: Makes the image round
+                imageStyle={{ borderRadius: 50 }}
               ></ImageBackground>
               <View style={styles.targetButtonTextContainer}>
                 <Text style={styles.targetButtonText}>{targets[0].title}</Text>
@@ -240,10 +231,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignContent: "center",
-    //backgroundColor: "#EEF7FB",
   },
   targetButton: {
-    backgroundColor: Theme.colors.buttonBlue, // Customize color
+    backgroundColor: Theme.colors.buttonBlue,
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 20,
@@ -270,13 +260,13 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    alignItems: "center", // Vertically center the image and text
+    alignItems: "center",
     justifyContent: "flex-start",
-    width: "100%", // Ensure it takes full width
+    width: "100%",
   },
   profileImage: {
     aspectRatio: 1,
-    width: windowWidth * 0.15, // Adjust width as necessary
-    marginRight: 10, // Add space between image and text
+    width: windowWidth * 0.15,
+    marginRight: 10,
   },
 });

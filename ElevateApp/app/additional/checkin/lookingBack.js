@@ -19,8 +19,7 @@ import db from "@/database/db";
 
 export default function LookingBack() {
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [otherText, setOtherText] = useState(""); // State for "Other" input
-
+  const [otherText, setOtherText] = useState("");
   const router = useRouter();
   const options = [
     "Anxious",
@@ -147,9 +146,7 @@ export default function LookingBack() {
 
 const styles = StyleSheet.create({
   container: {
-    // alignItems: "center",
     flex: 1,
-    //padding: 20,
     backgroundColor: "#EEF7FB",
   },
   top: {

@@ -40,12 +40,12 @@ export default function Members() {
           .from("users")
           .select("id, username, bio, profile_pic");
         if (error) {
-          throw error; // Throw the error to be caught in the catch block
+          throw error; 
         }
         const filteredData = data.filter((item) => item.id !== user_id);
 
         const formattedData = filteredData.map((item) => ({
-          id: item.id, // Use a unique key
+          id: item.id, 
           profilePicture: item.profile_pic,
           name: item.username,
           bio: item.bio,
@@ -54,7 +54,7 @@ export default function Members() {
       } catch (err) {
         console.error("Error fetching members:", err.message || err);
       } finally {
-        setLoading(false); // Ensure loading is turned off in both success and error cases
+        setLoading(false); 
       }
     };
 

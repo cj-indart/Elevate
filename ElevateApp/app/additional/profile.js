@@ -15,7 +15,6 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import db from "@/database/db";
-import Entypo from "@expo/vector-icons/Entypo";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 const windowWidth = Dimensions.get("window").width;
@@ -236,11 +235,11 @@ export default function Profile() {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flexDirection: "row", // Aligns children horizontally (side by side)
-    justifyContent: "center", // Centers the entire container horizontally
-    alignItems: "center", // Centers the children vertically
-    marginTop: windowHeight * 0.02, // Adjusts vertical spacing from top of the screen
-    paddingHorizontal: 20, // Optional: Adds horizontal padding if needed
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: windowHeight * 0.02,
+    paddingHorizontal: 20,
   },
   container: {
     flex: 1,
@@ -307,35 +306,35 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   textBox: {
-    marginLeft: windowWidth * 0.09, // Slightly right from the left edge (5% of screen width)
-    paddingTop: 30, // Padding around the box
-    backgroundColor: "#EEF7FB", // Light background color for the box
-    borderRadius: 8, // Rounded corners
-    width: "90%", // Makes the box width 90% of the screen width
-    justifyContent: "center", // Centers the text vertically within the box
+    marginLeft: windowWidth * 0.09,
+    paddingTop: 30,
+    backgroundColor: "#EEF7FB",
+    borderRadius: 8,
+    width: "90%",
+    justifyContent: "center",
   },
   textBoxText: {
-    fontSize: 20, // Medium header text size
-    fontWeight: "500", // Medium weight (can be adjusted to 'bold' if needed)
-    color: "#333", // Text color
-    textAlign: "left", // Aligns text to the left within the box
+    fontSize: 20,
+    fontWeight: "500",
+    color: "#333",
+    textAlign: "left",
   },
   touchableOpacityContainer: {
-    flexDirection: "row", // Aligns the children (text and arrow) side by side
-    alignItems: "center", // Vertically centers the content
-    backgroundColor: "#00e0ff", // Light blue color for the background
-    borderRadius: 20, // Rounded edges for the button
-    paddingVertical: 15, // Vertical padding for the button
-    width: "80%", // Takes up 80% of the screen width
-    alignSelf: "center", // Centers the button horizontally on the screen
-    justifyContent: "space-between", // Ensures the text and arrow are at the edges
-    marginTop: windowHeight * 0.03, // Adjusts the space above the button
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#00e0ff",
+    borderRadius: 20,
+    paddingVertical: 15,
+    width: "80%",
+    alignSelf: "center",
+    justifyContent: "space-between",
+    marginTop: windowHeight * 0.03,
   },
   touchableText: {
-    fontSize: 18, // Text size for the button label
-    fontWeight: "500", // Medium weight text
-    color: "white", // White color for the text
-    marginLeft: 15, // Adds space between the text and the left edge
+    fontSize: 18,
+    fontWeight: "500",
+    color: "white",
+    marginLeft: 15,
   },
   targetsNav: {
     marginTop: windowHeight * 0.05,
@@ -375,7 +374,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 10,
     borderRadius: 20,
-    overflow: "hidden", // Ensures the corners are clipped for the child components
+    overflow: "hidden",
   },
   modalContainer: {
     flex: 1,
@@ -411,7 +410,7 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.35,
   },
   checkinButton: {
-    backgroundColor: Theme.colors.buttonBlue, // Customize color
+    backgroundColor: Theme.colors.buttonBlue,
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 15,
@@ -421,10 +420,10 @@ const styles = StyleSheet.create({
     height: windowHeight * 0.07,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between", //
+    justifyContent: "space-between",
   },
   targetButton: {
-    backgroundColor: Theme.colors.buttonBlue, // Customize color
+    backgroundColor: Theme.colors.buttonBlue,
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 20,
@@ -434,7 +433,7 @@ const styles = StyleSheet.create({
     height: windowHeight * 0.1,
     alignItems: "center",
     flexDirection: "row",
-    justifyContent: "space-between", // Center content vertically
+    justifyContent: "space-between",
   },
   targetButtonText: {
     marginLeft: 10,
@@ -444,12 +443,12 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    alignItems: "center", // Center vertically
+    alignItems: "center",
     justifyContent: "space-evenly",
-    width: "100%", // Ensure it takes full width
+    width: "100%",
   },
   progressIndicator: {
-    marginRight: 10, // Space between the indicator and the text
+    marginRight: 10,
   },
   checkBox: {
     marginLeft: 10,
@@ -460,9 +459,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white", // Add this to make the background visible
+    backgroundColor: "white",
   },
   checkedBox: {
-    backgroundColor: Theme.colors.buttonBlue, // Or any color you prefer for the checked state
+    backgroundColor: Theme.colors.buttonBlue,
   },
 });
