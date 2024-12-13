@@ -15,7 +15,7 @@ import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
+import { useLocalSearchParams } from "expo-router";
 import Feather from "@expo/vector-icons/Feather";
 
 import db from "@/database/db";
@@ -27,10 +27,13 @@ import { ScrollView } from "react-native-gesture-handler";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-export default function AllTargets() {
+export default function LandayCheckin() {
   const router = useRouter();
   const [targets, setTargets] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const params = useLocalSearchParams();
+  console.log(params);
 
   // Fetch data from Supabase
   useEffect(() => {
@@ -75,13 +78,24 @@ export default function AllTargets() {
       <SafeAreaView style={styles.container}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => router.push("/additional/otherProfile")}
+          onPress={() => {
+            router.push({
+              pathname: "/additional/otherProfile",
+              params: {
+                id: params.id,
+                profile_pic: params.profile_pic,
+                bio: params.bio,
+                name: params.name,
+                grad: params.grad,
+              },
+            });
+          }}
         >
           <Ionicons name="chevron-back" size={30} color="black" />
         </TouchableOpacity>
         <ScrollView style={styles.scrollViewContent}>
           <View style={styles.topNav}>
-            <Text style={styles.title}>Your Checkin</Text>
+            <Text style={styles.title}>{params.name}'s Checkin</Text>
           </View>
           <View style={styles.questionContainer}>
             <Text style={styles.questionText}>

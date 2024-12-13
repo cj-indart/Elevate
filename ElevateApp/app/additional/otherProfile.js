@@ -8,6 +8,7 @@ import {
   Dimensions,
   ScrollView,
   Image,
+  Link,
 } from "react-native";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
@@ -22,7 +23,7 @@ import { useLocalSearchParams } from "expo-router";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-export default function Profile() {
+export default function OtherProfile() {
   const router = useRouter();
   const [profileImage, setProfileImage] = useState(null);
 
@@ -171,11 +172,38 @@ export default function Profile() {
           <Text style={styles.bioText}>{params.bio}</Text>
         </View>
         <View style={styles.textBox}>
-          <Text style={styles.textBoxText}>James's Weekly Check-In</Text>
+          <Text style={styles.textBoxText}>Weekly Check-In</Text>
         </View>
+        {/* <Link
+          href={{
+            pathname: "/additional/landaycheckin",
+            params: {
+              id: params.id,
+              profile_pic: params.profile_pic,
+              bio: params.bio,
+              name: params.name,
+              grad: params.grad,
+            },
+          }}
+        >
+          <View style={styles.checkinButton}>
+            <Text style={styles.targetButtonText}>See complete</Text>
+          </View>
+        </Link> */}
         <TouchableOpacity
           style={styles.checkinButton}
-          onPress={() => router.push("/additional/checkin/landaycheckin")}
+          onPress={() => {
+            router.push({
+              pathname: "/additional/checkin/landaycheckin",
+              params: {
+                id: params.id,
+                profile_pic: params.profile_pic,
+                bio: params.bio,
+                name: params.name,
+                grad: params.grad,
+              },
+            });
+          }}
         >
           <Text style={styles.targetButtonText}>See complete</Text>
           <Image
@@ -184,7 +212,7 @@ export default function Profile() {
           />
         </TouchableOpacity>
         <View style={styles.textBox}>
-          <Text style={styles.textBoxText}>James's Upcoming Targets</Text>
+          <Text style={styles.textBoxText}>Upcoming Targets</Text>
         </View>
         <View style={styles.targetButton}>
           <View style={styles.row}>
