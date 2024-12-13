@@ -145,7 +145,7 @@ export default function Background() {
 
       <View style={styles.inputBoxContainer}>
         <TextInput
-          style={[styles.inputBox, styles.multiLineInputBox]} // Add a new style for multi-line input
+          style={[styles.inputBox2, styles.multiLineInputBox]} // Add a new style for multi-line input
           placeholder="Short bio!"
           value={bio}
           placeholderTextColor={Theme.colors.placeholderText}
@@ -157,7 +157,7 @@ export default function Background() {
       </View>
 
       <TextInput
-        style={styles.inputBox}
+        style={styles.inputBox1}
         placeholder="Major"
         placeholderTextColor={Theme.colors.placeholderText}
         value={major}
@@ -249,27 +249,37 @@ const styles = StyleSheet.create({
     fontSize: Theme.sizes.bodyText,
     textAlign: "justify",
   },
-  inputBox: {
+  inputBox1: {
+    fontSize: Theme.sizes.bodyText,
     height: windowHeight * 0.06,
     width: windowWidth * 0.8,
     borderColor: Theme.colors.border,
     borderRadius: 5,
     paddingHorizontal: 10,
     margin: 10,
-    padding: 10,
-    backgroundColor: "#EEF7FB",
+    backgroundColor: "white",
+  },
+  inputBox2: {
     fontSize: Theme.sizes.bodyText,
+    height: windowHeight * 0.06,
+    width: windowWidth * 0.8,
+    borderColor: Theme.colors.border,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    margin: 10,
+    backgroundColor: "white",
   },
   dropdownTrigger: {
+    fontSize: Theme.sizes.bodyText,
     height: windowHeight * 0.06,
     width: windowWidth * 0.8,
     borderColor: Theme.colors.border,
-    borderWidth: 0.5,
     borderRadius: 5,
     paddingHorizontal: 10,
     margin: 10,
-    backgroundColor: Theme.colors.backgroundSecodary,
-    justifyContent: "center",
+    backgroundColor: "white",
+    justifyContent: 'center'
   },
   dropdownTriggerText: {
     fontSize: 16,
