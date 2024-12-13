@@ -44,7 +44,7 @@ export default function Group() {
         setLoading(true);
         const { data, error } = await db
           .from("users")
-          .select("id, username, profile_pic");
+          .select("id, username, profile_pic, bio, grad");
         if (error) {
           throw error;
         }
@@ -52,9 +52,10 @@ export default function Group() {
 
         const formattedData = filteredData.map((item) => ({
           id: item.id,
-          profilePicture: item.profile_pic,
+          profile_pic: item.profile_pic,
           name: item.username,
           bio: item.bio,
+          grad: item.grad,
         }));
         setMembers(formattedData);
       } catch (err) {

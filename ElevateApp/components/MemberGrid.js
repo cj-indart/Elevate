@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 
-const MemberCard = ({ profilePicture, name }) => {
+const MemberCard = ({ profile_pic, name }) => {
   return (
     <View style={styles.card}>
-      <Image source={{ uri: profilePicture }} style={styles.image} />
+      <Image source={{ uri: profile_pic }} style={styles.image} />
       <Text style={styles.name}>{name}</Text>
     </View>
   );
@@ -14,46 +14,91 @@ const MemberCard = ({ profilePicture, name }) => {
 
 const MemberGrid = ({ members }) => {
   const router = useRouter();
+
   return (
     <View style={styles.gridContainer}>
       <View style={styles.row}>
         {members[0] && (
-          <TouchableOpacity onPress={() => router.push("/additional/landayprofile")}>
+          <Link
+            href={{
+              pathname: "/additional/otherProfile",
+              params: {
+                id: members[0].id,
+                profile_pic: members[0].profile_pic,
+                bio: members[0].bio,
+                name: members[0].name,
+                grad: members[0].grad,
+              },
+            }}
+          >
             <MemberCard
               key={members[0].id}
-              profilePicture={members[0].profilePicture}
+              profile_pic={members[0].profile_pic}
               name={members[0].name}
             />
-          </TouchableOpacity>
+          </Link>
         )}
         {members[1] && (
-          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+          <Link
+            href={{
+              pathname: "/additional/otherProfile",
+              params: {
+                id: members[1].id,
+                profile_pic: members[1].profile_pic,
+                bio: members[1].bio,
+                name: members[1].name,
+                grad: members[1].grad,
+              },
+            }}
+          >
             <MemberCard
               key={members[1].id}
-              profilePicture={members[1].profilePicture}
+              profile_pic={members[1].profile_pic}
               name={members[1].name}
             />
-          </TouchableOpacity>
+          </Link>
         )}
       </View>
       <View style={styles.row}>
         {members[2] && (
-          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+          <Link
+            href={{
+              pathname: "/additional/otherProfile",
+              params: {
+                id: members[2].id,
+                profile_pic: members[2].profile_pic,
+                bio: members[2].bio,
+                name: members[2].name,
+                grad: members[2].grad,
+              },
+            }}
+          >
             <MemberCard
               key={members[2].id}
-              profilePicture={members[2].profilePicture}
+              profile_pic={members[2].profile_pic}
               name={members[2].name}
             />
-          </TouchableOpacity>
+          </Link>
         )}
         {members[3] && (
-          <TouchableOpacity onPress={() => alert("not implemented yet!")}>
+          <Link
+            href={{
+              pathname: "/additional/otherProfile",
+              params: {
+                id: members[3].id,
+                profile_pic: members[3].profile_pic,
+                bio: members[3].bio,
+                name: members[3].name,
+                grad: members[3].grad,
+              },
+            }}
+          >
             <MemberCard
               key={members[3].id}
-              profilePicture={members[3].profilePicture}
+              profile_pic={members[3].profile_pic}
               name={members[3].name}
             />
-          </TouchableOpacity>
+          </Link>
         )}
       </View>
     </View>

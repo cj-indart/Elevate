@@ -13,7 +13,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import Theme from "@/assets/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Feather from "@expo/vector-icons/Feather";
@@ -75,124 +75,84 @@ export default function AllTargets() {
       <SafeAreaView style={styles.container}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => router.push("/additional/landayprofile")}
+          onPress={() => router.push("/additional/otherProfile")}
         >
           <Ionicons name="chevron-back" size={30} color="black" />
         </TouchableOpacity>
         <ScrollView style={styles.scrollViewContent}>
-        <View style={styles.topNav}>
-          <Text style={styles.title}>James Landay's Checkin</Text>
-        </View>
-        <View style={styles.questionContainer}>
-          <Text style={styles.questionText}>
-            What did you do well this week?
-          </Text>
-          <View style={styles.answerContainer}>
-            <Text style={styles.checkMark}>✓</Text>
-            <Text style={styles.answerText}>
-              Networking
-            </Text>
-            </View>
-            <Text style={styles.answerNoCheck}>
-              Submitting Applications
-            </Text>
-            <Text style={styles.answerNoCheck}>
-              Interview Prep
-            </Text>
-            <View style={styles.answerContainer}>
-            <Text style={styles.checkMark}>✓</Text>
-            <Text style={styles.answerText}>
-              Community Building
-            </Text>
-            </View>
-            <View style={styles.answerContainer}>
-            <Text style={styles.checkMark}>✓</Text>
-            <Text style={styles.answerText}>
-              Self-care
-            </Text>
-            </View>
-            <Text style={styles.answerNoCheck}>
-              Other
-            </Text>
+          <View style={styles.topNav}>
+            <Text style={styles.title}>Your Checkin</Text>
           </View>
           <View style={styles.questionContainer}>
-          <Text style={styles.questionText}>
-            What do you want to focus on next week?
-          </Text>
-          <Text style={styles.answerNoCheck}>
-              Networking
+            <Text style={styles.questionText}>
+              What did you do well this week?
             </Text>
             <View style={styles.answerContainer}>
-            <Text style={styles.checkMark}>✓</Text>
-            <Text style={styles.answerText}>
-              Submitting Applications
-            </Text>
+              <Text style={styles.checkMark}>✓</Text>
+              <Text style={styles.answerText}>Networking</Text>
+            </View>
+            <Text style={styles.answerNoCheck}>Submitting Applications</Text>
+            <Text style={styles.answerNoCheck}>Interview Prep</Text>
+            <View style={styles.answerContainer}>
+              <Text style={styles.checkMark}>✓</Text>
+              <Text style={styles.answerText}>Community Building</Text>
             </View>
             <View style={styles.answerContainer}>
-            <Text style={styles.checkMark}>✓</Text>
-            <Text style={styles.answerText}>
-              Interview Prep
-            </Text>
+              <Text style={styles.checkMark}>✓</Text>
+              <Text style={styles.answerText}>Self-care</Text>
             </View>
-            <Text style={styles.answerNoCheck}>
-              Community Building
-            </Text>
-            <View style={styles.answerContainer}>
-            <Text style={styles.checkMark}>✓</Text>
-            <Text style={styles.answerText}>
-              Self-care
-            </Text>
-            </View>
-            <Text style={styles.answerNoCheck}>
-              Other
-            </Text>
+            <Text style={styles.answerNoCheck}>Other</Text>
           </View>
           <View style={styles.questionContainer}>
-          <Text style={styles.questionText}>
-            This week, how have you been feeling?
-          </Text>
-          <View style={styles.answerContainer}>
-            <Text style={styles.checkMark}>✓</Text>
-            <Text style={styles.answerText}>
-              Anxious
+            <Text style={styles.questionText}>
+              What do you want to focus on next week?
             </Text>
-            </View>
-            <Text style={styles.answerNoCheck}>
-              Hopeful
-            </Text>
-            <Text style={styles.answerNoCheck}>
-              Scared
-            </Text>
+            <Text style={styles.answerNoCheck}>Networking</Text>
             <View style={styles.answerContainer}>
-            <Text style={styles.checkMark}>✓</Text>
-            <Text style={styles.answerText}>
-              Confident
-            </Text>
+              <Text style={styles.checkMark}>✓</Text>
+              <Text style={styles.answerText}>Submitting Applications</Text>
             </View>
             <View style={styles.answerContainer}>
-            <Text style={styles.checkMark}>✓</Text>
-            <Text style={styles.answerText}>
-              Together
-            </Text>
+              <Text style={styles.checkMark}>✓</Text>
+              <Text style={styles.answerText}>Interview Prep</Text>
             </View>
-            <Text style={styles.answerNoCheck}>
-              Scattered
-            </Text>
-            <Text style={styles.answerNoCheck}>
-              Other
-            </Text>
+            <Text style={styles.answerNoCheck}>Community Building</Text>
+            <View style={styles.answerContainer}>
+              <Text style={styles.checkMark}>✓</Text>
+              <Text style={styles.answerText}>Self-care</Text>
+            </View>
+            <Text style={styles.answerNoCheck}>Other</Text>
           </View>
           <View style={styles.questionContainer}>
-          <Text style={styles.questionText}>
-            Any other comments?
-          </Text>
-          <View style={styles.answerContainer}>
-            <Text style={styles.answerProse}>
-            My CS147 group was super helpful for morale this week!
+            <Text style={styles.questionText}>
+              This week, how have you been feeling?
             </Text>
+            <View style={styles.answerContainer}>
+              <Text style={styles.checkMark}>✓</Text>
+              <Text style={styles.answerText}>Anxious</Text>
+            </View>
+            <Text style={styles.answerNoCheck}>Hopeful</Text>
+            <Text style={styles.answerNoCheck}>Scared</Text>
+            <View style={styles.answerContainer}>
+              <Text style={styles.checkMark}>✓</Text>
+              <Text style={styles.answerText}>Confident</Text>
+            </View>
+            <View style={styles.answerContainer}>
+              <Text style={styles.checkMark}>✓</Text>
+              <Text style={styles.answerText}>Together</Text>
+            </View>
+            <Text style={styles.answerNoCheck}>Scattered</Text>
+            <Text style={styles.answerNoCheck}>Other</Text>
           </View>
+          <View style={styles.questionContainer}>
+            <Text style={styles.questionText}>Any other comments?</Text>
+            <View style={styles.answerContainer}>
+              <Text style={styles.answerProse}>
+                My CS147 group was super helpful for morale this week!
+              </Text>
+            </View>
           </View>
-          </ScrollView>
+        </ScrollView>
       </SafeAreaView>
     </GestureHandlerRootView>
   );
@@ -204,23 +164,23 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     flex: 1,
-    backgroundColor: 'f5f5f5',
+    backgroundColor: "f5f5f5",
   },
-    questionContainer: {
-      flexDirection: "column",
-      backgroundColor: Theme.colors.buttonBlue,
-      padding: 15,
-      marginBottom: 10,
-      borderRadius: 20,
-      marginVertical: 0,
-      marginHorizontal: 20,
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
-      alignItems: "left",
-    },
+  questionContainer: {
+    flexDirection: "column",
+    backgroundColor: Theme.colors.buttonBlue,
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 20,
+    marginVertical: 0,
+    marginHorizontal: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    alignItems: "left",
+  },
   topNav: {
     marginVertical: windowWidth * 0.1,
     flexDirection: "row",
@@ -289,7 +249,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingLeft: 20,
     paddingTop: 8,
-    alignItems: "baseline"
+    alignItems: "baseline",
   },
   list: {
     paddingBottom: 20,

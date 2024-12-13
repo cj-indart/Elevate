@@ -17,6 +17,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import db from "@/database/db";
 import Entypo from "@expo/vector-icons/Entypo";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
+import { useLocalSearchParams } from "expo-router";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -25,39 +26,8 @@ export default function Profile() {
   const router = useRouter();
   const [profileImage, setProfileImage] = useState(null);
 
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const {
-          data: { session },
-        } = await db.auth.getSession();
-        const user_id = session?.user?.id;
-
-        if (!user_id) {
-          Alert.alert("Error", "Not logged in");
-          return;
-        }
-
-        const { data, error } = await db
-          .from("users")
-          .select("profile_pic")
-          .eq("id", user_id)
-          .single();
-
-        if (error) {
-          console.error("Error fetching user profile:", error);
-          Alert.alert("Error", "Failed to fetch profile picture");
-        } else if (data?.profile_pic) {
-          setProfileImage(data.profile_pic);
-        }
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-        Alert.alert("Error", "Failed to fetch profile picture");
-      }
-    };
-
-    fetchUserProfile();
-  }, []);
+  const params = useLocalSearchParams();
+  console.log(params);
 
   const handleSelectImage = async () => {
     try {
@@ -161,7 +131,6 @@ export default function Profile() {
 
   return (
     <SafeAreaView style={styles.container}>
-
       <TouchableOpacity
         style={styles.back}
         onPress={() => router.push("/tabs/groupHome")}
@@ -169,27 +138,27 @@ export default function Profile() {
         <Ionicons name="chevron-back" size={30} color="black" />
       </TouchableOpacity>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.title}>James Landay</Text>
-      </View>
-        <TouchableOpacity
-          style={styles.imageContainer}
-          onPress={handleSelectImage}
-        >
-          {profileImage ? (
-            <Image source={require("@/assets/images/landay_profile.png")} style={styles.profileImage} />
+        <View style={styles.headerContainer}>
+          <Text style={styles.title}>{params.name}</Text>
+        </View>
+        <View style={styles.imageContainer} onPress={handleSelectImage}>
+          {params.profile_pic ? (
+            <Image
+              source={{
+                uri: params.profile_pic,
+              }}
+              style={styles.profileImage}
+            />
           ) : (
             <Text style={styles.imagePlaceholderText}>+</Text>
           )}
-        </TouchableOpacity>
+        </View>
         <View style={styles.basicInfo}>
           <Image
             source={require("@/assets/images/grad_cap.png")}
             style={[styles.icon, { height: 20, width: 20 }]}
           />
-          <Text style={styles.infoText}>
-            Berkeley '90
-          </Text>
+          <Text style={styles.infoText}>{params.grad}</Text>
         </View>
         <View style={styles.basicInfo}>
           <Image
@@ -199,38 +168,39 @@ export default function Profile() {
           <Text style={styles.infoText}>Stanford, CA</Text>
         </View>
         <View style={styles.centeredView}>
-                <Text style={styles.bioText}>
-                I'm a Stanford Computer Science professor specializing in HCI and the co-founder and Co-Director of the Stanford Institute for Human-centered Artificial Intelligence (HAI). I don't actually need a job--I'm just here to take a look at your app!
-                </Text>
+          <Text style={styles.bioText}>{params.bio}</Text>
         </View>
         <View style={styles.textBox}>
-            <Text style={styles.textBoxText}>James's Weekly Check-In</Text>
+          <Text style={styles.textBoxText}>James's Weekly Check-In</Text>
         </View>
-        <TouchableOpacity style={styles.checkinButton} onPress={() => router.push("/additional/checkin/landaycheckin")}>
-            <Text style={styles.targetButtonText}>See complete</Text>
-            <Image
+        <TouchableOpacity
+          style={styles.checkinButton}
+          onPress={() => router.push("/additional/checkin/landaycheckin")}
+        >
+          <Text style={styles.targetButtonText}>See complete</Text>
+          <Image
             source={require("@/assets/images/right_arrow.png")}
             style={[styles.icon, { height: 15, width: 15 }]}
           />
         </TouchableOpacity>
         <View style={styles.textBox}>
-            <Text style={styles.textBoxText}>James's Upcoming Targets</Text>
+          <Text style={styles.textBoxText}>James's Upcoming Targets</Text>
         </View>
         <View style={styles.targetButton}>
-        <View style={styles.row}>
-          <AnimatedCircularProgress
-            size={windowWidth * 0.15}
-            width={3}
-            fill={66}
-            tintColor="#00e0ff"
-            backgroundColor="#3d5875"
-          >
-            {(fill) => <Text style={styles.progressText}>5 days</Text>}
-          </AnimatedCircularProgress>
+          <View style={styles.row}>
+            <AnimatedCircularProgress
+              size={windowWidth * 0.15}
+              width={3}
+              fill={66}
+              tintColor="#00e0ff"
+              backgroundColor="#3d5875"
+            >
+              {(fill) => <Text style={styles.progressText}>5 days</Text>}
+            </AnimatedCircularProgress>
 
-          <Text style={styles.targetButtonText}>Give everyone an A!</Text>
+            <Text style={styles.targetButtonText}>Give everyone an A!</Text>
+          </View>
         </View>
-      </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -238,11 +208,11 @@ export default function Profile() {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flexDirection: 'row',                // Aligns children horizontally (side by side)
-    justifyContent: 'center',            // Centers the entire container horizontally
-    alignItems: 'center',                // Centers the children vertically
-    marginTop: windowHeight * 0.02,       // Adjusts vertical spacing from top of the screen
-    paddingHorizontal: 20,               // Optional: Adds horizontal padding if needed
+    flexDirection: "row", // Aligns children horizontally (side by side)
+    justifyContent: "center", // Centers the entire container horizontally
+    alignItems: "center", // Centers the children vertically
+    marginTop: windowHeight * 0.02, // Adjusts vertical spacing from top of the screen
+    paddingHorizontal: 20, // Optional: Adds horizontal padding if needed
   },
   container: {
     flex: 1,
@@ -266,17 +236,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   centeredView: {
-    width: '80%',             
-    justifyContent: 'center',
+    width: "80%",
+    justifyContent: "center",
   },
   bioText: {
     marginTop: windowHeight * 0.03,
     fontSize: Theme.sizes.bodyText,
-    fontStyle: 'italic'
+    fontStyle: "italic",
   },
   infoText: {
     fontSize: Theme.sizes.bodyText,
-    fontStyle: 'bold'
+    fontStyle: "bold",
   },
   imageContainer: {
     width: 120,
@@ -309,35 +279,35 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   textBox: {
-    marginLeft: windowWidth * 0.09,  // Slightly right from the left edge (5% of screen width)
-    paddingTop: 30,                    // Padding around the box
-    backgroundColor: "#f0f0f0",     // Light background color for the box
-    borderRadius: 8,                // Rounded corners
-    width: "90%",                   // Makes the box width 90% of the screen width
-    justifyContent: "center",       // Centers the text vertically within the box
+    marginLeft: windowWidth * 0.09, // Slightly right from the left edge (5% of screen width)
+    paddingTop: 30, // Padding around the box
+    backgroundColor: "#f0f0f0", // Light background color for the box
+    borderRadius: 8, // Rounded corners
+    width: "90%", // Makes the box width 90% of the screen width
+    justifyContent: "center", // Centers the text vertically within the box
   },
   textBoxText: {
-    fontSize: 20,                   // Medium header text size
-    fontWeight: "500",               // Medium weight (can be adjusted to 'bold' if needed)
-    color: "#333",                  // Text color
-    textAlign: "left",              // Aligns text to the left within the box
+    fontSize: 20, // Medium header text size
+    fontWeight: "500", // Medium weight (can be adjusted to 'bold' if needed)
+    color: "#333", // Text color
+    textAlign: "left", // Aligns text to the left within the box
   },
   touchableOpacityContainer: {
-    flexDirection: "row",            // Aligns the children (text and arrow) side by side
-    alignItems: "center",            // Vertically centers the content
-    backgroundColor: "#00e0ff",      // Light blue color for the background
-    borderRadius: 20,                // Rounded edges for the button
-    paddingVertical: 15,             // Vertical padding for the button
-    width: "80%",                    // Takes up 80% of the screen width
-    alignSelf: "center",             // Centers the button horizontally on the screen
+    flexDirection: "row", // Aligns the children (text and arrow) side by side
+    alignItems: "center", // Vertically centers the content
+    backgroundColor: "#00e0ff", // Light blue color for the background
+    borderRadius: 20, // Rounded edges for the button
+    paddingVertical: 15, // Vertical padding for the button
+    width: "80%", // Takes up 80% of the screen width
+    alignSelf: "center", // Centers the button horizontally on the screen
     justifyContent: "space-between", // Ensures the text and arrow are at the edges
-    marginTop: windowHeight * 0.03,  // Adjusts the space above the button
+    marginTop: windowHeight * 0.03, // Adjusts the space above the button
   },
   touchableText: {
-    fontSize: 18,                    // Text size for the button label
-    fontWeight: "500",                // Medium weight text
-    color: "white",                  // White color for the text
-    marginLeft: 15,                  // Adds space between the text and the left edge
+    fontSize: 18, // Text size for the button label
+    fontWeight: "500", // Medium weight text
+    color: "white", // White color for the text
+    marginLeft: 15, // Adds space between the text and the left edge
   },
   targetsNav: {
     marginTop: windowHeight * 0.05,
@@ -423,7 +393,7 @@ const styles = StyleSheet.create({
     height: windowHeight * 0.07,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between", // 
+    justifyContent: "space-between", //
   },
   targetButton: {
     backgroundColor: Theme.colors.buttonBlue, // Customize color
@@ -435,7 +405,7 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.8,
     height: windowHeight * 0.1,
     alignItems: "center",
-    flexDirection: 'row',    
+    flexDirection: "row",
     justifyContent: "space-between", // Center content vertically
   },
   targetButtonText: {
