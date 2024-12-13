@@ -15,7 +15,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="groupHome"
           options={{
-            title: "Group",
+            title: "Crew",
             tabBarIcon: ({ size, color }) => (
               <FontAwesome name="group" size={size} color={color} />
             ),
@@ -24,7 +24,6 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="groupChat"
           options={{
-            title: "Personal",
             title: "Chat",
             tabBarIcon: ({ size, color }) => (
               <FontAwesome name="comments" size={size} color={color} />
@@ -34,8 +33,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="personalHome"
           options={{
-            title: "Chat",
-            title: "Personal",
+            title: "Home",
             tabBarIcon: ({ size, color }) => (
               <FontAwesome name="user" size={size} color={color} />
             ),

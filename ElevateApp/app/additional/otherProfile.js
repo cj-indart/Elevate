@@ -26,6 +26,50 @@ const windowHeight = Dimensions.get("window").height;
 export default function OtherProfile() {
   const router = useRouter();
   const [profileImage, setProfileImage] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [targets, setTargets] = useState([]);
+
+  useEffect(() => {
+    const fetchTargets = async () => {
+      try {
+        setLoading(true);
+        const { data, error } = await db
+          .from("targets")
+          .select("id, title, description, deadline, priority")
+          .eq("id", params.id);
+
+        if (error) {
+          throw error;
+        }
+
+        // Format the data and sort by closest deadline
+        const formattedData = data
+          .map((item) => ({
+            id: item.id,
+            title: item.title,
+            description: item.description,
+            deadline: item.deadline,
+            priority: item.priority,
+          }))
+          .sort((a, b) => {
+            // Convert deadlines to Date objects for comparison
+            const dateA = new Date(a.deadline);
+            const dateB = new Date(b.deadline);
+
+            // Sort in ascending order (closest deadline first)
+            return dateA - dateB;
+          });
+
+        setTargets(formattedData);
+      } catch (err) {
+        console.error("Error fetching targets:", err.message || err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTargets();
+  }, []);
 
   const params = useLocalSearchParams();
   console.log(params);
@@ -214,21 +258,27 @@ export default function OtherProfile() {
         <View style={styles.textBox}>
           <Text style={styles.textBoxText}>Upcoming Targets</Text>
         </View>
-        <View style={styles.targetButton}>
-          <View style={styles.row}>
-            <AnimatedCircularProgress
-              size={windowWidth * 0.15}
-              width={3}
-              fill={66}
-              tintColor="#00e0ff"
-              backgroundColor="#3d5875"
-            >
-              {(fill) => <Text style={styles.progressText}>5 days</Text>}
-            </AnimatedCircularProgress>
+        {targets.length > 0 ? (
+          <View style={styles.targetButton}>
+            <View style={styles.row}>
+              <AnimatedCircularProgress
+                size={windowWidth * 0.15}
+                width={3}
+                fill={66}
+                tintColor="#00e0ff"
+                backgroundColor="#3d5875"
+              >
+                {(fill) => <Text style={styles.progressText}>5 days</Text>}
+              </AnimatedCircularProgress>
 
-            <Text style={styles.targetButtonText}>Give everyone an A!</Text>
+              <Text style={styles.targetButtonText}>{targets[0].title}</Text>
+            </View>
           </View>
-        </View>
+        ) : (
+          <View style={styles.noTargetsContainer}>
+            <Text style={styles.noTargetsText}>No targets set!</Text>
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -256,6 +306,12 @@ const styles = StyleSheet.create({
     top: 75,
     left: 20,
     zIndex: 1,
+  },
+  noTargetsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 150,
   },
   title: {
     textAlign: "center",
